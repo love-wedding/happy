@@ -6,32 +6,6 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-<script>
-window.__errors = [];
-window.onerror = function(msg, url, line, col, err) {
-  var info = 'ERR: ' + msg + ' at ' + url + ':' + line;
-  window.__errors.push(info);
-  document.title = info;
-};
-window.onunhandledrejection = function(e) {
-  var info = 'REJECT: ' + (e.reason && (e.reason.stack || e.reason.message) || e.reason);
-  window.__errors.push(info);
-  document.title = info;
-};
-setInterval(function() {
-  if (window.__errors.length > 0) {
-    var d = document.getElementById('debug-box');
-    if (!d) {
-      d = document.createElement('div');
-      d.id = 'debug-box';
-      d.style = 'position:fixed;top:0;left:0;z-index:99999;background:red;color:white;font-size:14px;max-height:100vh;overflow:auto;padding:10px;';
-      document.body.appendChild(d);
-    }
-    d.innerHTML = window.__errors.map(function(e) { return '<p>' + e + '</p>'; }).join('');
-  }
-}, 500);
-</script>
-
      <meta charSet="utf-8" />
      <!-- This site is hosted on Netlify. Anyone can build and deploy a site
      like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=53d3fea3-9cd2-4988-8362-50693b4dbfc0

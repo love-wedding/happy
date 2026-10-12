@@ -1,0 +1,158 @@
+================================================================================
+          HƯỚNG DẪN CHI TIẾT NGUYÊN NHÂN LỖI & CÁCH KHẮC PHỤC
+      KHI CLONE WEB NEXT.JS BẰNG HTTRACK VỀ CHẠY HTML THUẦN (OFFLINE)
+================================================================================
+
+1. NGUYÊN NHÂN TẠI SAO BỊ LỖI DỪNG Ở MÀN HÌNH NGÀY SINH NHẬT
+--------------------------------------------------------------------------------
+- Website gốc được xây dựng bằng Next.js (App Router) + Turbopack + React 19.
+- Cơ chế của Next.js:
+  + Trang HTML tải về ban đầu chỉ là HTML tĩnh do máy chủ xuất sẵn (chứa hiệu ứng
+    CSS cuộn lịch đến ngày sinh nhật).
+  + Toàn bộ logic tương tác phía sau (bánh kem, thổi nến, đọc thư, sao băng...)
+    đều nằm trong các module JavaScript động (chunks) được nạp tiếp qua Turbopack.
+- Vấn đề khi dùng HTTrack clone về:
+  + HTTrack chỉ cào được trang HTML đầu tiên và một số file JS/CSS bề mặt.
+  + Trong mã nguồn Turbopack (`turbopack-*.js`), các đường dẫn nạp file chunk bị
+    gắn cứng dạng tuyệt đối: `/_next/static/chunks/...` (bắt đầu bằng dấu gạch chéo `/`).
+  + Khi chạy `npx serve .` không đúng thư mục gốc hoặc khi mở trực tiếp file HTML
+    (giao thức `file:///`), trình duyệt sẽ tìm file ở ổ đĩa gốc `C:/_next/...`
+    -> Gây lỗi 404 Not Found (ChunkLoadError).
+  + Khi React bị lỗi tải file chunk, quá trình "Hydration" (kích hoạt mã JS)
+    bị SẬP HOÀN TOÀN.
+  + Kết quả: Trình duyệt chỉ chạy xong hiệu ứng CSS cuộn lịch có sẵn trong HTML tĩnh,
+    sau đó ĐỨNG IM MÃI MÃI, không bao giờ chuyển tiếp sang màn hình bánh sinh nhật.
+  + Ngoài ra, HTTrack không quét được các file ảnh nằm ẩn ở các bước sau:
+    thẻ điều ước (`wish-tag-01.webp`), giấy thư (`paper-letter-tall-01.webp`),
+    ảnh kỷ niệm (`girl1.jpeg` đến `girl4.jpeg`), cánh hoa rơi (`petal-*.webp`).
+
+
+================================================================================
+2. TẠI SAO KHÔNG NÊN TIẾP TỤC CHẠY BẰNG NEXT.JS KHI MUỐN CHẠY HTML THUẦN (DOUBLE CLICK)
+--------------------------------------------------------------------------------
+- Khi double-click file `.html`, trình duyệt mở bằng giao thức `file:///`.
+- Trình duyệt hiện đại (Chrome, Edge, Firefox) áp dụng chính sách bảo mật CORS rất
+  nghiêm ngặt đối với `file:///`:
+  + Chặn các lệnh `fetch()` đọc file cục bộ.
+  + Chặn Next.js Flight streaming reader và history pushState nội bộ.
+- Do đó, nếu giữ nguyên cấu trúc Next.js/React phức tạp, bắt buộc phải bật server
+  như `npx serve .`, không thể nào mở trực tiếp bằng double-click.
+- GIẢI PHÁP TỐI ƯU NHẤT: Chuyển đổi mã hiển thị sang HTML + Vanilla JavaScript thuần.
+
+
+================================================================================
+3. CÁC BƯỚC KHẮC PHỤC CHI TIẾT (CÔNG THỨC ÁP DỤNG CHO CÁC DỰ ÁN SAU)
+================================================================================
+
+BƯỚC 1: KIỂM TRA VÀ TẢI ĐẦY ĐỦ CÁC FILE MEDIA CÒN THIẾU
+--------------------------------------------------------------------------------
+- Mở file JS chính của trang (thường là file chunk lớn nhất, ví dụ `0_yzaot.gvg__.js`).
+- Tìm kiếm từ khóa: `images/`, `.webp`, `.png`, `.jpg`, `.jpeg`, `.mp3`.
+- Ghi lại danh sách các đường dẫn ảnh bị thiếu.
+- Ghép đường dẫn đó vào tên miền gốc của web (ví dụ: `https://birthday-gift-cake.netlify.app/images/...`)
+  để tải trực tiếp file về lưu vào đúng thư mục `images/`.
+
+BƯỚC 2: TẬN DỤNG TOÀN BỘ FILE CSS ĐÃ CÓ
+--------------------------------------------------------------------------------
+- File CSS mà HTTrack tải về (`_next/static/chunks/0f7a1bt_m6o_g.css`) đã chứa 100%
+  các class Tailwind, hiệu ứng keyframes animation (ngọn lửa lay động, thổi tắt,
+  khói bốc lên, sao băng rơi, cánh hoa bay, giấy thư, v.v.) và font chữ.
+- Giữ nguyên file CSS này, chỉ cần gọi vào thẻ `<head>` của `index.html`:
+  `<link rel="stylesheet" href="_next/static/chunks/0f7a1bt_m6o_g.css" />`
+
+BƯỚC 3: TRÍCH XUẤT DỮ LIỆU VÀ CÁC TRẠNG THÁI (STATE MACHINE)
+--------------------------------------------------------------------------------
+- Tìm component chính trong file JS (`BirthdayExperience`):
+  Xem nó có bao nhiêu giai đoạn (stage) chuyển cảnh:
+  1. `opening`: Cuộn lịch đến ngày sinh nhật -> chạy trong ~5.5 giây -> sang `intro`.
+  2. `intro`: Bánh kem + nến -> sau 1.85s que diêm thắp nến -> người dùng nhấn giữ
+     ngọn nến 2.6s để tắt nến -> bốc khói -> sang `beats`.
+  3. `beats`: Lần lượt hiện 3 câu thông điệp ấm áp -> sang `blackout`.
+  4. `blackout`: Dòng chữ "đang thu gom những kỷ niệm…" -> sang `wish`.
+  5. `wish`: 4 thẻ chọn điều ước -> chọn 1 thẻ thì thẻ đó bay lên phát sáng -> sang `heart`.
+  6. `heart`: Lưới ảnh trái tim đập nhịp + cánh hoa rơi + bấm ảnh mở lightbox -> sang `letter`.
+  7. `letter`: Giấy viết thư cổ điển + hiệu ứng gõ máy chữ typewriter -> sang `final`.
+  8. `final`: Thiệp vàng chúc mừng -> có nút sang `starlight` và nút chơi lại từ đầu.
+  9. `starlight`: Bầu trời đêm -> bấm ngôi sao phóng điều ước thành sao băng -> có thể
+     chạm bất cứ đâu trên bầu trời để thả thêm sao băng.
+
+BƯỚC 4: VIẾT FILE `app.js` THUẦN (VANILLA JAVASCRIPT)
+--------------------------------------------------------------------------------
+- Tạo file `app.js` chứa toàn bộ dữ liệu từ điển ngôn ngữ (vi, en, ko, ja, zh...)
+  trực tiếp trong code (dưới dạng object JS), KHÔNG dùng `fetch()` file JSON để
+  tránh lỗi CORS khi chạy `file:///`.
+- Quản lý trạng thái đơn giản bằng biến:
+  `let state = { stage: 'opening', candleLit: false, ... };`
+- Viết hàm `render()`: Dựa vào `state.stage` để sinh ra chuỗi HTML tương ứng và gán
+  vào `<div id="app"></div>` thông qua `innerHTML`.
+- Gắn các sự kiện:
+  + Thổi nến: Lắng nghe `onpointerdown` tính thời gian `(performance.now() - start) / 2600`.
+    Cập nhật thuộc tính `stroke-dashoffset` của vòng tròn SVG.
+  + Đọc thư: Dùng `requestAnimationFrame` tăng dần số ký tự `fullText.slice(0, count)`.
+  + Bầu trời sao: Lắng nghe `onpointerdown` lấy tọa độ `clientX, clientY` để tạo sao băng.
+
+BƯỚC 5: HỖ TRỢ TRUYỀN TÊN KHÁCH & NGÀY QUA URL PARAMETER
+--------------------------------------------------------------------------------
+- Viết hàm đọc tham số từ cả query string (`?name=...`) và hash (`#name=...`):
+  ```javascript
+  function getUrlParams() {
+    let search = window.location.search.slice(1);
+    let hash = window.location.hash.slice(1);
+    const sp = new URLSearchParams(search || hash);
+    return {
+      receiverName: sp.get('name') || sp.get('u') || sp.get('receiver') || null,
+      senderName: sp.get('sender') || sp.get('from') || null,
+      dateStr: sp.get('date') || null
+    };
+  }
+  ```
+- Thay thế từ xưng hô trong văn bản:
+  + Nếu có `receiverName`: Thay toàn bộ "Cậu" / "cậu" thành tên người nhận.
+  + Nếu có `senderName`: Thay toàn bộ "Tớ" / "tớ" thành tên người gửi.
+  + Nếu có `dateStr` (ví dụ `25/12`): Đổi ngày và tháng của vòng quay lịch `opening`.
+
+BƯỚC 6: XỬ LÝ ÂM NHẠC TỰ ĐỘNG PHÁT TRÊN MỌI TRÌNH DUYỆT
+--------------------------------------------------------------------------------
+- Các trình duyệt hiện nay cấm phát nhạc tự động nếu chưa có cử chỉ người dùng.
+- Thêm thẻ: `<audio id="bg-audio" src="music/birthday.mp3" loop preload="auto"></audio>`
+- Lắng nghe lần chạm/click đầu tiên trên toàn màn hình:
+  ```javascript
+  document.addEventListener('pointerdown', function() {
+    const a = document.getElementById('bg-audio');
+    if (a) { a.volume = 0.6; a.play().catch(() => {}); }
+  }, { once: true });
+  ```
+
+BƯỚC 7: TẠO FILE `index.html` SIÊU GỌN VÀ SẠCH SẼ
+--------------------------------------------------------------------------------
+- Loại bỏ toàn bộ các thẻ script Turbopack cũ (`turbopack-...`, `_next/static/chunks/...`,
+  `self.__next_f.push...`).
+- Cấu trúc `index.html` chỉ cần:
+  ```html
+  <!DOCTYPE html>
+  <html lang="vi" class="fzaghita_da295c95-module__uDwZtq__variable dancing_script_9b023527-module__7vhT-W__variable h-full antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Món Quà Sinh Nhật Đặc Biệt 🎂</title>
+    <link rel="stylesheet" href="_next/static/chunks/0f7a1bt_m6o_g.css" />
+  </head>
+  <body class="min-h-full">
+    <audio id="bg-audio" src="music/birthday.mp3" loop preload="auto"></audio>
+    <div id="app"></div>
+    <script src="app.js"></script>
+  </body>
+  </html>
+  ```
+
+================================================================================
+4. CÁCH SỬ DỤNG FILE ĐÃ SỬA
+================================================================================
+1. Chạy mặc định:
+   Double-click trực tiếp vào file `index.html`.
+2. Chạy kèm tên người nhận:
+   Mở trình duyệt, gõ vào thanh địa chỉ:
+   `index.html?name=Thu Trang`
+   hoặc `index.html?name=Thu Trang&sender=Thành Nam&date=25/12`
+================================================================================
+
