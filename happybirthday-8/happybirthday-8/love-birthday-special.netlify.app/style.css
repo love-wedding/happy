@@ -1,0 +1,1352 @@
+@import url('https://fonts.googleapis.com/css2?family=Coiny&amp;family=Titan+One&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&amp;family=Sriracha&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,800;0,900;1,400&amp;display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --color-pink: #feecea;
+    --color-white: #fff;
+    --color-black: #333;
+    --color-text-pink: #ff7882;
+    --color-heart: #F61F1F;
+    --color-bg-letter: #fff8e4;
+    --color-border: #DACCBF;
+}
+html{
+    height: 100%;
+}
+body {
+    position: relative;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #feecea;
+    background-image: radial-gradient(ellipse at center, #fff7f5 0%, #feecea 45%, #f9d4cf 100%);
+    background-attachment: fixed;
+}
+#wrapper{
+    position: relative;
+    background-color: transparent;
+    height:100%;
+    overflow: hidden;
+    z-index: 1;
+}
+.flag__birthday{
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-10px);
+    pointer-events: none;
+}
+.flag__birthday .flag__left,
+.flag__birthday .flag__right{
+    width: clamp(140px, 26vw, 350px);
+    height: auto;
+}
+.flag__birthday .flag__left{
+    transform: rotate(-10deg) translate(-6%, 9%);
+}
+.flag__birthday .flag__right{
+    transform: rotate(10deg) translate(6%, 9%) scaleX(-1);
+}
+.content{
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding-top: 3rem;
+}
+.content .left, .content .right{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.content .left{
+    width: 100%;
+}
+.content .right{
+    width: 60%;
+}
+.left .btn{
+    transform: scale(0);
+    animation: scaleCricle 2s 16s forwards ease-in-out;
+}
+#btn__letter{
+    position: relative;
+    margin-top: 30px;
+    background-color: var(--color-text-pink);
+    outline: none;
+    padding: 5px 15px;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: 3px solid var(--color-black);
+    font-family: "Sriracha", cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transform: scale(1);
+    transition: all .5s ease-in-out;
+}
+#btn__letter:active{
+    transform: scale(0.7);
+}
+#btn__letter i{
+    margin-left: 5px;
+}
+#btn__letter:hover{
+    border-color: var(--color-heart);
+    background-color: var(--color-heart);
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#btn__letter:hover i{
+    animation: rotateHeart 1s infinite linear;
+}
+@keyframes rotateHeart{
+    0%,50%, 100%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(12deg);
+    }
+    75%{
+        transform: rotate(-12deg);
+    }
+}
+.title{
+    position: relative;
+    width: max-content;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    font-family: "Titan One", sans-serif;
+    font-size: 2rem;
+    flex-direction: column;
+    perspective: 1000px;
+}
+.title .happy, .title .birthday{
+    position: relative;
+    text-shadow: 2px 2px 0 #fff5d4,
+                -2px 2px 0 #fff5d4,
+                2px -2px 0 #fff5d4,
+                -2px -2px 0 #fff5d4,
+                3px 6px 0 rgba(80, 16, 32, 0.35);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    letter-spacing: 2px;
+}
+.title .happy{
+    color: #b03c4d;
+}
+.title .happy span, .title .birthday span{
+    transform: translateY(50px);
+    opacity: 0;
+    visibility: hidden;
+    animation: txtTranslateY 1.2s var(--t) forwards;
+}
+@keyframes txtTranslateY{
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.title .birthday{
+    color: #b03c4d;
+}
+
+.title .hat{
+    position: absolute;
+    --hat-end-top: -95px;
+    right: -55px;
+    top: -350px;
+    transform: rotate(-40deg);
+    z-index: -1;
+    animation: topHat 1.8s 3s forwards ease;
+}
+.title .hat img{
+    width: 150px;
+}
+@keyframes topHat{
+    20%, 30%{
+        top: var(--hat-end-top, -95px);
+        transform-origin: left;
+        transform: rotate(-40deg);
+    }
+    35%, 100%{
+        top: var(--hat-end-top, -95px);
+        transform: rotate(0deg);
+    }
+}
+.date__of__birth, .name{
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    background-color: var(--color-text-pink);
+    border-radius: 50px;
+    margin-top: 20px;
+    font-family: "Sriracha", cursive;
+    
+}
+.date__of__birth{
+    border: 3px solid var(--color-black);
+    position: relative;
+    transform: translateY(-100px);
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    width: 0px;
+    animation: dateOfBirth 5s 9s forwards;
+}
+@keyframes dateOfBirth{
+    20%,40%{
+        width: 0px;
+        height: 0;
+        transform: translateY(0px);
+        opacity: 1;
+        visibility: visible;
+    }
+    45%{
+        transform: translateY(0px);
+        opacity: 1;
+        visibility: visible;
+        width: 300px;
+        height: 0px;
+    }
+    50%,100%{
+        transform: translateY(0px);
+        opacity: 1;
+        visibility: visible;
+        width: 300px;
+        height: 50px;
+    }
+}
+.name{
+    position: absolute;
+    padding: 0px 40px;
+    bottom: -20px;
+    border: 3px solid var(--color-black);
+}
+.date__of__birth span, .name span{
+    font-weight: bold;
+    margin: 0px 40px;
+}
+.date__of__birth span{
+    font-size: 1.2rem;
+}
+.name span{
+    font-size: 1.7rem;
+}
+.right .box__account{
+    position: relative;
+}
+.content .right .image{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border: 6px solid var(--color-black);
+}
+.content .right .image img{
+    width: 100%;
+    object-fit: cover;
+
+}
+.cricle{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes scaleCricle {
+    0%{
+        transform: scale(0);
+    }
+    10%{
+        transform: scale(1.3);
+    }
+    20%{
+        transform: scale(0.7);
+    }
+    30%,100%{
+        transform: scale(1);
+    }
+
+}
+.text__cricle{
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-text-pink);
+    border-radius: 50%;
+    border: 5px solid var(--color-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotateCricle 5s linear infinite;
+}
+@keyframes rotateCricle{
+    to{
+        transform: rotate(360deg);
+    }
+}
+.text__cricle span{
+    top: 0%;
+    left: 50%;
+    position: absolute;
+    color: var(--color-black);
+    transform: rotate(calc(var(--i) * 24deg));
+    transform-origin: 0 45px;
+    font-family: "Sriracha", cursive;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+.fa-heart{
+    color: var(--color-heart);
+    filter: drop-shadow(0 0 3px var(--color-heart));
+    animation: scaleHeart 1s infinite linear;
+}
+.cricle .fa-heart{
+    position: absolute;
+    transform: scale(0.85);
+}
+@keyframes scaleHeart{
+    50%{
+        transform: scale(1.2);
+    }
+}
+.right .balloon_one{
+    position: absolute;
+    top: -70px;
+    left: -70px;
+    animation: balloon1 2s infinite linear;
+}
+@keyframes balloon1{
+    0%, 50%,100%{
+        transform-origin: bottom right;
+        transform: rotate(0deg);
+    }
+    25%{
+        transform-origin: bottom right;
+        transform: rotate(3deg);
+    }
+    75%{
+        transform-origin: bottom right;
+        transform: rotate(-3deg);
+    }
+}
+.right .balloon_two{
+    position: absolute;
+    top: 170px;
+    right: -65px;
+    z-index: -1;
+    transform: rotate(10deg);
+    animation: balloon2 2s infinite linear;
+}
+@keyframes balloon2 {
+    0%,50%,100%{
+        transform-origin: bottom left;
+        transform: rotate(10deg);
+    }
+    25%{
+        transform-origin: bottom left;
+        transform: rotate(7deg);
+    }
+    75%{
+        transform-origin: bottom left;
+        transform: rotate(13deg);
+    }
+}
+
+.decorate_star{
+    position: absolute;
+    background-color: var(--color-black);
+    clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);
+    animation: scaleStar 2s infinite ease-in-out;
+}
+.decorate_star.star1{
+    width: 20px;
+    height: 20px;
+    top: 75px;
+    left: 300px;
+}
+.decorate_star.star2{
+    width: 15px;
+    height: 20px;
+    top: 35px;
+    right: 360px;
+}
+.decorate_star.star3{
+    width: 14px;
+    height: 14px;
+    top: 290px;
+    left: 630px;
+}
+.decorate_star.star4{
+    width: 18px;
+    height: 18px;
+    bottom: 60px;
+    left: 35px;
+}
+.decorate_star.star5{
+    width: 16px;
+    height: 18px;
+    bottom: 140px;
+    left: 500px;
+}
+@keyframes scaleStar {
+    25%{
+        transform: scale(0.8);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+}
+.decorate_bottom{
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+}
+.decorate_flower--one{
+    position: absolute;
+    top: 250px;
+    left: 50px;
+}
+.decorate_flower--two{
+    position: absolute;
+    top: 225px;
+    left: 540px;
+}
+.decorate_flower--three{
+    position: absolute;
+    top: 150px;
+    right: 235px;
+}
+
+.corner{
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+    height: auto;
+    filter: drop-shadow(0 -4px 12px rgba(120, 20, 20, 0.18));
+}
+.corner--bottom-left{
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    transform: scaleX(-1) scaleY(-1);
+    transform-origin: bottom left;
+}
+.corner--bottom-right{
+    bottom: 0;
+    right: 0;
+    width: 320px;
+    transform: scaleY(-1);
+    transform-origin: bottom right;
+}
+
+.bg__icon{
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    animation: bgIconFloat 6s infinite ease-in-out;
+}
+.bg__icon img{
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(180, 30, 30, 0.15));
+}
+.bg__icon--lips{
+    top: 90px;
+    right: 80px;
+    transform: rotate(15deg);
+}
+.bg__icon--lips img{
+    width: 95px;
+    opacity: 0.85;
+}
+.bg__icon--stars{
+    bottom: 120px;
+    left: 90px;
+    transform: rotate(-12deg);
+    animation-delay: 1s;
+}
+.bg__icon--stars img{
+    width: 100px;
+    opacity: 0.8;
+}
+.bg__icon--heart{
+    bottom: 180px;
+    right: 80px;
+    transform: rotate(10deg);
+    animation-delay: 2s;
+}
+.bg__icon--heart img{
+    width: 110px;
+    opacity: 0.8;
+}
+
+/* Icon 6-12 (mới thêm) — rải đều trang */
+.bg__icon--6  { top: 220px; left: 60px;  transform: rotate(-8deg);  animation-delay: 0.5s; }
+.bg__icon--6 img  { width: 80px; opacity: 0.78; }
+
+.bg__icon--7  { top: 350px; right: 220px; transform: rotate(14deg); animation-delay: 1.5s; }
+.bg__icon--7 img  { width: 70px; opacity: 0.82; }
+
+.bg__icon--8  { top: 50%; left: 40px; transform: rotate(-18deg); animation-delay: 2.4s; }
+.bg__icon--8 img  { width: 95px; opacity: 0.75; }
+
+.bg__icon--9  { top: 50%; right: 50px; transform: rotate(20deg); animation-delay: 3.2s; }
+.bg__icon--9 img  { width: 85px; opacity: 0.78; }
+
+.bg__icon--10 { top: 110px; left: 460px; transform: rotate(18deg); animation-delay: 1.1s; }
+.bg__icon--10 img { width: 55px; opacity: 0.75; }
+
+.bg__icon--11 { bottom: 280px; left: 220px; transform: rotate(-22deg); animation-delay: 2.8s; }
+.bg__icon--11 img { width: 75px; opacity: 0.8; }
+
+.bg__icon--12 { bottom: 200px; left: 320px; transform: rotate(-14deg); animation-delay: 3.8s; }
+.bg__icon--12 img { width: 70px; opacity: 0.78; }
+@keyframes bgIconFloat{
+    0%, 100%{ translate: 0 0; }
+    50%{ translate: 0 -10px; }
+}
+
+
+/* ── Loading overlay — chỉ hiện khi fetch API ──────────────────────────── */
+#loading-overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: radial-gradient(circle at center, #5a1f1f 0%, #2a0a14 60%, #0a0001 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+}
+#loading-overlay.hidden{ display: none; }
+#loading-overlay.fade-out{ opacity: 0; pointer-events: none; }
+
+#loading-overlay .loading-heart{
+    font-size: 64px;
+    line-height: 1;
+    margin-bottom: 22px;
+    animation: loadingPulse 1.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px rgba(255, 150, 165, 0.5));
+}
+@keyframes loadingPulse{
+    0%, 100%{ transform: scale(1); }
+    50%{ transform: scale(1.2); }
+}
+#loading-overlay .loading-title{
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffd7dd;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255, 107, 138, 0.5);
+    margin: 0 18px 26px;
+    letter-spacing: 0.5px;
+    animation: loadingFloat 3s ease-in-out infinite;
+}
+@keyframes loadingFloat{
+    0%, 100%{ transform: translateY(0); }
+    50%{ transform: translateY(-5px); }
+}
+#loading-overlay .loading-bar{
+    width: 220px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    overflow: hidden;
+}
+#loading-overlay .loading-progress{
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b8a, #ffb1b8);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+#loading-overlay .loading-percent{
+    margin-top: 14px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: 2px;
+    font-family: 'Sriracha', system-ui, sans-serif;
+}
+@media (max-width: 658px){
+    #loading-overlay .loading-heart{ font-size: 50px; }
+    #loading-overlay .loading-title{ font-size: 1.6rem; }
+    #loading-overlay .loading-bar{ width: 180px; }
+}
+
+/* ── Modal thiệp sinh nhật — burgundy + cream paper torn edges ──────────── */
+.box__letter{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(40, 8, 12, 0.75);
+    z-index: 10;
+    display: none;
+}
+.box__letter .letter__border{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(94vw, 720px);
+    max-height: 90vh;
+    max-height: 90dvh;
+    background-color: #5a1f1f;
+    background-image: linear-gradient(160deg, #6a2424 0%, #4a1818 100%);
+    padding: 22px 18px;
+    border-radius: 6px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.55), inset 0 0 30px rgba(0,0,0,0.18);
+    display: none;
+}
+.letter__border .letter{
+    position: relative;
+    width: 100%;
+    max-height: calc(90vh - 44px);
+    max-height: calc(90dvh - 44px);
+    padding: 18px 26px 22px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+/* Cream paper với mép răng cưa qua SVG turbulence filter */
+.letter__border .letter::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #f5ecd9;
+    background-image:
+        radial-gradient(rgba(180, 140, 90, 0.06) 1px, transparent 1.5px),
+        linear-gradient(160deg, #f7eedb 0%, #ede2ce 100%);
+    background-size: 5px 5px, 100% 100%;
+    filter: url(#paper-torn-edges);
+    z-index: 0;
+    /* Force GPU layer để Safari/iPad không tile-render filter → tránh đứt khúc */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: filter;
+    isolation: isolate;
+}
+.letter__border .letter > *{
+    position: relative;
+    z-index: 1;
+}
+
+/* Header HAPPY Birthday */
+.letter__header{
+    margin-bottom: 18px;
+    flex-shrink: 0;
+}
+.happy-bday{
+    margin: 0;
+    line-height: 1;
+    color: #8b2a2a;
+    text-align: center;
+}
+.happy-bday__big,
+.happy-bday__script{
+    display: inline;
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 2.4rem;
+    color: #8b2a2a;
+    letter-spacing: -1px;
+    text-shadow: 0 1px 0 rgba(139, 42, 42, 0.08);
+    vertical-align: baseline;
+}
+.happy-bday__script{
+    margin-left: 0.35em;
+}
+
+/* Body 2 cột: ảnh trái + content phải */
+.letter__body{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 22px;
+    flex: 1;
+    min-height: 0; /* để con scroll được */
+}
+.letter__image{
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(60, 18, 18, 0.28);
+    background: #ede2ce;
+    align-self: center;
+    max-height: 360px;
+}
+.letter__image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.letter__content{
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+}
+
+/* Typewriter "Gửi em" */
+.letter__border .letter .title__letter{
+    flex-shrink: 0;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: #6b1820;
+    margin-bottom: 8px;
+    min-height: 2rem;
+}
+
+/* Typewriter nội dung thư — scrollable */
+.letter__border .letter .text__letter{
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 8px 4px 0;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.15rem;
+    color: #2c1818;
+    line-height: 1.55;
+    /* Scrollbar tinh tế */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 42, 42, 0.35) transparent;
+}
+.letter__border .letter .text__letter::-webkit-scrollbar{
+    width: 6px;
+}
+.letter__border .letter .text__letter::-webkit-scrollbar-thumb{
+    background-color: rgba(139, 42, 42, 0.35);
+    border-radius: 3px;
+}
+.letter__border .letter .text__letter p{
+    margin: 0;
+}
+
+/* Nút đóng × */
+.letter__border .close{
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 32px;
+    height: 32px;
+    background-color: #f5ecd9;
+    color: #5a1f1f;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    cursor: pointer;
+    z-index: 5;
+    transition: transform 0.2s ease;
+}
+.letter__border .close:hover{
+    transform: scale(1.1);
+}
+
+/* ── End-of-experience: ảnh bay lên ────────────────────────────────────── */
+.flying-photos-container{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+/* Lớp "vỏ" emoji burst từ vị trí bánh (giống Heart_Valentine createExplosion) */
+.cake-burst-shell{
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    width: 0;
+    height: 0;
+}
+.burst-particle{
+    position: absolute;
+    left: 0;
+    top: 0;
+    will-change: transform, opacity;
+    animation: cake-burst-particle var(--duration, 1.1s) ease-out forwards;
+}
+@keyframes cake-burst-particle{
+    0%{
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    18%{
+        transform: translate(-50%, -50%) scale(1.4) rotate(calc(var(--rot, 90deg) * 0.2));
+        opacity: 1;
+    }
+    100%{
+        transform:
+            translate(calc(-50% + var(--tx, 100px)), calc(-50% + var(--ty, -100px)))
+            scale(var(--end-scale, 0.2))
+            rotate(var(--rot, 90deg));
+        opacity: 0;
+    }
+}
+.flying-photo{
+    position: fixed;
+    /* left + top set bằng JS theo vị trí cake center */
+    border-radius: 10px;
+    border: 5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    object-fit: cover;
+    will-change: transform, opacity;
+    transform: translate(-50%, -50%) scale(0.35);
+    animation: fly-from-cake var(--dur, 11s) ease-out forwards;
+}
+
+/* Quỹ đạo xoắn ốc — chiều xoắn quyết định bởi --spin (CW hoặc CCW) */
+@keyframes fly-from-cake{
+    /* 0%: tại bánh, ẩn nhỏ */
+    0%{
+        transform: translate(-50%, -50%) translate(0, 0) scale(0.32) rotate(0deg);
+        opacity: 0;
+    }
+    /* 5%: vừa bắt đầu bùng ra */
+    5%{
+        opacity: 0.5;
+        transform:
+            translate(-50%, -50%)
+            translate(calc(var(--burst-x, 100px) * 0.25), calc(var(--burst-y, -80px) * 0.25))
+            scale(0.55)
+            rotate(calc(var(--spin, 30deg) * 0.4));
+    }
+    /* 15%: bùng tới điểm peak burst */
+    15%{
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            translate(var(--burst-x, 100px), var(--burst-y, -80px))
+            scale(1)
+            rotate(calc(var(--spin, 30deg) * 1.2));
+    }
+    /* 35%: giữ ở phía burst, chỉ dịch lên + xoắn nhẹ */
+    35%{
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            translate(
+                calc(var(--burst-x, 100px) * 1.05),
+                calc(var(--burst-y, -80px) - 22vh)
+            )
+            scale(1)
+            rotate(calc(var(--spin, 30deg) * 2.5));
+    }
+    /* 60%: tiếp tục tỏa ra ngoài + dịch lên */
+    60%{
+        opacity: 0.9;
+        transform:
+            translate(-50%, -50%)
+            translate(
+                calc(var(--burst-x, 100px) * 1.15),
+                calc(var(--burst-y, -80px) - 50vh)
+            )
+            scale(0.95)
+            rotate(calc(var(--spin, 30deg) * 4));
+    }
+    /* 85%: gần đỉnh viewport, giữ phía burst */
+    85%{
+        opacity: 0.55;
+        transform:
+            translate(-50%, -50%)
+            translate(
+                calc(var(--burst-x, 100px) * 1.2),
+                calc(var(--burst-y, -80px) - 85vh)
+            )
+            scale(0.9)
+            rotate(calc(var(--spin, 30deg) * 6));
+    }
+    /* 100%: ra khỏi viewport phía trên, vẫn ở phía burst */
+    100%{
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            translate(
+                calc(var(--burst-x, 100px) * 1.3),
+                calc(-100vh - 220px)
+            )
+            scale(0.82)
+            rotate(calc(var(--spin, 30deg) * 7.5));
+    }
+}
+@media (max-width: 658px){
+    .flying-photo{
+        border-width: 3px;
+    }
+}
+
+
+#copy {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+}
+
+#copy a {
+    text-decoration: none;
+    color: #191919d7;
+}
+
+#copy p {
+    color: #ff3d5a;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+html.intro-active #wrapper *,
+html.intro-active #wrapper *::before,
+html.intro-active #wrapper *::after{
+    animation-play-state: paused !important;
+}
+html.intro-active #wrapper .content,
+html.intro-active #wrapper .box__letter{
+    visibility: hidden;
+}
+
+#intro__cube{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 160px;
+    overflow: hidden;
+    transition: opacity .8s ease, visibility .8s ease;
+}
+#intro__cube.hidden{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.intro__title{
+    color: #7a1a2a;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-shadow: 0 3px 14px rgba(180, 30, 30, 0.2);
+}
+.intro__title span{
+    display: inline-block;
+}
+.intro__hint{
+    color: #8a3340;
+    font-family: 'Sriracha', cursive;
+    font-size: 1rem;
+    opacity: 0.85;
+    animation: introPulse 2s infinite ease-in-out;
+}
+@keyframes introPulse{
+    0%, 100%{ opacity: 0.6; transform: translateY(0); }
+    50%{ opacity: 1; transform: translateY(-5px); }
+}
+
+#intro__cube .cube{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    animation: cubeRotate 15s infinite linear;
+    cursor: pointer;
+    transition: transform .4s ease;
+}
+#intro__cube .cube:hover{
+    animation-play-state: paused;
+    transform: scale(1.1);
+}
+@keyframes cubeRotate{
+    from { transform: rotateX(0deg) rotateY(0deg); }
+    to   { transform: rotateX(360deg) rotateY(360deg); }
+}
+#intro__cube .outer-cube,
+#intro__cube .inner-cube{
+    transform-style: preserve-3d;
+}
+#intro__cube .outer-cube > div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgba(255,255,255,0.85);
+    opacity: 1;
+    background-color: transparent;
+    transition: all .9s;
+    overflow: hidden;
+}
+#intro__cube .outer-cube > div img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+#intro__cube .outer-top    { transform: rotateX(90deg)  translateZ(100px); }
+#intro__cube .outer-bottom { transform: rotateX(-90deg) translateZ(100px); }
+#intro__cube .outer-front  { transform: rotateY(0deg)   translateZ(100px); }
+#intro__cube .outer-back   { transform: translateZ(-100px) rotateY(180deg); }
+#intro__cube .outer-left   { transform: rotateY(90deg)  translateZ(100px); }
+#intro__cube .outer-right  { transform: rotateY(-90deg) translateZ(100px); }
+
+#intro__cube .inner-cube > div{
+    position: absolute;
+    top: 35px;
+    left: 35px;
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.7);
+}
+#intro__cube .inner-cube > div img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+#intro__cube .inner-top    { transform: rotateX(90deg)  translateZ(65px); }
+#intro__cube .inner-bottom { transform: rotateX(-90deg) translateZ(65px); }
+#intro__cube .inner-front  { transform: rotateY(0deg)   translateZ(65px); }
+#intro__cube .inner-back   { transform: translateZ(-65px) rotateY(180deg); }
+#intro__cube .inner-left   { transform: rotateY(90deg)  translateZ(65px); }
+#intro__cube .inner-right  { transform: rotateY(-90deg) translateZ(65px); }
+
+#intro__cube .cube:hover .outer-top    { transform: rotateX(90deg)  translateZ(200px); opacity: 1; }
+#intro__cube .cube:hover .outer-bottom { transform: rotateX(-90deg) translateZ(200px); opacity: 1; }
+#intro__cube .cube:hover .outer-front  { transform: rotateY(0deg)   translateZ(200px); opacity: 1; }
+#intro__cube .cube:hover .outer-back   { transform: translateZ(-200px) rotateY(180deg); opacity: 1; }
+#intro__cube .cube:hover .outer-left   { transform: rotateY(90deg)  translateZ(200px); opacity: 1; }
+#intro__cube .cube:hover .outer-right  { transform: rotateY(-90deg) translateZ(200px); opacity: 1; }
+
+#intro__cube .cube.exploding{
+    animation: cubeFlythrough 2s forwards cubic-bezier(0.35, 0, 0.55, 1) !important;
+}
+@keyframes cubeFlythrough{
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1); }
+    45%  { transform: scale(2.5); }
+    75%  { transform: scale(7); }
+    100% { transform: scale(14); opacity: 0; }
+}
+
+#intro__cube .cube.exploding .outer-top    { animation: outerOpenTop    0.5s forwards ease-out; }
+#intro__cube .cube.exploding .outer-bottom { animation: outerOpenBottom 0.5s forwards ease-out; }
+#intro__cube .cube.exploding .outer-front  { animation: outerOpenFront  0.5s forwards ease-out; }
+#intro__cube .cube.exploding .outer-back   { animation: outerOpenBack   0.5s forwards ease-out; }
+#intro__cube .cube.exploding .outer-left   { animation: outerOpenLeft   0.5s forwards ease-out; }
+#intro__cube .cube.exploding .outer-right  { animation: outerOpenRight  0.5s forwards ease-out; }
+
+@keyframes outerOpenTop    { 0% { opacity: 1; } 100% { transform: rotateX(90deg)  translateZ(320px); opacity: 0; } }
+@keyframes outerOpenBottom { 0% { opacity: 1; } 100% { transform: rotateX(-90deg) translateZ(320px); opacity: 0; } }
+@keyframes outerOpenFront  { 0% { opacity: 1; } 100% { transform: rotateY(0deg)   translateZ(320px); opacity: 0; } }
+@keyframes outerOpenBack   { 0% { opacity: 1; } 100% { transform: translateZ(-320px) rotateY(180deg); opacity: 0; } }
+@keyframes outerOpenLeft   { 0% { opacity: 1; } 100% { transform: rotateY(90deg)  translateZ(320px); opacity: 0; } }
+@keyframes outerOpenRight  { 0% { opacity: 1; } 100% { transform: rotateY(-90deg) translateZ(320px); opacity: 0; } }
+
+#intro__cube .cube.exploding .inner-cube{
+    animation: innerHighlight 0.9s 0.4s forwards ease-out;
+}
+@keyframes innerHighlight{
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.4); }
+}
+
+#intro__cube .cube.exploding .inner-cube > div{
+    border-color: rgba(255,255,255,0.95);
+    box-shadow: 0 0 30px rgba(255, 200, 220, 0.6);
+}
+
+#intro__cube .cube.exploding .inner-top    { animation: coreBurstTop    0.9s 1.2s forwards cubic-bezier(0.3, 0.6, 0.4, 1); }
+#intro__cube .cube.exploding .inner-bottom { animation: coreBurstBottom 0.9s 1.2s forwards cubic-bezier(0.3, 0.6, 0.4, 1); }
+#intro__cube .cube.exploding .inner-front  { animation: coreBurstFront  0.9s 1.2s forwards cubic-bezier(0.3, 0.6, 0.4, 1); }
+#intro__cube .cube.exploding .inner-back   { animation: coreBurstBack   0.9s 1.2s forwards cubic-bezier(0.3, 0.6, 0.4, 1); }
+#intro__cube .cube.exploding .inner-left   { animation: coreBurstLeft   0.9s 1.2s forwards cubic-bezier(0.3, 0.6, 0.4, 1); }
+#intro__cube .cube.exploding .inner-right  { animation: coreBurstRight  0.9s 1.2s forwards cubic-bezier(0.3, 0.6, 0.4, 1); }
+
+@keyframes coreBurstTop    { 0% { opacity: 1; } 100% { transform: rotateX(90deg)  translateZ(350px) rotate(180deg); opacity: 0; } }
+@keyframes coreBurstBottom { 0% { opacity: 1; } 100% { transform: rotateX(-90deg) translateZ(350px) rotate(-180deg); opacity: 0; } }
+@keyframes coreBurstFront  { 0% { opacity: 1; } 100% { transform: rotateY(0deg)   translateZ(350px) rotate(180deg); opacity: 0; } }
+@keyframes coreBurstBack   { 0% { opacity: 1; } 100% { transform: translateZ(-350px) rotateY(180deg) rotate(-180deg); opacity: 0; } }
+@keyframes coreBurstLeft   { 0% { opacity: 1; } 100% { transform: rotateY(90deg)  translateZ(350px) rotate(180deg); opacity: 0; } }
+@keyframes coreBurstRight  { 0% { opacity: 1; } 100% { transform: rotateY(-90deg) translateZ(350px) rotate(-180deg); opacity: 0; } }
+
+#intro__cube.exploding-mode .intro__title{
+    animation: introTextOut 0.6s forwards ease-out;
+}
+@keyframes introTextOut{
+    to{ opacity: 0; transform: scale(0.8) translateY(-20px); }
+}
+
+@media screen and (max-width: 658px)   {
+
+    .flag__birthday .flag__left {
+        transform: rotate(-10deg) translate(-8%, 4%);
+    }
+
+    .flag__birthday .flag__right {
+        transform: rotate(10deg) translate(8%, 4%) scaleX(-1);
+    }
+
+    .content {
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 25px;
+        align-items: center;
+        padding-top: 2rem;
+    }
+
+    .title {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-family: "Titan One", sans-serif;
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        letter-spacing: 4px;
+        flex-direction: column;
+        perspective: 1000px;
+    }
+
+    #btn__letter {
+        position: relative;
+        margin-top: 17px;
+        width: 209px;
+        background-color: var(--color-text-pink);
+        outline: none;
+        padding: 6px 4px;
+        font-size: 1rem;
+        border-radius: 50px;
+        border: 3px solid var(--color-black);
+        font-family: "Sriracha", cursive;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+        /* transform: scale(1); */
+        transition: all .5s ease-in-out;
+    }
+
+    .cricle {
+        position: absolute;
+        top: 10px;
+        right: -54px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(0);
+        animation: scaleCricle 3s 15s forwards ease-in-out;
+    }
+
+    .title .hat {
+        position: absolute;
+        --hat-end-top: -65px;
+        right: 30px;
+        top: -180px;
+        transform: rotate(-40deg);
+        z-index: -1;
+        animation: topHat 1.8s 3s forwards ease;
+    }
+    .title .hat img { width: 75px; }
+
+    .box__letter .letter__border {
+        width: min(94vw, 380px);
+        max-height: 92vh;
+        max-height: 92dvh;
+        padding: 16px 12px;
+    }
+    .letter__border .letter {
+        padding: 14px 18px 18px;
+        max-height: calc(92vh - 36px);
+        max-height: calc(92dvh - 36px);
+    }
+    .happy-bday__big,
+    .happy-bday__script { font-size: 1.8rem; }
+    .letter__header { margin-bottom: 14px; }
+
+    /* Stack ảnh trên, content dưới */
+    .letter__body {
+        grid-template-columns: 1fr;
+        grid-template-rows: clamp(200px, 32vh, 280px) 1fr;
+        gap: 14px;
+    }
+    .letter__image {
+        height: 100%;
+        min-height: 200px;
+        max-height: 280px;
+    }
+    .letter__border .letter .title__letter { font-size: 1.4rem; }
+    .letter__border .letter .text__letter { font-size: 1.02rem; line-height: 1.5; }
+
+    .content .right .image {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        border: 6px solid var(--color-black);
+    }
+
+    .name {
+        position: absolute;
+        padding: 0px 3px;
+        bottom: -6px;
+        border: 3px solid var(--color-black);
+    }
+
+    .name span {
+        font-size: 1rem;
+    }
+
+    .right .balloon_one {
+        position: absolute;
+        top: 10px;
+        left: -77px;
+        animation: balloon1 2s infinite linear;
+    }
+
+    .right .balloon_one img{
+        width: 76px !important;
+    }
+
+    .corner--bottom-left{ width: 110px; }
+    .corner--bottom-right{ width: 180px; }
+
+    .intro__title{ font-size: clamp(1.4rem, 6vw, 1.9rem); letter-spacing: 2px; text-align: center; padding: 0 16px; }
+    .intro__hint{ font-size: 0.9rem; }
+    #intro__cube{ gap: clamp(40px, 12vh, 100px); padding: 16px; }
+    #intro__cube .cube{ width: 140px; height: 140px; }
+    #intro__cube .outer-cube > div{ width: 140px; height: 140px; }
+    #intro__cube .outer-top    { transform: rotateX(90deg)  translateZ(70px); }
+    #intro__cube .outer-bottom { transform: rotateX(-90deg) translateZ(70px); }
+    #intro__cube .outer-front  { transform: rotateY(0deg)   translateZ(70px); }
+    #intro__cube .outer-back   { transform: translateZ(-70px) rotateY(180deg); }
+    #intro__cube .outer-left   { transform: rotateY(90deg)  translateZ(70px); }
+    #intro__cube .outer-right  { transform: rotateY(-90deg) translateZ(70px); }
+    #intro__cube .inner-cube > div{ width: 90px; height: 90px; top: 25px; left: 25px; }
+    #intro__cube .inner-top    { transform: rotateX(90deg)  translateZ(45px); }
+    #intro__cube .inner-bottom { transform: rotateX(-90deg) translateZ(45px); }
+    #intro__cube .inner-front  { transform: rotateY(0deg)   translateZ(45px); }
+    #intro__cube .inner-back   { transform: translateZ(-45px) rotateY(180deg); }
+    #intro__cube .inner-left   { transform: rotateY(90deg)  translateZ(45px); }
+    #intro__cube .inner-right  { transform: rotateY(-90deg) translateZ(45px); }
+    .bg__icon--lips{ top: 60px; right: 15px; }
+    .bg__icon--lips img{ width: 55px; }
+    .bg__icon--stars{ bottom: 80px; left: 15px; }
+    .bg__icon--stars img{ width: 60px; }
+    .bg__icon--heart{ bottom: 100px; right: 15px; }
+    .bg__icon--heart img{ width: 65px; }
+
+    /* Mobile: thu nhỏ + giấu icon 8, 11 (ở mid-left dễ chen content) */
+    .bg__icon--6  { top: 140px; left: 10px; }
+    .bg__icon--6 img  { width: 50px; }
+    .bg__icon--7  { top: 220px; right: 15px; }
+    .bg__icon--7 img  { width: 45px; }
+    .bg__icon--8, .bg__icon--11 { display: none; }
+    .bg__icon--9  { top: 60%; right: 10px; }
+    .bg__icon--9 img  { width: 55px; }
+    .bg__icon--10 { top: 240px; left: 10px; }
+    .bg__icon--10 img { width: 42px; }
+    .bg__icon--12 { bottom: 180px; left: 18vw; }
+    .bg__icon--12 img { width: 50px; }
+
+}
+
+/* ── Tablet (659px–1024px): chen icon ra khỏi vùng title Happy Birthday ── */
+@media screen and (min-width: 659px) and (max-width: 1024px) {
+    /* icon--10 ở desktop là top:110 left:460 → trên tablet rơi vào giữa, đè chữ Happy Birthday */
+    .bg__icon--10 { top: 70px; left: 24px; }
+    .bg__icon--10 img { width: 48px; }
+    /* icon--7 ở right:220 cũng có thể chen vào khu title trên iPad portrait */
+    .bg__icon--7 { top: 80px; right: 24px; }
+    .bg__icon--7 img { width: 60px; }
+}
+
+/* ── Extra-small screens (≤380px — iPhone SE, Galaxy Fold cover) ───────── */
+@media screen and (max-width: 380px) {
+    .flag__birthday .flag__left,
+    .flag__birthday .flag__right{
+        width: clamp(110px, 34vw, 150px);
+    }
+    .flag__birthday .flag__left { transform: rotate(-10deg) translate(-10%, 2%); }
+    .flag__birthday .flag__right { transform: rotate(10deg) translate(10%, 2%) scaleX(-1); }
+
+    .title .hat {
+        --hat-end-top: -55px;
+        right: 18px;
+        top: -150px;
+    }
+    .title .hat img { width: 60px; }
+
+    .box__letter .letter__border {
+        width: 96vw;
+        padding: 12px 8px;
+    }
+    .letter__border .letter {
+        padding: 12px 14px 14px;
+    }
+    .letter__body {
+        gap: 10px;
+        grid-template-rows: clamp(160px, 28vh, 220px) 1fr;
+    }
+    .letter__image { min-height: 160px; max-height: 220px; }
+    .happy-bday__big,
+    .happy-bday__script { font-size: 1.5rem; }
+    .letter__border .letter .title__letter { font-size: 1.25rem; }
+    .letter__border .letter .text__letter { font-size: 0.95rem; }
+
+    #intro__cube .cube{ width: 120px; height: 120px; }
+    #intro__cube .outer-cube > div{ width: 120px; height: 120px; }
+    #intro__cube .outer-top    { transform: rotateX(90deg)  translateZ(60px); }
+    #intro__cube .outer-bottom { transform: rotateX(-90deg) translateZ(60px); }
+    #intro__cube .outer-front  { transform: rotateY(0deg)   translateZ(60px); }
+    #intro__cube .outer-back   { transform: translateZ(-60px) rotateY(180deg); }
+    #intro__cube .outer-left   { transform: rotateY(90deg)  translateZ(60px); }
+    #intro__cube .outer-right  { transform: rotateY(-90deg) translateZ(60px); }
+    #intro__cube .inner-cube > div{ width: 78px; height: 78px; top: 21px; left: 21px; }
+    #intro__cube .inner-top    { transform: rotateX(90deg)  translateZ(39px); }
+    #intro__cube .inner-bottom { transform: rotateX(-90deg) translateZ(39px); }
+    #intro__cube .inner-front  { transform: rotateY(0deg)   translateZ(39px); }
+    #intro__cube .inner-back   { transform: translateZ(-39px) rotateY(180deg); }
+    #intro__cube .inner-left   { transform: rotateY(90deg)  translateZ(39px); }
+    #intro__cube .inner-right  { transform: rotateY(-90deg) translateZ(39px); }
+
+    .corner--bottom-left{ width: 80px; }
+    .corner--bottom-right{ width: 130px; }
+}
