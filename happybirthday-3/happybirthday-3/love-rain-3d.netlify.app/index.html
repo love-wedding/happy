@@ -34,82 +34,17 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="author" content="lovegift online">
     <meta name="copyright" content="© 2025 lovegift online">
-    <link rel="icon" href="../cdn.shopify.com/s/files/1/0757/9700/4572/files/tim6a24.png?v=1767367148">
+    <link rel="icon" href="images/tim.png">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link
             href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&amp;family=Pacifico&amp;family=Noto+Sans:wght@300;400;500;700&amp;display=swap"
             rel="stylesheet">
-    <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="../cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <link rel="stylesheet" href="static/vendor/all.min.css">
+    <script src="static/vendor/pako.min.js"></script>
     <link rel="stylesheet" href="static/css/app.css" />
   </head>
   <body class="font-sans antialiased">
-    <script>
-      (function () {
-        var host     = (location.hostname || "").toLowerCase();
-        var referrer = (document.referrer  || "").toLowerCase();
-        var inIframe = false;
-        try { inIframe = window.self !== window.top; } catch (e) { inIframe = true; }
-
-        if (
-          host.indexOf("lovegift.online") !== -1 ||
-          host === "localhost" ||
-          host === "127.0.0.1"
-        ) return;
-        if (inIframe && referrer.indexOf("lovegift.online") !== -1) return;
-
-        var REDIRECT_URL = "https://www.youtube.com/watch?v=IxX_QHay02M&amp;list=RDIxX_QHay02M&amp;start_radio=1";
-        var redirected = false;
-        function bye() {
-          if (redirected) return;
-          redirected = true;
-          try {
-            if (inIframe && window.top) window.top.location.replace(REDIRECT_URL);
-            else location.replace(REDIRECT_URL);
-          } catch (e) { location.href = REDIRECT_URL; }
-        }
-
-        document.addEventListener("contextmenu", function (e) { e.preventDefault(); }, true);
-        document.addEventListener("copy",  function (e) { e.preventDefault(); }, true);
-        document.addEventListener("cut",   function (e) { e.preventDefault(); }, true);
-        document.addEventListener("selectstart", function (e) { e.preventDefault(); }, true);
-        document.addEventListener("dragstart",   function (e) { e.preventDefault(); }, true);
-
-        document.addEventListener("keydown", function (e) {
-          var k = (e.key || "").toLowerCase();
-          var isF12 = e.keyCode === 123 || k === "f12";
-          var ctrl  = e.ctrlKey || e.metaKey;
-          var devCombo =
-            (ctrl && e.shiftKey && (k === "i" || k === "j" || k === "c")) ||
-            (ctrl && (k === "u" || k === "s"));
-          if (isF12 || devCombo) {
-            e.preventDefault();
-            e.stopPropagation();
-            bye();
-          }
-        }, true);
-
-        var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-        if (!isTouch) {
-          var THRESHOLD = 170;
-          function checkDevtools() {
-            var widthDiff  = window.outerWidth  - window.innerWidth;
-            var heightDiff = window.outerHeight - window.innerHeight;
-            if (widthDiff > THRESHOLD || heightDiff > THRESHOLD) bye();
-          }
-          setInterval(checkDevtools, 1000);
-
-          setInterval(function () {
-            var t0 = performance.now();
-            // eslint-disable-next-line no-debugger
-            debugger;
-            var t1 = performance.now();
-            if (t1 - t0 > 150) bye();
-          }, 1500);
-        }
-      })();
-    </script>
     <style>
       #lovegift-entrance {
         position: fixed;
@@ -348,7 +283,6 @@
     <script>
       (function () {
         var DEFAULT_IMAGES = [
-          "/images/_%20(7).jpeg",
           "images/_%20(8).jpg",
           "images/_%20(9).jpg",
           "images/nguyen%20thanh%20thuy.jpg",
@@ -373,7 +307,7 @@
         function start() {
           attachTilt();
           if (!window.LOVEGIFT_IMAGES || window.LOVEGIFT_IMAGES.length === 0) {
-            return;
+            window.LOVEGIFT_IMAGES = DEFAULT_IMAGES;
           }
           var IMAGES = window.LOVEGIFT_IMAGES;
           var rgb = hexToRgb(readThemeColor());
@@ -481,14 +415,9 @@
           window.__lovegiftAppStarted = true;
           window.__lovegiftConfigReady = true;
           window.dispatchEvent(new Event("lovegift-ready"));
-          var s1 = document.createElement("script");
-          s1.type = "module";
-          s1.src = "static/js/app.js";
-          document.body.appendChild(s1);
-          var s2 = document.createElement("script");
-          s2.type = "module";
-          s2.src = "static/js/home.js";
-          document.body.appendChild(s2);
+          var s = document.createElement("script");
+          s.src = "static/js/bundle.js";
+          document.body.appendChild(s);
           hideLoading();
         }
 

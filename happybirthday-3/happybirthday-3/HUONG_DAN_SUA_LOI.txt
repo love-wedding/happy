@@ -1,0 +1,68 @@
+================================================================================
+  GHI CHÚ KỸ THUẬT: NGUYÊN NHÂN VÀ CÁCH SỬA LỖI CHẠY HTML OFFLINE (DOUBLE-CLICK)
+  Dự án: love-rain-3d.netlify.app
+================================================================================
+
+I. VẤN ĐỀ BAN ĐẦU
+- Khi clone web từ Netlify về bằng HTTrack:
+  + Chạy qua lệnh server ảo (`npx serve .`) thì chạy được.
+  + Nhưng double-click trực tiếp file `index.html` (chạy qua giao thức file:///) thì màn hình trắng hoặc không hiển thị giao diện.
+
+--------------------------------------------------------------------------------
+
+II. 4 NGUYÊN NHÂN GỐC RỄ
+
+1. Lỗi CORS khi dùng ES Module trên giao thức file:///
+   - Mã nguồn gốc sử dụng: `<script type="module" src="...">` và các lệnh `import / export`.
+   - Khi double-click mở trực tiếp file HTML, trình duyệt chạy dưới giao thức `file:///` (Origin = `null`).
+   - Chính sách bảo mật mặc định của trình duyệt hiện đại (Chrome, Edge, Firefox) sẽ CHẶN TẤT CẢ các file JavaScript dùng `type="module"` qua `file:///` để tránh đọc trộm dữ liệu máy tính cá nhân.
+
+2. Script chống clone / chống xem trộm mã nguồn:
+   - Trong `index.html` ban đầu chứa đoạn script bắt sự kiện phím (F12, Ctrl+U, chuột phải) và kiểm tra `location.hostname`.
+   - Khi mở qua `file:///`, hostname là chuỗi rỗng (""). Đoạn script này tự động kích hoạt hàm `bye()` và chuyển hướng trình duyệt thẳng sang trang YouTube.
+
+3. HTTrack tải thiếu 3 file thư viện lớn:
+   - HTTrack chỉ quét các liên kết tĩnh thông thường, không quét được các file được nạp động bằng lệnh `import(...)` bên trong JavaScript.
+   - Do đó bị thiếu 3 file bắt buộc:
+     * `three.module.js` (~1 MB - thư viện đồ họa không gian 3D)
+     * `particle-effect.js` (~323 KB - hiệu ứng pháo hoa, hạt mưa rơi)
+     * `troika-three-text.esm.js` (~217 KB - hiển thị chữ 3D)
+   - Thiếu 3 file này khiến code báo lỗi 404 và dừng hoàn toàn.
+
+4. Đường dẫn tuyệt đối (/static/...):
+   - Đường dẫn trong file gốc bắt đầu bằng gạch chéo `/static/js/...`.
+   - Trên web server (http://localhost), nó trỏ đúng về thư mục gốc của trang.
+   - Khi double-click (`file:///`), nó sẽ trỏ ra tận ổ đĩa `C:\static\...`, dẫn tới lỗi không tìm thấy file (Not Found).
+
+--------------------------------------------------------------------------------
+
+III. CÁC BƯỚC ĐÃ XỬ LÝ ĐỂ CHẠY ĐƯỢC BẰNG DOUBLE-CLICK
+
+Bước 1: Tải bù đầy đủ các file còn thiếu
+- Tải trực tiếp 3 file: `three.module.js`, `particle-effect.js`, `troika-three-text.esm.js` từ server gốc `https://love-rain-3d.netlify.app/static/js/` và lưu vào thư mục `static/js/`.
+
+Bước 2: Xóa bỏ mã độc hại / chống clone
+- Mở file `index.html`, xóa bỏ toàn bộ đoạn script chặn F12, chặn chuột phải và đoạn mã tự động redirect sang YouTube (`bye()`).
+
+Bước 3: Đóng gói toàn bộ ES Module thành 1 file JS thuần (IIFE)
+- Gộp (bundle) toàn bộ mã nguồn React, Three.js, Text 3D, hiệu ứng hạt rơi và `home.js` thành 1 file JavaScript duy nhất:
+  => `static/js/bundle.js`
+- File này được đóng gói theo chuẩn IIFE (Immediately Invoked Function Expression) - là JavaScript thuần truyền thống, KHÔNG dùng `type="module"`, nạp vào là chạy ngay lập tức, tương thích 100% với giao thức `file:///`.
+
+Bước 4: Chuẩn hóa đường dẫn tương đối (Relative Path)
+- Đổi tất cả đường dẫn `/static/...` thành `./static/...` hoặc `static/...`.
+- Đảm bảo các tài nguyên (ảnh tim.png, font chữ, CSS) đều nằm cục bộ bên trong thư mục dự án để có thể chạy offline mà không cần mạng Internet.
+
+Bước 5: Cập nhật thẻ script trong `index.html`
+- Thay thế:
+    <script type="module" src="/static/js/app.js"></script>
+  Thành:
+    <script src="static/js/bundle.js"></script>
+
+--------------------------------------------------------------------------------
+
+IV. KẾT QUẢ VÀ HƯỚNG DẪN SỬ DỤNG
+- Bây giờ bạn chỉ cần vào thư mục dự án và double-click trực tiếp vào file:
+  `index.html`
+- Bấm nút "Mở Quà" để thưởng thức trọn vẹn hiệu ứng 3D, âm nhạc và ảnh mà không cần cài đặt hay chạy bất kỳ câu lệnh nào!
+================================================================================
