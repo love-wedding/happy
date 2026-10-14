@@ -13,7 +13,7 @@ const ENVELOPE_DEFAULTS = {
   message:
     "Từ ngày có anh, cuộc sống của em trở nên tươi đẹp hơn bao giờ hết. Cảm ơn anh vì đã luôn ở bên em, yêu thương và che chở cho em.\nYêu anh nhiều lắm!",
   images: [
-    "./image1.jpeg",
+    (window.DEFAULT_LOVE_IMAGE || "./image2.jpg"),
   ],
 };
 
@@ -60,18 +60,25 @@ function openEnvelope() {
   envelopeWrapper.classList.add("open");
   isEnvelopeOpen = true;
 
-  if (clickInstruction) clickInstruction.style.opacity = "0";
+  if (clickInstruction) {
+    clickInstruction.style.opacity = "0";
+  }
 
   setTimeout(() => {
     if (!card) return;
     card.classList.add("animation-done");
+
+    if (clickInstruction) {
+      clickInstruction.textContent = "Nhấn vào thiệp để đọc lời nhắn 💌";
+      clickInstruction.style.opacity = "1";
+    }
   }, 1800);
 }
 
 function bindEnvelopeInteractions() {
   if (!envelopeWrapper) return;
 
-  // Click vào thư: đang đóng → mở lại (thiệp bay ra); đã mở xong → hiện modal
+  // Click vào thư hoặc dòng hướng dẫn: đang đóng → mở; đã mở xong → hiện modal
   envelopeWrapper.addEventListener("click", function (e) {
     e.stopPropagation();
     if (!isEnvelopeOpen) {
@@ -80,6 +87,17 @@ function bindEnvelopeInteractions() {
       openModal();
     }
   });
+
+  if (clickInstruction) {
+    clickInstruction.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (!isEnvelopeOpen) {
+        openEnvelope();
+      } else if (card && card.classList.contains("animation-done")) {
+        openModal();
+      }
+    });
+  }
 
   // Hover peek-flip (desktop) → run typewriter, like the original project
   if (card) {
@@ -334,6 +352,11 @@ function applyTypewriterToElement(el, text, startDelay) {
 function openModal() {
   const modal = document.getElementById("wishModal");
   if (!modal) return;
+
+  // Dọn dẹp ảnh bay nếu có để không che thư khi đang mở
+  const container = document.getElementById("flyingImages");
+  if (container) container.innerHTML = "";
+
   modal.classList.add("show");
 
   const polaroidImage = modal.querySelector(".polaroid-image");
@@ -397,29 +420,29 @@ function launchFlyingImages(images) {
   const screenW = window.innerWidth;
   const isMobile = screenW <= 480;
 
-  // Kích thước cố định, đẹp mắt — KHÔNG co lại theo số lượng ảnh.
+  // Kích thước ảnh bay đẹp mắt
   const baseSize = isMobile
     ? Math.min(150, Math.floor(screenW * 0.42))
-    : Math.min(200, Math.floor(screenW * 0.2));
+    : Math.min(200, Math.floor(screenW * 0.22));
 
-  const count = images.length;
-  // Rải thời điểm phóng ảnh: mỗi ảnh cách nhau ~600ms, gói gọn tối đa ~8s dù nhiều ảnh.
-  const launchWindow = count > 1 ? Math.min(count * 600, 8000) : 0;
-  const step = count > 1 ? launchWindow / (count - 1) : 0;
+  // Phóng 20 ảnh bay liên tục tạo hiệu ứng ảnh chạy rực rỡ
+  const totalPhotos = Math.max(20, images.length * 5);
+  const step = 380; // mỗi ảnh cách nhau 380ms
   const maxFlight = 7500;
 
   let lastCenter = -1;
 
-  images.forEach(function (imgSrc, index) {
+  for (let index = 0; index < totalPhotos; index++) {
+    const imgSrc = images[index % images.length];
     setTimeout(function () {
       const img = document.createElement("img");
       img.src = imgSrc;
       img.className = "flying-photo";
 
-      const size = Math.round(baseSize * (0.82 + Math.random() * 0.36));
+      const size = Math.round(baseSize * (0.8 + Math.random() * 0.4));
       const half = size / 2;
 
-      // Vị trí ngang ngẫu nhiên, luôn nằm trọn trong màn hình và tránh trùng ảnh trước.
+      // Vị trí ngang ngẫu nhiên, tránh trùng ảnh ngay trước
       let center;
       let tries = 0;
       do {
@@ -428,7 +451,7 @@ function launchFlyingImages(images) {
       } while (lastCenter >= 0 && Math.abs(center - lastCenter) < size * 0.5 && tries < 6);
       lastCenter = center;
 
-      const duration = 6000 + Math.random() * 1500;
+      const duration = 6000 + Math.random() * 2000;
 
       img.style.width = size + "px";
       img.style.height = size + "px";
@@ -437,24 +460,14 @@ function launchFlyingImages(images) {
 
       container.appendChild(img);
       setTimeout(function () { if (img.parentNode) img.remove(); }, duration + 200);
-    }, Math.round(index * step));
-  });
+    }, index * step);
+  }
 
-  const totalTime = launchWindow + maxFlight + 500;
+  const totalTime = totalPhotos * step + maxFlight + 500;
   setTimeout(function () {
     container.innerHTML = "";
     const mainContent = envelopeScene && envelopeScene.querySelector(".main-content");
     if (mainContent) mainContent.classList.remove("hidden");
-    if (envelopeWrapper) envelopeWrapper.classList.remove("open");
-    isEnvelopeOpen = false;
-    if (card) {
-      card.classList.remove("animation-done");
-      card.classList.remove("flipped");
-    }
-    typewriterStarted = false;
-
-    // Re-open automatically for subsequent visits
-    setTimeout(openEnvelope, 600);
   }, totalTime);
 }
 
@@ -466,20 +479,6 @@ function showEnvelopeScene() {
   cacheEnvelopeEls();
   if (!envelopeScene) return;
 
-  // Only reveal the envelope when the loaded config has a message,
-  // or when previewing (?isPreview=true). Otherwise restore the 3D heart.
-  const isPreview = (function () {
-    try {
-      return new URLSearchParams(window.location.search).get("isPreview") === "true";
-    } catch (_) { return false; }
-  })();
-  if (!window._hasEnvelopeMessage && !isPreview) {
-    const canvas = document.querySelector("canvas");
-    if (canvas) canvas.classList.remove("letter-hidden", "letter-zoom");
-    document.body.classList.remove("letter-open");
-    return;
-  }
-
   if (!isEnvelopeInitialized) {
     initializeEnvelopeContent();
     bindEnvelopeInteractions();
@@ -487,10 +486,18 @@ function showEnvelopeScene() {
     isEnvelopeInitialized = true;
   }
 
-  envelopeScene.classList.add("visible");
+  // Đặt phong bì ở trạng thái đóng để người dùng click mở thư
+  if (envelopeWrapper) envelopeWrapper.classList.remove("open");
+  isEnvelopeOpen = false;
+  if (card) card.classList.remove("animation-done", "flipped");
 
-  // Auto-open envelope after scene fade-in (no click required)
-  setTimeout(openEnvelope, 800);
+  if (clickInstruction) {
+    clickInstruction.textContent = "💌 Nhấn vào phong bì để mở thư 💌";
+    clickInstruction.style.opacity = "1";
+  }
+
+  envelopeScene.classList.add("visible");
+  // Không tự động mở thư — chờ người dùng click vào phong bì!
 }
 
 window.showEnvelopeScene = showEnvelopeScene;
