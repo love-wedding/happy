@@ -130,9 +130,11 @@ originalTexts["forEach"]((t) => {
 });
 let currentWordIndex = 0;
 let nextWordSpawnTime = 0;
+const defaultImgPaths = (window.DEFAULT_LOVE_IMAGE ? [window.DEFAULT_LOVE_IMAGE] : []);
+const appImgPaths = (appData["images"] && appData["images"].length > 0) ? appData["images"] : defaultImgPaths;
 const IMAGE_CONFIG = {
-  paths: appData["images"] || [],
-  count: appData["images"]?.["length"] || 0,
+  paths: appImgPaths,
+  count: appImgPaths.length,
   scale: 2.5,
   glowIntensity: 0.4,
   spawnRate: 0.18,
@@ -162,6 +164,9 @@ let independentImageSprites = [];
 let nextIndependentSpawnTime = 0;
 const planeYCenter = 10;
 const textureLoader = new THREE["TextureLoader"]();
+if (window.location.protocol === "file:") {
+  textureLoader.setCrossOrigin("");
+}
 async function fetchAndPrepareImageTextures() {
   try {
     const e = IMAGE_CONFIG["paths"].map(
@@ -639,6 +644,7 @@ function createHeartExplosion(t) {
   mouse.y = (-t["clientY"] / window["innerHeight"]) * 2 + 1;
   raycaster["setFromCamera"](mouse, camera);
   const o = new THREE["Vector3"]();
+  const explosionDistance = camera ? camera.position.distanceTo(HEART_CENTER_TARGET) : 80;
   raycaster["ray"].at(explosionDistance, o);
   const a = new THREE["Group"]();
   const s = makeMat({
@@ -2518,8 +2524,14 @@ renderer.domElement["addEventListener"]("pointerdown", (t) => {
     const dx = e.clientX - downX;
     const dy = e.clientY - downY;
     const dt = performance.now() - downT;
-    // treat as tap: quick + minimal movement (not a drag/rotate)
-    if (dt < 450 && dx * dx + dy * dy < 120) {
+    // Nhận diện click / tap nhạy và chính xác
+    if (dt < 900 && dx * dx + dy * dy < 625) {
+      triggerReveal();
+    }
+  });
+
+  canvas.addEventListener("click", () => {
+    if (!isRevealing) {
       triggerReveal();
     }
   });

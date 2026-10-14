@@ -1,0 +1,182 @@
+/* Tùy chỉnh bổ sung cho web sinh nhật chạy thuần HTML/CSS/JS */
+@font-face {
+  font-family: 'britishGreen';
+  src: url('_next/static/media/1FTVVIPBritishGreen_Italic-s.p.06hu.o8-rb_v4.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-brand: 'britishGreen', "britishGreen Fallback", ui-serif, Georgia, serif;
+}
+
+/* Ánh sáng phòng */
+[data-room="lit"] #roomLitLayer {
+  opacity: 1 !important;
+}
+
+[data-room="vintage"] #roomVintageLayer {
+  opacity: 1 !important;
+}
+
+/* Ẩn các stage không active */
+.stage-container {
+  display: none !important;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  min-height: 100dvh;
+  width: 100%;
+}
+
+.stage-container.active {
+  display: flex !important;
+  opacity: 1;
+}
+
+/* Hiệu ứng chớp sáng chuyển cảnh */
+#flashOverlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+#flashOverlay.flashing {
+  opacity: 1;
+}
+
+/* Animations cho nến và lửa */
+@keyframes spFlick {
+  0%, 100% { transform: rotate(-2.5deg) scaleY(1); }
+  30% { transform: rotate(2deg) scaleY(0.95); }
+  55% { transform: rotate(-1deg) scaleY(1.07); }
+  80% { transform: rotate(1.6deg) scaleY(0.96); }
+}
+
+@keyframes spFlickFast {
+  0%, 100% { transform: rotate(-9deg) scaleY(0.84); }
+  25% { transform: rotate(8deg) scaleY(1.08); }
+  50% { transform: rotate(-7deg) scaleY(0.72); }
+  75% { transform: rotate(9deg) scaleY(1.02); }
+}
+
+.sp-flame-inner {
+  animation: spFlick 1.5s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+[data-sp-blowing="1"] .sp-flame-inner {
+  animation: spFlickFast 0.28s linear infinite !important;
+}
+
+@keyframes spSmoke {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  12% { opacity: 0.6; }
+  55% { transform: translate(var(--sp-smoke-x, 6px), -30px) scale(1.1); opacity: 0.4; }
+  100% { transform: translate(calc(var(--sp-smoke-x, 6px) * -1), -64px) scale(1.7); opacity: 0; }
+}
+
+.sp-smoke {
+  animation: spSmoke 2.6s ease-out infinite;
+}
+
+@keyframes spCakeIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes spCandleIn {
+  from { opacity: 0; transform: translate(-50%, -100%) scaleY(0.24); }
+  to { opacity: 1; transform: translate(-50%, -100%) scaleY(1); }
+}
+
+/* Que diêm châm nến */
+@keyframes spMatchStrike {
+  from { transform: scale(0.2); opacity: 1; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+@keyframes spMatchFlameIn {
+  0% { transform: scale(0.1); }
+  60% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* Wish animations */
+@keyframes spWishIn {
+  0% { transform: rotate(var(--sp-wa, 0deg)) translateX(110px) scale(0.5); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: rotate(calc(var(--sp-wa, 0deg) + 130deg)) translateX(10px) scale(1.1); opacity: 0; }
+}
+
+@keyframes spWishGlow {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.08); }
+}
+
+@keyframes spHeartBeat {
+  0%, 100% { transform: scale(1); }
+  12% { transform: scale(1.22); }
+  24% { transform: scale(1.02); }
+  36% { transform: scale(1.16); }
+  50% { transform: scale(1); }
+}
+
+@keyframes spWishBurst {
+  from { transform: scale(0.6); opacity: 0.9; }
+  to { transform: scale(var(--sp-burst, 2.6)); opacity: 0; }
+}
+
+@keyframes spWishSpark {
+  from { transform: translate(0, 0) scale(1); opacity: 1; }
+  to { transform: translate(var(--sp-sx, 0px), var(--sp-sy, 0px)) scale(0.4); opacity: 0; }
+}
+
+@keyframes spWishTwinkle {
+  0%, 100% { opacity: 0.12; transform: scale(0.7); }
+  50% { opacity: 0.75; transform: scale(1); }
+}
+
+@keyframes spWishRise {
+  0% { transform: translate(0, 0) scale(0.3) rotate(0deg); opacity: 0; }
+  12% { opacity: 1; }
+  78% { opacity: 1; }
+  100% { transform: translate(var(--sp-dx, 0px), -96vh) scale(1) rotate(var(--sp-rot, 0deg)); opacity: 0; }
+}
+
+/* Thư chúc mừng (Letter Scroll) */
+@keyframes spTapHint {
+  0%, 100% { transform: scaleY(1); opacity: 0.92; }
+  50% { transform: scaleY(1.08); opacity: 1; }
+}
+
+@keyframes spRollSpin {
+  to { background-position-y: 9px; }
+}
+
+@keyframes spLetterIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(11, 10, 20, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+}

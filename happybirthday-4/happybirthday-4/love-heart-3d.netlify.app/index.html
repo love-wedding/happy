@@ -62,19 +62,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="assets/envelope3d83.css?v=202507">
 
-  <!-- Import map: three + jsm examples nạp từ CDN. Native trên trình duyệt mới;
-       es-module-shims polyfill cho iOS < 16.4. -->
-  <script async src="../ga.jspm.io/npm_es-module-shims%401.10.0/dist/es-module-shims.js"></script>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.min.js",
-        "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/"
-      }
-    }
-  </script>
-  <link rel="modulepreload" href="../cdn.jsdelivr.net/npm/three%400.157.0/build/three.module.min.js" crossorigin>
-  <link rel="modulepreload" href="assets/scriptsc1db.js?v=20260718">
+
 
   <!-- Chặn phím tắt mở DevTools & chuột phải -->
   <script>
@@ -279,6 +267,43 @@
       #heartlove-loading::before,
       #heartlove-loading::after { animation: none !important; }
     }
+
+    .tap-heart-prompt {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background: rgba(255, 91, 138, 0.28);
+      border: 1.5px solid rgba(255, 140, 175, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 11px 26px;
+      border-radius: 999px;
+      font-family: 'Mali', cursive, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255, 91, 138, 0.4), 0 0 15px rgba(255, 91, 138, 0.3);
+      animation: prompt-float 2.2s ease-in-out infinite;
+      user-select: none;
+      transition: opacity 0.5s ease, transform 0.4s ease;
+      white-space: nowrap;
+    }
+    .tap-heart-prompt:hover {
+      background: rgba(255, 91, 138, 0.45);
+      box-shadow: 0 6px 28px rgba(255, 91, 138, 0.6);
+      transform: translateX(-50%) scale(1.06);
+    }
+    @keyframes prompt-float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-7px); }
+    }
+    body.letter-open .tap-heart-prompt {
+      opacity: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 
@@ -314,6 +339,7 @@
     Lưu ý: API hiện không trả về `title` và `message`/`popupMessage`
            -> dùng default; vẫn đọc optional `s.title` / `s.message` để tương thích nếu sau này API bổ sung.
   -->
+  <script src="assets/default-image.js"></script>
   <script>
     function decodeData(encodedString) {
       try {
@@ -364,7 +390,7 @@
           "Mãi mãi bên em! 💗💕",
           "Em là cả thế giới của anh! 💞💓"
         ],
-        images: ["image1.jpeg", "image2.jpg", "image3.jpeg"],
+        images: (window.DEFAULT_LOVE_IMAGE ? [window.DEFAULT_LOVE_IMAGE] : []),
         heartColor: "#fd9595"
       }
     };
@@ -372,8 +398,8 @@
     function initWithData(settings) {
       const music = settings.music || defaultData.data.backgroundMusic;
       const popupMessage = settings.message || settings.popupMessage || defaultData.data.popupMessage;
-      // Chỉ chuyển cảnh sang envelope khi config có sẵn nội dung message.
-      window._hasEnvelopeMessage = !!(settings.message || settings.popupMessage);
+      // Luôn chuyển cảnh sang envelope khi click vào trái tim
+      window._hasEnvelopeMessage = true;
       const messages = settings.messages
         ? (Array.isArray(settings.messages) ? settings.messages : settings.messages.split(',').map(function (m) { return m.trim(); }))
         : defaultData.data.messages;
@@ -506,6 +532,11 @@
     })();
   </script>
 
+  <!-- Prompt chạm vào trái tim để mở thư trên màn hình 3D -->
+  <div id="tapHeartPrompt" class="tap-heart-prompt" onclick="if(window.__revealLetter) window.__revealLetter();">
+    💌 Chạm vào trái tim để mở thư 💌
+  </div>
+
   <!-- Envelope scene (hidden until heart is tapped) -->
   <div class="envelope-scene" id="envelopeScene">
     <div class="main-content">
@@ -536,7 +567,7 @@
         </div>
       </div>
 
-      <p class="click-instruction" id="clickInstruction" style="opacity:0">Nhấn vào thư để mở lại 💌</p>
+      <p class="click-instruction" id="clickInstruction">💌 Nhấn vào phong bì để mở thư 💌</p>
     </div>
 
     <div class="flying-hearts-container" id="flyingHearts"></div>
@@ -562,25 +593,18 @@
     <div class="flying-images-container" id="flyingImages"></div>
   </div>
 
-  <script src="assets/envelope3d83.js?v=202507" defer></script>
+  <script src="assets/envelope3d83.js?v=202507"></script>
   <script src="assets/index.main58b4.js?v=202407"></script>
-  <!-- Chờ _heartloveReady (nếu có) trước khi khởi tạo scripts.js, sau đó ẩn loading -->
-  <script type="module">
+  <script src="assets/scriptsc1db.bundle.js"></script>
+  <script>
     function hideHeartloveLoading() {
       const el = document.getElementById('heartlove-loading');
       if (!el) return;
       el.classList.add('is-hidden');
-      // Gỡ khỏi DOM sau khi animation fade-out hoàn tất để không chiếm tài nguyên
       setTimeout(function () { el.remove(); }, 400);
     }
     window.hideHeartloveLoading = hideHeartloveLoading;
 
-    if (window._heartloveReady) {
-      await window._heartloveReady;
-    }
-    await import('assets/scriptsc1db.js?v=20260718');
-
-    // Cho scene 3D dựng frame đầu (2 rAF) rồi ẩn overlay ngay, không cần setTimeout padding
     requestAnimationFrame(function () {
       requestAnimationFrame(hideHeartloveLoading);
     });

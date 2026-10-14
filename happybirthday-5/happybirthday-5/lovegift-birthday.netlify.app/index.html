@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi" class="britishgreen_d3d126a5-module__CskFMW__variable h-full antialiased">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Món quà sinh nhật nhỏ gửi bằng yêu thương 🎂</title>
+  <meta name="description" content="Bật đèn lên, thổi nến, rồi ước một điều nhé — một món quà sinh nhật nhỏ làm bằng cả tấm lòng, gửi đến người bạn thương 🤍" />
+
+  <!-- Font & Stylesheet gốc -->
+  <link rel="stylesheet" href="_next/static/chunks/0hhbla0ro0jdt.css" />
+  <link rel="stylesheet" href="_next/static/chunks/0_lo.jjfr8tmf.css" />
+  <link rel="stylesheet" href="custom.css" />
+
+  <link rel="icon" href="icon0799.png" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-icon7a94.png" type="image/png" />
+</head>
+
+<body class="min-h-full overflow-x-hidden selection:bg-amber-500/20">
+  <!-- Chớp sáng trắng khi chuyển cảnh -->
+  <div id="flashOverlay"></div>
+
+  <!-- Nút điều khiển âm nhạc góc phải dưới -->
+  <button id="bgmBtn" type="button" aria-label="Bật/Tắt nhạc" title="Bật/Tắt nhạc nền"
+    class="fixed bottom-4 right-4 z-[60] flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white/90 backdrop-blur-md transition hover:bg-black/60 hover:text-white shadow-lg cursor-pointer">
+    <!-- Icon Loa Bật -->
+    <svg id="iconVolOn" class="h-5 w-5" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+      <path d="M16 9a5 5 0 0 1 0 6" />
+      <path d="M19.364 18.364a9 9 0 0 0 0-12.728" />
+    </svg>
+    <!-- Icon Loa Tắt -->
+    <svg id="iconVolOff" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+      <line x1="22" x2="16" y1="9" y2="15" />
+      <line x1="16" x2="22" y1="9" y2="15" />
+    </svg>
+    <!-- Vòng phát sóng gợi ý chạm vào -->
+    <span id="bgmWave" class="pointer-events-none absolute inset-0 animate-ping rounded-full border border-white/40"></span>
+  </button>
+
+  <!-- Container chính của toàn bộ ứng dụng -->
+  <div id="appContainer" data-sp-stage="dark" data-room="dark"
+    class="relative flex min-h-[100dvh] w-full flex-col overflow-hidden"
+    style="background:var(--room-gradient);color:var(--text-primary);--sp-accent:var(--accent-alt);--sp-glow:var(--glow-warm)">
+
+    <!-- Background Layer (Đèn nền, Pháo hoa giấy, Dây trang trí, Bóng bay) -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0">
+      <!-- Ánh sáng phòng -->
+      <div id="roomLitLayer" class="pointer-events-none absolute inset-0 transition-opacity duration-700" style="background:var(--room-lit);opacity:0"></div>
+      <div id="roomVintageLayer" class="pointer-events-none absolute inset-0 transition-opacity duration-700" style="background:var(--room-vintage);opacity:0"></div>
+
+      <!-- Đốm sáng lung linh trôi nổi -->
+      <div class="mv-blob" style="width:52vmax;height:52vmax;left:-14%;top:-18%;background:var(--glow-violet);animation-delay:0s"></div>
+      <div class="mv-blob" style="width:34vmax;height:34vmax;left:62%;top:48%;background:var(--glow-rose);animation-delay:-7s"></div>
+      <div class="mv-blob" style="width:26vmax;height:26vmax;left:20%;top:64%;background:var(--glow-warm);animation-delay:-14s"></div>
+
+      <!-- Dây cờ tiệc sinh nhật ở đỉnh (hiển thị khi phòng sáng) -->
+      <div id="garlandContainer" class="pointer-events-none absolute left-1/2 top-0 w-[130%] max-w-[560px] -translate-x-1/2 z-10 transition-opacity duration-700" style="opacity:0">
+        <img src="images/birthday/surprise-party/decor/garland-party-01.svg" alt="" class="mv-garland w-full" />
+      </div>
+
+      <!-- Bóng bay bay 2 bên -->
+      <div id="balloonsContainer" class="transition-opacity duration-700" style="opacity:0">
+        <div class="pointer-events-none absolute" style="left:-4%;top:10%">
+          <div class="mv-bob" style="animation-duration:5.4s"><img src="images/birthday/surprise-party/decor/balloon-blush-01.svg" alt="" style="width:96px;transform:rotate(-6deg)" /></div>
+        </div>
+        <div class="pointer-events-none absolute" style="left:11%;top:3%">
+          <div class="mv-bob" style="animation-duration:6.6s;animation-delay:1.1s"><img src="images/birthday/surprise-party/decor/balloon-cream-01.svg" alt="" style="width:54px;transform:rotate(9deg) scaleX(-1)" /></div>
+        </div>
+        <div class="pointer-events-none absolute" style="left:85%;top:78%">
+          <div class="mv-bob" style="animation-duration:5s;animation-delay:1.6s"><img src="images/birthday/surprise-party/decor/balloon-sage-01.svg" alt="" style="width:90px;transform:rotate(5deg) scaleX(-1)" /></div>
+        </div>
+        <div class="pointer-events-none absolute" style="left:88%;top:7%">
+          <div class="mv-bob" style="animation-duration:6s;animation-delay:0.6s"><img src="images/birthday/surprise-party/decor/balloon-blue-01.svg" alt="" style="width:72px;transform:rotate(6deg) scaleX(-1)" /></div>
+        </div>
+      </div>
+
+      <!-- Cánh hoa rơi rải rác -->
+      <div id="petalsContainer" class="transition-opacity duration-700" style="opacity:0">
+        <img src="images/birthday/secret-bouquet/intro/petal-cream-broad-01.webp" alt="" class="mv-confetti-fall absolute" style="left:15%;top:0;width:38px;animation-duration:14s" />
+        <img src="images/birthday/secret-bouquet/intro/petal-blush-broad-01.webp" alt="" class="mv-confetti-fall absolute" style="left:45%;top:0;width:42px;animation-duration:16s;animation-delay:2s" />
+        <img src="images/birthday/secret-bouquet/intro/petal-peach-broad-01.webp" alt="" class="mv-confetti-fall absolute" style="left:75%;top:0;width:36px;animation-duration:13s;animation-delay:4s" />
+        <img src="images/birthday/proposal-certificate/particles/heart-petal-confetti-01.webp" alt="" class="mv-confetti-fall absolute" style="left:88%;top:0;width:30px;animation-duration:15s;animation-delay:1s" />
+      </div>
+    </div>
+
+    <!-- NỘI DUNG CÁC STAGE CHÍNH (z-10) -->
+    <div class="relative z-10 flex min-h-[100dvh] w-full flex-col">
+
+      <!-- ================================================= -->
+      <!-- STAGE 1: DARK (CÔNG TẮC BẬT ĐÈN) -->
+      <!-- ================================================= -->
+      <section id="stage-dark" class="stage-container active flex flex-col items-center justify-center gap-6 px-6 py-12 text-center">
+        <!-- SVG Filters cho công tắc cổ điển -->
+        <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+          <defs>
+            <filter id="sketchy" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="turbulence" baseFrequency="0.035 0.042" numOctaves="4" result="noise" seed="42" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="4.5" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+            <filter id="sketchy-sm" x="-18%" y="-18%" width="136%" height="136%">
+              <feTurbulence type="turbulence" baseFrequency="0.06" numOctaves="3" result="noise" seed="7" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+          </defs>
+        </svg>
+
+        <p class="mv-body mv-fade-up text-[1.15rem]" style="letter-spacing:0.04em">ở đây tối quá…</p>
+
+        <!-- Khối công tắc đèn kiểu vintage -->
+        <div id="bulbContainer" class="mv-bulb mv-fade-in relative">
+          <span aria-hidden="true" class="mv-switch-pool"></span>
+
+          <!-- Hạt sáng xung quanh công tắc -->
+          <div id="switchMotes" class="pointer-events-none absolute inset-0"></div>
+
+          <label class="theme-switch theme-switch--upright cursor-pointer" title="Bật công tắc đèn">
+            <input id="lightCheckbox" class="theme-switch__checkbox" type="checkbox" checked />
+            <div class="theme-switch__container">
+              <div class="theme-switch__clouds"></div>
+              <div class="theme-switch__stars-container">
+                <svg fill="none" viewBox="0 0 144 55" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="currentColor" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688Z" />
+                </svg>
+              </div>
+              <div class="theme-switch__circle-container">
+                <div class="theme-switch__sun-moon-container">
+                  <div class="theme-switch__moon">
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                    <div class="theme-switch__spot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <p class="mv-body mv-fade-up text-[0.95rem] opacity-80" style="letter-spacing:0.12em">
+          cậu thử gạt công tắc đèn đi 💡
+        </p>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- STAGE 2: SURPRISE (CHÚC MỪNG SINH NHẬT) -->
+      <!-- ================================================= -->
+      <section id="stage-surprise" class="stage-container flex-col items-center justify-center px-6 py-16 text-center">
+        <p class="mv-kicker mv-fade-in text-sm font-semibold tracking-widest text-amber-300">BẤT NGỜ CHƯA!!</p>
+        <h1 class="mv-display mv-fade-up mt-7 max-w-4xl tracking-tight"
+          style="font-size:clamp(2.25rem, 8.5vw, 4.75rem); animation-delay:0.1s">
+          CHÚC MỪNG SINH NHẬT
+        </h1>
+
+        <!-- Tên người nhận phát sáng rực rỡ với font chữ nghệ thuật -->
+        <p class="cfg-recipient mv-name-glow mv-fade-up mt-6 leading-[1.1]"
+          style="font-family:var(--font-brand), ui-serif, Georgia, serif; font-size:clamp(3rem, 13vw, 6rem); color:var(--accent-strong); animation-delay:0.28s; padding-bottom:0.12em">
+          Em Bé 🤍
+        </p>
+
+        <div class="mv-fade-up mt-7 flex items-center justify-center gap-4" style="animation-delay:0.44s">
+          <span class="h-px w-10 sm:w-16" style="background:var(--border-accent)"></span>
+          <span style="font-family:var(--font-brand), ui-serif, Georgia, serif; font-size:clamp(1.05rem, 3.4vw, 1.35rem); font-style:italic; color:var(--accent)">
+            tròn <span class="cfg-age font-bold">20</span> tuổi
+          </span>
+          <span class="h-px w-10 sm:w-16" style="background:var(--border-accent)"></span>
+        </div>
+
+        <p class="mv-body mv-fade-up mt-6 max-w-sm text-base sm:text-lg" style="animation-delay:0.58s">
+          hôm nay là ngày của <span class="cfg-recipient">cậu</span> 🎉
+        </p>
+
+        <div class="mt-14 min-h-12">
+          <button id="btnSurpriseNext" type="button" class="mv-btn mv-btn-primary px-8 py-3 text-base font-semibold shadow-xl mv-fade-in" style="display:none;">
+            tiếp nào 🎈
+          </button>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- STAGE 3: CAKE (BÁNH KEM & THỔI NẾN) -->
+      <!-- ================================================= -->
+      <section id="stage-cake" class="stage-container relative flex-col items-center justify-center gap-5 sm:gap-7 px-4 py-8 sm:py-16 text-center select-none" style="touch-action:none">
+        <!-- SVG Lửa nến định nghĩa gradient gốc -->
+        <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+          <defs>
+            <radialGradient id="spFlameGrad" cx="50%" cy="70%" r="65%">
+              <stop offset="0%" stop-color="#ffe2a8" />
+              <stop offset="60%" stop-color="#ffb45e" />
+              <stop offset="100%" stop-color="#ef7e34" />
+            </radialGradient>
+            <radialGradient id="spFlameCore" cx="50%" cy="70%" r="65%">
+              <stop offset="0%" stop-color="#fffdf2" />
+              <stop offset="100%" stop-color="#ffd89a" />
+            </radialGradient>
+          </defs>
+        </svg>
+
+        <div id="cakeWrapper" class="relative w-full" style="max-width:min(400px, 80vw);animation:spCakeIn 900ms ease both" data-sp-blowing="0">
+          <!-- Lớp nến và hiệu ứng thắp nến diêm -->
+          <div class="pointer-events-none absolute inset-0 z-20" aria-hidden="true">
+            <!-- Que diêm thắp nến -->
+            <div id="matchContainer" class="absolute inset-x-0" style="top:24%;"></div>
+
+            <!-- Nơi chứa các ngọn nến động (nến số 20 hoặc nến cổ điển) -->
+            <div id="candlesContainer" class="absolute inset-0"></div>
+          </div>
+
+          <!-- Ảnh bánh kem trang trí -->
+          <img src="images/birthday/surprise-party/props/cake-party-01.webp" alt="Bánh kem sinh nhật"
+            class="relative z-10 w-full select-none pointer-events-none" draggable="false" />
+        </div>
+
+        <!-- Vùng hitbox toàn màn hình để nhấn giữ thổi nến -->
+        <button id="cakeHitbox" type="button" aria-label="Nhấn giữ để thổi nến"
+          class="absolute inset-0 z-30 cursor-pointer bg-transparent border-0 outline-none select-none" style="display:none"></button>
+
+        <p id="cakeMsg" class="max-w-sm italic text-lg sm:text-xl text-amber-100 transition-opacity duration-300 relative z-20"
+          style="font-family:var(--font-brand), ui-serif, Georgia, serif; opacity:0.92">
+          giờ tới phần quan trọng nhất 🎂
+        </p>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- STAGE 4: WISH (ƯỚC MỘT ĐIỀU ƯỚC) -->
+      <!-- ================================================= -->
+      <section id="stage-wish" class="stage-container flex-col items-center justify-center gap-6 px-6 py-16 text-center select-none" style="touch-action:none">
+        <!-- Các hạt sao lấp lánh nền -->
+        <div id="wishTwinkles" class="pointer-events-none absolute inset-0"></div>
+
+        <!-- Các ngôi sao bay lên trời sau khi ước xong -->
+        <div id="wishRisingStars" class="pointer-events-none absolute inset-0 z-30"></div>
+
+        <!-- Dòng thông điệp ước -->
+        <div class="relative w-full max-w-sm" style="min-height:7em">
+          <p id="wishPrompt" class="absolute inset-x-0 top-0 text-lg sm:text-2xl italic leading-relaxed transition-all duration-700"
+            style="font-family:var(--font-brand), ui-serif, Georgia, serif; color:var(--text-primary);">
+            giờ thì… ước một điều. nhắm mắt lại, cứ từ từ. ✨
+          </p>
+          <p id="wishDoneMsg" class="absolute inset-x-0 top-0 text-lg sm:text-2xl italic leading-relaxed transition-all duration-1000"
+            style="font-family:var(--font-brand), ui-serif, Georgia, serif; color:var(--wish-done-text); text-shadow:var(--wish-done-glow); opacity:0; transform:scale(0.94); pointer-events:none;">
+            điều ước vừa theo những vì sao gửi lên trời rồi đó… mong một ngày, nó sẽ thành sự thật 🌠
+          </p>
+        </div>
+
+        <!-- Nút giữ ước nguyện -->
+        <div id="wishPadArea" class="relative flex flex-col items-center gap-8 transition-opacity duration-700">
+          <div class="relative flex items-center justify-center">
+            <!-- Vầng hào quang chuyển động -->
+            <span id="wishGlow" class="pointer-events-none absolute h-48 w-48 rounded-full" style="background:var(--wish-glow);opacity:0.35"></span>
+
+            <!-- Nơi chứa trái tim xoắn ốc bay vào tâm khi nhấn giữ -->
+            <div id="wishHeartsContainer" class="pointer-events-none absolute inset-0 z-20"></div>
+
+            <!-- Vòng bùng nổ sau khi hoàn thành -->
+            <div id="wishBurstContainer" class="pointer-events-none absolute inset-0 z-20" style="display:none"></div>
+
+            <!-- Nút tròn ngôi sao -->
+            <button id="wishBtn" type="button" aria-label="Giữ để ước"
+              class="relative flex h-28 w-28 items-center justify-center rounded-full cursor-pointer select-none outline-none"
+              style="background:var(--wish-pad-bg); border:1px solid var(--wish-pad-border); transform:scale(1); transition:transform 500ms cubic-bezier(.3,1.2,.4,1)">
+              <!-- Vòng tròn SVG đếm tiến trình -->
+              <svg class="absolute inset-0 h-full w-full -rotate-90 pointer-events-none" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="44" fill="none" stroke="var(--wish-ring-track)" stroke-width="3" />
+                <circle id="wishRingProgress" cx="50" cy="50" r="44" fill="none" stroke="var(--wish-ring-fill)" stroke-width="3" stroke-linecap="round"
+                  stroke-dasharray="276.46" stroke-dashoffset="276.46" />
+              </svg>
+
+              <!-- Ngôi sao ở tâm -->
+              <span id="wishStar" class="mv-wish-star relative flex h-[86%] w-[86%] items-center justify-center overflow-hidden rounded-full pointer-events-none">
+                <svg class="mv-wish-star-icon h-12 w-12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <p class="text-xs tracking-wider" style="color:var(--text-muted);letter-spacing:0.1em">
+            giữ tay trên màn hình trong lúc ước
+          </p>
+
+          <button id="btnWishNext" type="button" class="mv-btn mv-btn-primary mt-2 px-7 py-2.5 text-sm" style="display:none">
+            tiếp ✨
+          </button>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- STAGE 5: LETTER (BỨC THƯ TÌNH CẢM) -->
+      <!-- ================================================= -->
+      <section id="stage-letter" class="stage-container flex-col items-center justify-center gap-6 px-6 py-16 text-center select-none">
+        <p class="max-w-sm italic text-lg sm:text-2xl text-amber-100" style="font-family:var(--font-brand), ui-serif, Georgia, serif; line-height:1.4">
+          còn một điều nữa. cái này từ <span class="cfg-sender font-semibold text-amber-300">Anh nè</span> 💌
+        </p>
+
+        <!-- Cuộn giấy thư vintage -->
+        <div class="relative w-full max-w-md select-none" style="animation:spLetterIn 900ms cubic-bezier(.2,.8,.3,1) both">
+          <div id="letterWrapper" class="relative overflow-hidden rounded-[10px] transition-[height] duration-700 ease-out" style="height:96px">
+            <!-- Mặt giấy thư -->
+            <div id="letterContent" class="relative bg-cover bg-center px-6 pb-10 pt-8 text-left sm:px-7"
+              style="background-image:url('images/birthday/surprise-party/letter/paper-letter-party-01.svg');border-radius:10px;box-shadow:0 26px 60px -30px rgba(0,0,0,.6)">
+              
+              <!-- Ảnh Polaroid đính kèm -->
+              <div id="letterPhotoWrapper" class="relative mx-auto mb-6 w-fit" style="transform:rotate(-2.6deg)">
+                <span aria-hidden="true" class="absolute left-1/2 top-0 z-10"
+                  style="width:74px;height:22px;transform:translate(-50%, -46%) rotate(-3deg);background:rgba(226,214,170,.6);box-shadow:0 1px 2px rgba(60,40,25,.18)"></span>
+                <div style="padding:8px 8px 12px;background:#fffdf6;border-radius:3px;box-shadow:0 12px 26px -14px rgba(60,40,25,.55)">
+                  <img id="letterPhoto" src="images/people/photo-01.jpeg" alt="Ảnh kỷ niệm" class="block h-auto w-full rounded-[2px] object-cover" style="max-width:172px" />
+                </div>
+              </div>
+
+              <!-- Lời thư tình cảm -->
+              <p id="letterText" style="font-family:var(--font-brand), ui-serif, Georgia, serif; font-size:clamp(16px, 4.4vw, 19px); line-height:1.8; color:#3d201e; white-space:pre-wrap">
+                Chúc mừng sinh nhật cậu 🎂
+              </p>
+
+              <!-- Ký tên -->
+              <p class="mt-6 text-right" style="font-family:var(--font-brand), ui-serif, Georgia, serif; font-size:clamp(17px, 4.6vw, 20px); color:#7a5a48">
+                — <span class="cfg-sender">Anh nè</span>, gửi <span class="cfg-recipient">Em Bé 🤍</span>
+              </p>
+            </div>
+
+            <!-- Vệt bóng tối ở đáy khi cuộn chưa mở -->
+            <div id="letterFadeShadow" aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 h-10"
+              style="background:linear-gradient(180deg, transparent, rgba(90,60,40,.28))"></div>
+          </div>
+
+          <!-- Nút cuộn giấy mở thư kiểu trục cuốn cổ điển -->
+          <button id="btnRollOpen" type="button" class="relative z-10 mx-auto -mt-2 block cursor-pointer text-center outline-none border-0 bg-transparent"
+            style="width:108%;margin-left:-4%" aria-label="Chạm vào cuộn giấy để mở thư">
+            <div class="relative h-9 overflow-hidden rounded-full shadow-lg"
+              style="background:linear-gradient(180deg, #f3e2c6 0%, #e8cfa6 30%, #caa06a 78%, #b18a55 100%);box-shadow:inset 0 2px 3px rgba(255,250,235,.8), inset 0 -3px 5px rgba(90,60,30,.35), 0 12px 22px -10px rgba(90,60,30,.55);animation:spTapHint 1.8s ease-in-out infinite">
+              <!-- Hiệu ứng cuộn lăn -->
+              <span id="rollSpinStripe" aria-hidden="true" class="absolute inset-0"
+                style="background:repeating-linear-gradient(180deg, rgba(255,255,255,.22) 0 2px, rgba(140,100,60,.10) 2px 9px);opacity:0.55"></span>
+            </div>
+            <!-- Hai đầu gỗ tròn của trục cuốn -->
+            <span aria-hidden="true" class="absolute h-11 w-3 rounded-full" style="top:-4px;left:-2px;background:linear-gradient(180deg, #8f684c, #6e4c33);box-shadow:inset 0 1px 0 rgba(255,244,222,.35)"></span>
+            <span aria-hidden="true" class="absolute h-11 w-3 rounded-full" style="top:-4px;right:-2px;background:linear-gradient(180deg, #8f684c, #6e4c33);box-shadow:inset 0 1px 0 rgba(255,244,222,.35)"></span>
+            
+            <span id="letterHintText" aria-hidden="true" class="mt-3 block text-xs tracking-wider transition-opacity duration-300" style="color:var(--text-secondary);letter-spacing:0.08em">
+              chạm vào cuộn giấy để mở thư ✨
+            </span>
+          </button>
+        </div>
+
+        <div class="min-h-[3rem] mt-4">
+          <button id="btnLetterNext" type="button" class="mv-btn mv-btn-primary px-8 py-3 text-sm font-semibold shadow-xl" style="display:none">
+            tiếp ✨
+          </button>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- STAGE 6: BLOOM (KỶ NIỆM ẢNH) -->
+      <!-- ================================================= -->
+      <section id="stage-bloom" class="stage-container flex-col items-center justify-center gap-8 px-6 py-16 text-center">
+        <h2 class="mv-display text-2xl sm:text-4xl font-serif italic text-amber-100">
+          những khoảnh khắc này, giờ là của cậu rồi.
+        </h2>
+
+        <!-- Khung lưới Mosaic ảnh -->
+        <div id="mosaicGrid" class="grid w-full max-w-lg grid-cols-2 sm:grid-cols-3 gap-3.5 sm:gap-4.5 p-2">
+          <!-- Các ảnh sẽ được sinh ra từ config.js -->
+        </div>
+
+        <div class="mt-4 min-h-12">
+          <button id="btnBloomNext" type="button" class="mv-btn mv-btn-primary px-8 py-3 text-sm font-semibold shadow-xl" style="display:none">
+            điều cuối cùng ✨
+          </button>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- STAGE 7: KEEPSAKE (CHỨNG NHẬN & ĐIỀU ƯỚC) -->
+      <!-- ================================================= -->
+      <section id="stage-keepsake" class="stage-container flex-col items-center justify-center gap-6 px-6 py-16 text-center">
+        <p class="mv-kicker text-xs font-semibold tracking-widest text-amber-300 uppercase">TIỆC BẤT NGỜ</p>
+
+        <!-- Thẻ giấy lưu niệm -->
+        <div class="relative w-full max-w-sm rounded-2xl p-6 text-left shadow-2xl"
+          style="background:rgba(255, 253, 246, 0.95);color:#3d201e;box-shadow:0 24px 60px -20px rgba(0,0,0,0.5)">
+          <div class="flex items-center justify-between border-b border-amber-900/10 pb-4">
+            <span class="text-xs uppercase tracking-wider font-semibold text-amber-800">Chứng nhận tuổi mới</span>
+            <span class="text-xs text-amber-900/60 font-serif italic cfg-age-stamp">20 tuổi 🎂</span>
+          </div>
+
+          <div class="my-5">
+            <h3 class="text-xl font-serif font-bold text-amber-950">
+              <span class="cfg-recipient">Em Bé</span> 🤍
+            </h3>
+            <p class="text-xs text-amber-800/80 mt-1">
+              chính thức bước sang tuổi mới rực rỡ và bình an!
+            </p>
+          </div>
+
+          <!-- Khu vực nhập điều ước của người nhận -->
+          <div class="mt-4 border-t border-dashed border-amber-900/20 pt-4">
+            <label for="customWishInput" class="block text-xs font-semibold text-amber-900 mb-2">
+              tới lượt cậu — viết điều ước cho năm tới nhé ✍️
+            </label>
+            <textarea id="customWishInput" rows="3"
+              placeholder="vd. năm nay mình mong sẽ dũng cảm hơn với ước mơ của chính mình…"
+              class="w-full rounded-lg border border-amber-900/20 bg-amber-50/50 p-3 text-xs text-stone-800 outline-none focus:border-amber-600 focus:bg-white"></textarea>
+            <button id="btnAttachWish" type="button" class="mv-btn mv-btn-primary mt-3 w-full py-2 text-xs">
+              Đính vào món quà 💌
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <button id="btnKeepsakeNext" type="button" class="mv-btn mv-btn-primary px-8 py-3 text-sm font-semibold shadow-xl">
+            giữ lại tấm này ✨
+          </button>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- STAGE 8: SHARE (TỔNG KẾT & CHIA SẺ) -->
+      <!-- ================================================= -->
+      <section id="stage-share" class="stage-container flex-col items-center justify-center gap-6 px-6 py-16 text-center">
+        <p class="mv-kicker text-xs font-semibold tracking-widest text-amber-300 uppercase">GỬI CẬU 🤍</p>
+        <h2 class="mv-display max-w-sm text-2xl sm:text-3xl font-serif italic text-amber-100">
+          mong điều ước cậu vừa viết sẽ thành sự thật trong năm nay nhé
+        </h2>
+
+        <!-- Khung ảnh Polaroid tổng kết -->
+        <div id="polaroidCard" class="relative mx-auto w-full max-w-xs rotate-[-1.5deg] rounded-sm p-4 text-left shadow-2xl transition-transform hover:rotate-0"
+          style="background:#ffffff;box-shadow:0 28px 60px -25px rgba(0,0,0,0.7)">
+          <div class="overflow-hidden rounded-sm aspect-square bg-stone-100">
+            <img id="sharePhoto" src="images/people/photo-01.jpeg" alt="Kỷ niệm" class="h-full w-full object-cover" />
+          </div>
+          <div class="pt-4 pb-2">
+            <p class="font-serif text-base font-bold text-stone-900">
+              <span class="cfg-recipient">Em Bé</span> — <span class="cfg-age">20</span> tuổi
+            </p>
+            <p id="shareWishDisplay" class="mt-2 text-xs font-serif italic text-stone-600 border-l-2 border-amber-400 pl-2">
+              "Luôn rực rỡ và hạnh phúc mỗi ngày ✨"
+            </p>
+            <p class="mt-3 text-[10px] text-stone-400 text-right">
+              Một món quà nhỏ từ <span class="cfg-sender">Anh nè</span> 🤍
+            </p>
+          </div>
+        </div>
+
+        <hr class="mv-rule mt-12 w-full max-w-xs" />
+
+        <p class="mv-fade-up mt-8 max-w-sm italic text-sm sm:text-base text-amber-100/90" style="font-family:var(--font-brand), ui-serif, Georgia, serif">
+          cảm ơn cậu đã đi cùng tới tận khoảnh khắc này — sinh nhật thật vui nhé 🤍
+        </p>
+
+        <button id="btnRestart" type="button" class="mv-btn mv-btn-ghost mt-8 px-6 py-2.5 text-xs">
+          xem lại bữa tiệc 🎈
+        </button>
+      </section>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL (XEM ẢNH LỚN) -->
+  <div id="lightboxOverlay" class="lightbox-overlay">
+    <button id="lightboxClose" type="button" aria-label="Đóng ảnh"
+      class="absolute right-5 top-5 z-20 text-white bg-black/50 hover:bg-black/80 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer">
+      ✕
+    </button>
+    <button id="lightboxPrev" type="button" aria-label="Ảnh trước"
+      class="absolute left-4 z-20 text-white bg-black/50 hover:bg-black/80 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer">
+      ❮
+    </button>
+    <button id="lightboxNext" type="button" aria-label="Ảnh sau"
+      class="absolute right-4 z-20 text-white bg-black/50 hover:bg-black/80 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer">
+      ❯
+    </button>
+
+    <figure class="flex max-h-full flex-col items-center gap-3" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" alt="" class="max-h-[75vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl" />
+      <figcaption class="text-center text-white">
+        <p id="lightboxCaption" class="text-sm font-serif italic text-amber-100"></p>
+        <p id="lightboxCounter" class="mt-1 text-xs text-stone-400"></p>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- Script cấu hình & ứng dụng -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
