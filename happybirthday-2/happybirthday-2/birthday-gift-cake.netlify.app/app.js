@@ -1,9 +1,11 @@
 /**
  * Standalone Birthday Experience
  * Converted to pure vanilla JavaScript for offline / file:// double-click compatibility.
+ * FIXED: letter typewriter animation, listener leaks, timer cleanup.
  */
 (function () {
   'use strict';
+  console.log('[birthday] app.js build v3 - letter fix');
 
   // --- RAW LOCALES DICTIONARY ---
   const RAW_CONTENTS = {"vi":{"senderName":"Tớ","receiverName":"Cậu","opening":{"greeting":"Happy Birthday","day":17,"month":7},"intro":{"line1":"Có một món quà nhỏ dành cho cậu…","line2":"Nhưng trước khi mở, thổi nến trước nhé 🎂","idleHint":"👆 Nhấn & giữ ngọn nến cho đến khi tắt","holdingHint":"giữ nữa… giữ tiếp…","lightingHint":"đang thắp nến cho cậu…"},"beats":["Ngọn nến đã tắt…","nhưng cậu không đi qua năm nay một mình đâu.","Từ từ thôi nhé, Cậu. Tớ ở đây mà."],"blackoutCaption":"đang thu gom những kỷ niệm…","wish":{"kicker":"Một điều ước","question":"Bây giờ… chọn một điều ước cho ngày sinh nhật của cậu.","options":["Hạnh phúc hơn","Trúng Vietlott","Khỏe mạnh hơn","Bình yên hơn"],"reply":"Điều ước đã được nhận. Mong nó từ từ thành hiện thực."},"heart":{"caption":"Tất cả những kỷ niệm nhỏ này là dành cho cậu.","title":"Chúc Mừng Sinh Nhật, Cậu.","subtitle":"Hôm nay cậu nhất định phải được ăn mừng.","next":"Có một lá thư dành cho cậu →"},"letter":{"kicker":"Lá thư nhỏ","body":"Tớ không giỏi nói mấy lời hoa mỹ, nên viết đơn giản thôi: chúc mừng sinh nhật cậu nhé.\n\nNăm vừa rồi chắc chẳng dễ dàng gì, vậy mà cậu vẫn đi tới được hôm nay — giỏi hơn cậu nghĩ nhiều đấy.\n\nTớ chỉ mong cậu ăn ngon ngủ đủ, bớt lo một chút, và nhớ là luôn có người ở đây khi cậu cần.","signature":"— Tớ","next":"Vẫn còn nữa →"},"final":{"kicker":"Dành cho cậu","title":"Chúc Mừng Sinh Nhật, Cậu","from":"từ Tớ","message":"Mong điều ước cậu chọn lúc nãy thật sự tìm được đường đến với cậu trong năm nay.","starButton":"Gửi điều ước lên trời ✨","repeatButton":"Bắt đầu lại từ đầu"},"starlight":{"kicker":"Gửi lên trời","title":"Biến điều ước thành sao băng","subtitle":"Chạm vào ngôi sao để gửi điều ước của cậu lên trời đêm.","wishFallback":"Điều ước của cậu","sentTitle":"Điều ước đã được gửi đi ✨","sentMessage":"Người ta nói điều ước theo sao băng sớm muộn cũng thành hiện thực. Từ đêm nay, sẽ luôn có một ngôi sao giữ lời ước ấy giúp cậu.","tapHint":"Chạm vào bầu trời để thả thêm sao băng nhé ✧","backButton":"Quay lại thiệp","repeatButton":"Bắt đầu lại từ đầu"},"ui":{"months":["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"],"monthLabel":"Tháng {month}","heartTapHint":"Chạm vào trái tim để xem ảnh ♡","viewPhoto":"Xem ảnh","tapToClose":"Chạm để đóng","languageLabel":"Ngôn ngữ"}},"en":{"senderName":"me","receiverName":"you","opening":{"greeting":"Happy Birthday","day":17,"month":7},"intro":{"line1":"There's a little gift here for you…","line2":"But before you open it, blow out the candle first 🎂","idleHint":"👆 Press & hold the flame until it goes out","holdingHint":"keep holding… almost there…","lightingHint":"lighting the candle for you…"},"beats":["The candle has gone out…","but you're not walking through this year alone.","Take it slow{,receiver}. I'm right here."],"blackoutCaption":"gathering up the little memories…","wish":{"kicker":"One wish","question":"Now… pick one wish for your birthday.","options":["Happier","Win the lottery","Healthier","More peace"],"reply":"Your wish has been received. May it slowly come true."},"heart":{"caption":"All these little memories are for you.","title":"Happy Birthday{,receiver}.","subtitle":"Today, you deserve to be celebrated.","next":"There's a letter for you →"},"letter":{"kicker":"A little letter","body":"I'm not good with fancy words, so I'll keep it simple: happy birthday.\n\nThis past year can't have been easy, and yet here you are — you're stronger than you think.\n\nAll I wish is that you eat well, sleep enough, worry a little less, and remember that someone is always here when you need them.","signature":"— {sender}","next":"There's more →"},"final":{"kicker":"For you","title":"Happy Birthday{,receiver}","from":"from {sender}","message":"May the wish you just picked really find its way to you this year.","starButton":"Send the wish to the sky ✨","repeatButton":"Start over from the beginning"},"starlight":{"kicker":"Up to the sky","title":"Turn the wish into a shooting star","subtitle":"Touch the star to send your wish up into the night sky.","wishFallback":"Your wish","sentTitle":"The wish has been sent ✨","sentMessage":"They say a wish that rides a shooting star comes true sooner or later. From tonight on, there will always be a star up there keeping that wish for you.","tapHint":"Touch the sky to let more shooting stars fall ✧","backButton":"Back to the card","repeatButton":"Start over from the beginning"},"ui":{"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthLabel":"{monthName}","heartTapHint":"Touch the heart to see the photos ♡","viewPhoto":"View photo","tapToClose":"Tap to close","languageLabel":"Language"}},"ko":{"senderName":"나","receiverName":"너","opening":{"greeting":"생일 축하해","day":17,"month":7},"intro":{"line1":"너에게 줄 작은 선물이 있어…","line2":"하지만 열기 전에, 먼저 촛불을 불어서 꺼줘 🎂","idleHint":"👆 촛불을 꺼질 때까지 길게 눌러줘","holdingHint":"조금만 더… 계속 눌러…","lightingHint":"너를 위해 초에 불을 붙이는 중이야…"},"beats":["촛불이 꺼졌어…","그래도 올해를 너 혼자 걷는 건 아니야.","천천히 가도 돼{,receiver}. 나 여기 있잖아."],"blackoutCaption":"작은 추억들을 모으는 중이야…","wish":{"kicker":"하나의 소원","question":"이제… 네 생일 소원을 하나 골라봐.","options":["더 행복해지기","복권 당첨","더 건강해지기","더 평온해지기"],"reply":"소원이 접수됐어. 천천히 이루어지길."},"heart":{"caption":"이 작은 추억들은 전부 너를 위한 거야.","title":"생일 축하해{,receiver}.","subtitle":"오늘은 네가 꼭 축하받아야 해.","next":"너에게 온 편지가 있어 →"},"letter":{"kicker":"짧은 편지","body":"나는 화려한 말은 잘 못 해서, 그냥 간단히 말할게: 생일 축하해.\n\n지난 한 해가 쉽지 않았을 텐데, 그래도 여기까지 왔네 — 너는 네 생각보다 훨씬 강해.\n\n그저 잘 먹고 푹 자고, 걱정은 조금 덜고, 네가 필요할 때 늘 곁에 있는 사람이 있다는 걸 기억해줘.","signature":"— {sender}","next":"아직 더 있어 →"},"final":{"kicker":"너에게","title":"생일 축하해{,receiver}","from":"{sender}가","message":"방금 고른 그 소원이 올해 정말 너에게 닿기를.","starButton":"소원을 하늘로 보내기 ✨","repeatButton":"처음부터 다시 시작"},"starlight":{"kicker":"하늘로","title":"소원을 별똥별로 만들기","subtitle":"별을 터치해서 네 소원을 밤하늘로 보내줘.","wishFallback":"너의 소원","sentTitle":"소원을 보냈어 ✨","sentMessage":"별똥별을 따라 보낸 소원은 언젠가 이뤄진다고들 해. 오늘 밤부터, 그 소원을 대신 지켜주는 별 하나가 늘 저 위에 있을 거야.","tapHint":"하늘을 터치하면 별똥별이 더 떨어져 ✧","backButton":"카드로 돌아가기","repeatButton":"처음부터 다시 시작"},"ui":{"months":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"monthLabel":"{month}월","heartTapHint":"하트를 터치해서 사진을 봐 ♡","viewPhoto":"사진 보기","tapToClose":"터치하면 닫혀","languageLabel":"언어"}},"ja":{"senderName":"わたし","receiverName":"あなた","opening":{"greeting":"お誕生日おめでとう","day":17,"month":7},"intro":{"line1":"あなたに小さな贈り物があるの…","line2":"でも開ける前に、まずはろうそくを吹き消してね 🎂","idleHint":"👆 消えるまで炎を長押ししてね","holdingHint":"もう少し…そのまま押していて…","lightingHint":"あなたのためにろうそくを灯しているよ…"},"beats":["ろうそくが消えた…","でも今年をあなたひとりで歩くわけじゃないよ。","ゆっくりでいいからね{,receiver}。わたしはここにいるよ。"],"blackoutCaption":"小さな思い出を集めているよ…","wish":{"kicker":"ひとつの願いごと","question":"さあ…あなたの誕生日の願いをひとつ選んで。","options":["もっと幸せに","宝くじ当選","もっと健康に","もっと穏やかに"],"reply":"願いごとを受け取ったよ。少しずつ叶いますように。"},"heart":{"caption":"この小さな思い出は全部あなたのためのもの。","title":"お誕生日おめでとう{,receiver}。","subtitle":"今日はあなたが主役、ちゃんとお祝いされてね。","next":"あなたへの手紙があるよ →"},"letter":{"kicker":"小さな手紙","body":"きれいな言葉は得意じゃないから、シンプルに言うね：お誕生日おめでとう。\n\nこの一年は簡単じゃなかったはず、それでもここまで来たね — あなたは自分で思うよりずっと強いよ。\n\nちゃんと食べて、しっかり眠って、心配は少しだけ減らして、必要なときにはいつもそばにいる人がいるって覚えていてね。","signature":"— {sender}","next":"まだ続きがあるよ →"},"final":{"kicker":"あなたへ","title":"お誕生日おめでとう{,receiver}","from":"{sender}より","message":"さっき選んだ願いが、今年ほんとうにあなたのもとへ届きますように。","starButton":"願いを空へ送る ✨","repeatButton":"最初からやり直す"},"starlight":{"kicker":"空へ","title":"願いを流れ星に変えて","subtitle":"星に触れて、あなたの願いを夜空へ送ってね。","wishFallback":"あなたの願い","sentTitle":"願いを送ったよ ✨","sentMessage":"流れ星に乗せた願いは、いつかきっと叶うって言うよね。今夜からは、その願いをあなたの代わりに守ってくれる星が、いつも空にあるよ。","tapHint":"空に触れると、流れ星がもっと降ってくるよ ✧","backButton":"カードに戻る","repeatButton":"最初からやり直す"},"ui":{"months":["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],"monthLabel":"{month}月","heartTapHint":"ハートに触れて写真を見てね ♡","viewPhoto":"写真を見る","tapToClose":"タップで閉じる","languageLabel":"言語"}},"zh":{"senderName":"我","receiverName":"你","opening":{"greeting":"生日快乐","day":17,"month":7},"intro":{"line1":"这里有一份小礼物要送给你…","line2":"不过在打开之前，先把蜡烛吹灭吧 🎂","idleHint":"👆 按住火苗，直到它熄灭","holdingHint":"再坚持一下…继续按着…","lightingHint":"正在为你点上蜡烛…"},"beats":["蜡烛熄灭了…","但今年这段路，你不是一个人走。","慢慢来就好{,receiver}。我一直都在。"],"blackoutCaption":"正在把那些小小的回忆收集起来…","wish":{"kicker":"一个愿望","question":"现在…为你的生日许下一个愿望吧。","options":["更幸福","中大奖","更健康","更平静"],"reply":"愿望已经收到了。愿它慢慢成真。"},"heart":{"caption":"这些小小的回忆，全都是为你而留的。","title":"生日快乐{,receiver}。","subtitle":"今天，你一定要好好被庆祝。","next":"有一封信要给你 →"},"letter":{"kicker":"一封小信","body":"我不太会说漂亮话，所以就简单点说：生日快乐。\n\n过去这一年一定不容易，可你还是走到了今天 —— 你比自己以为的要坚强得多。\n\n我只希望你吃得好、睡得够，少操点心，也记得在你需要的时候，总有一个人在这里。","signature":"— {sender}","next":"还有呢 →"},"final":{"kicker":"给你","title":"生日快乐{,receiver}","from":"来自{sender}","message":"愿你刚才许下的那个愿望，今年真的能找到通往你的路。","starButton":"把愿望送上天空 ✨","repeatButton":"从头再来一次"},"starlight":{"kicker":"送上天空","title":"把愿望变成流星","subtitle":"轻触星星，把你的愿望送上夜空。","wishFallback":"你的愿望","sentTitle":"愿望已经送出去了 ✨","sentMessage":"人们说，随流星许下的愿望迟早都会实现。从今夜起，天上会一直有一颗星，替你守着那个愿望。","tapHint":"轻触夜空，让更多流星落下来吧 ✧","backButton":"回到贺卡","repeatButton":"从头再来一次"},"ui":{"months":["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],"monthLabel":"{month}月","heartTapHint":"轻触爱心查看照片 ♡","viewPhoto":"查看照片","tapToClose":"轻触关闭","languageLabel":"语言"}},"th":{"senderName":"ฉัน","receiverName":"เธอ","opening":{"greeting":"สุขสันต์วันเกิด","day":17,"month":7},"intro":{"line1":"มีของขวัญชิ้นเล็ก ๆ สำหรับเธออยู่ตรงนี้…","line2":"แต่ก่อนจะเปิด เป่าเทียนให้ดับก่อนนะ 🎂","idleHint":"👆 กดค้างที่เปลวเทียนจนกว่ามันจะดับ","holdingHint":"กดต่ออีกนิด… ใกล้แล้ว…","lightingHint":"กำลังจุดเทียนให้เธออยู่…"},"beats":["เทียนดับลงแล้ว…","แต่ปีนี้เธอไม่ได้เดินผ่านมันเพียงลำพังนะ","ค่อย ๆ ไปก็ได้{,receiver} ฉันอยู่ตรงนี้เอง"],"blackoutCaption":"กำลังเก็บรวบรวมความทรงจำเล็ก ๆ เหล่านั้น…","wish":{"kicker":"คำอธิษฐานหนึ่งข้อ","question":"ตอนนี้… เลือกคำอธิษฐานสักข้อสำหรับวันเกิดของเธอสิ","options":["มีความสุขมากขึ้น","ถูกลอตเตอรี่","สุขภาพดีขึ้น","สงบใจมากขึ้น"],"reply":"รับคำอธิษฐานไว้แล้วนะ ขอให้มันค่อย ๆ เป็นจริง"},"heart":{"caption":"ความทรงจำเล็ก ๆ ทั้งหมดนี้เพื่อเธอนะ","title":"สุขสันต์วันเกิด{,receiver}","subtitle":"วันนี้เธอต้องได้รับการฉลองนะ","next":"มีจดหมายถึงเธอด้วย →"},"letter":{"kicker":"จดหมายสั้น ๆ","body":"ฉันไม่เก่งเรื่องคำพูดสวยหรู เลยขอพูดง่าย ๆ ว่า สุขสันต์วันเกิดนะ\n\nปีที่ผ่านมาคงไม่ง่ายเลย แต่เธอก็มาถึงวันนี้ได้ — เธอเข้มแข็งกว่าที่ตัวเองคิดมากเลยนะ\n\nฉันแค่อยากให้เธอกินอิ่ม นอนหลับพอ กังวลให้น้อยลงสักนิด และจำไว้ว่ามีคนอยู่ตรงนี้เสมอเมื่อเธอต้องการ","signature":"— {sender}","next":"ยังมีอีกนะ →"},"final":{"kicker":"เพื่อเธอ","title":"สุขสันต์วันเกิด{,receiver}","from":"จาก {sender}","message":"ขอให้คำอธิษฐานที่เธอเพิ่งเลือก หาทางมาถึงเธอได้จริง ๆ ในปีนี้","starButton":"ส่งคำอธิษฐานขึ้นฟ้า ✨","repeatButton":"เริ่มใหม่ตั้งแต่ต้น"},"starlight":{"kicker":"ขึ้นสู่ท้องฟ้า","title":"เปลี่ยนคำอธิษฐานให้เป็นดาวตก","subtitle":"แตะที่ดวงดาวเพื่อส่งคำอธิษฐานของเธอขึ้นสู่ท้องฟ้ายามค่ำคืน","wishFallback":"คำอธิษฐานของเธอ","sentTitle":"ส่งคำอธิษฐานไปแล้ว ✨","sentMessage":"เขาว่ากันว่าคำอธิษฐานที่ล่องไปกับดาวตก ไม่ช้าก็เร็วจะเป็นจริง ตั้งแต่คืนนี้ไป จะมีดาวดวงหนึ่งบนฟ้าคอยเก็บรักษาคำอธิษฐานนั้นไว้ให้เธอเสมอ","tapHint":"แตะที่ท้องฟ้าเพื่อปล่อยดาวตกเพิ่มอีกสิ ✧","backButton":"กลับไปที่การ์ด","repeatButton":"เริ่มใหม่ตั้งแต่ต้น"},"ui":{"months":["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"],"monthLabel":"{monthName}","heartTapHint":"แตะที่หัวใจเพื่อดูรูปภาพ ♡","viewPhoto":"ดูรูปภาพ","tapToClose":"แตะเพื่อปิด","languageLabel":"ภาษา"}},"de":{"senderName":"ich","receiverName":"dich","opening":{"greeting":"Alles Gute zum Geburtstag","day":17,"month":7},"intro":{"line1":"Hier ist ein kleines Geschenk für dich…","line2":"Aber bevor du es öffnest, blas zuerst die Kerze aus 🎂","idleHint":"👆 Halte die Flamme gedrückt, bis sie erlischt","holdingHint":"halt noch durch… gleich geschafft…","lightingHint":"ich zünde die Kerze für dich an…"},"beats":["Die Kerze ist erloschen…","aber du gehst dieses Jahr nicht allein hindurch.","Lass dir Zeit{,receiver}. Ich bin ja hier."],"blackoutCaption":"sammle gerade die kleinen Erinnerungen ein…","wish":{"kicker":"Ein Wunsch","question":"Jetzt… such dir einen Wunsch zu deinem Geburtstag aus.","options":["Mehr Glück","Im Lotto gewinnen","Mehr Gesundheit","Mehr Ruhe"],"reply":"Dein Wunsch ist angekommen. Möge er langsam wahr werden."},"heart":{"caption":"All diese kleinen Erinnerungen sind für dich.","title":"Alles Gute zum Geburtstag{,receiver}.","subtitle":"Heute sollst du gefeiert werden.","next":"Es gibt einen Brief für dich →"},"letter":{"kicker":"Ein kleiner Brief","body":"Ich bin nicht gut in schönen Worten, also sag ich es einfach: alles Gute zum Geburtstag.\n\nDieses Jahr war bestimmt nicht leicht, und trotzdem bist du bis hierher gekommen — du bist stärker, als du denkst.\n\nIch wünsche mir nur, dass du gut isst, genug schläfst, dir etwas weniger Sorgen machst und daran denkst, dass immer jemand da ist, wenn du ihn brauchst.","signature":"— {sender}","next":"Es gibt noch mehr →"},"final":{"kicker":"Für dich","title":"Alles Gute zum Geburtstag{,receiver}","from":"von {sender}","message":"Möge der Wunsch, den du gerade gewählt hast, dieses Jahr wirklich seinen Weg zu dir finden.","starButton":"Den Wunsch zum Himmel schicken ✨","repeatButton":"Von vorne beginnen"},"starlight":{"kicker":"Hinauf zum Himmel","title":"Verwandle den Wunsch in eine Sternschnuppe","subtitle":"Berühre den Stern, um deinen Wunsch in den Nachthimmel zu schicken.","wishFallback":"Dein Wunsch","sentTitle":"Der Wunsch ist abgeschickt ✨","sentMessage":"Man sagt, ein Wunsch, der auf einer Sternschnuppe reist, geht früher oder später in Erfüllung. Von heute Nacht an wird immer ein Stern dort oben sein, der diesen Wunsch für dich bewahrt.","tapHint":"Berühre den Himmel, um weitere Sternschnuppen fallen zu lassen ✧","backButton":"Zurück zur Karte","repeatButton":"Von vorne beginnen"},"ui":{"months":["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],"monthLabel":"{monthName}","heartTapHint":"Berühre das Herz, um die Fotos zu sehen ♡","viewPhoto":"Foto ansehen","tapToClose":"Zum Schließen tippen","languageLabel":"Sprache"}},"fr":{"senderName":"moi","receiverName":"toi","opening":{"greeting":"Joyeux anniversaire","day":17,"month":7},"intro":{"line1":"Il y a un petit cadeau pour toi ici…","line2":"Mais avant de l'ouvrir, souffle d'abord la bougie 🎂","idleHint":"👆 Appuie et garde le doigt sur la flamme jusqu'à ce qu'elle s'éteigne","holdingHint":"continue… encore un peu…","lightingHint":"j'allume la bougie pour toi…"},"beats":["La bougie s'est éteinte…","mais tu ne traverses pas cette année tout seul.","Prends ton temps{,receiver}. Je suis là."],"blackoutCaption":"je rassemble ces petits souvenirs…","wish":{"kicker":"Un vœu","question":"Maintenant… choisis un vœu pour ton anniversaire.","options":["Plus de bonheur","Gagner au loto","Plus de santé","Plus de sérénité"],"reply":"Ton vœu est bien reçu. Qu'il se réalise peu à peu."},"heart":{"caption":"Tous ces petits souvenirs sont pour toi.","title":"Joyeux anniversaire{,receiver}.","subtitle":"Aujourd'hui, tu mérites d'être fêté.","next":"Il y a une lettre pour toi →"},"letter":{"kicker":"Une petite lettre","body":"Je ne suis pas doué pour les belles phrases, alors je fais simple : joyeux anniversaire.\n\nCette année n'a sûrement pas été facile, et pourtant te voilà arrivé jusqu'ici — tu es plus fort que tu ne le crois.\n\nJe souhaite juste que tu manges bien, que tu dormes assez, que tu t'inquiètes un peu moins, et que tu te souviennes qu'il y a toujours quelqu'un ici quand tu en as besoin.","signature":"— {sender}","next":"Ce n'est pas fini →"},"final":{"kicker":"Pour toi","title":"Joyeux anniversaire{,receiver}","from":"de {sender}","message":"Que le vœu que tu viens de choisir trouve vraiment le chemin jusqu'à toi cette année.","starButton":"Envoyer le vœu vers le ciel ✨","repeatButton":"Tout recommencer depuis le début"},"starlight":{"kicker":"Vers le ciel","title":"Transforme le vœu en étoile filante","subtitle":"Touche l'étoile pour envoyer ton vœu dans le ciel nocturne.","wishFallback":"Ton vœu","sentTitle":"Le vœu a été envoyé ✨","sentMessage":"On dit qu'un vœu porté par une étoile filante finit toujours par se réaliser. À partir de cette nuit, il y aura toujours une étoile là-haut qui gardera ce vœu pour toi.","tapHint":"Touche le ciel pour faire tomber d'autres étoiles filantes ✧","backButton":"Revenir à la carte","repeatButton":"Tout recommencer depuis le début"},"ui":{"months":["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],"monthLabel":"{monthName}","heartTapHint":"Touche le cœur pour voir les photos ♡","viewPhoto":"Voir la photo","tapToClose":"Touche pour fermer","languageLabel":"Langue"}},"es":{"senderName":"yo","receiverName":"ti","opening":{"greeting":"Feliz cumpleaños","day":17,"month":7},"intro":{"line1":"Aquí hay un pequeño regalo para ti…","line2":"Pero antes de abrirlo, sopla primero la vela 🎂","idleHint":"👆 Mantén pulsada la llama hasta que se apague","holdingHint":"aguanta un poco más… ya casi…","lightingHint":"estoy encendiendo la vela para ti…"},"beats":["La vela se ha apagado…","pero no vas a atravesar este año tú solo.","Ve con calma{,receiver}. Estoy aquí."],"blackoutCaption":"reuniendo esos pequeños recuerdos…","wish":{"kicker":"Un deseo","question":"Ahora… elige un deseo para tu cumpleaños.","options":["Más felicidad","Ganar la lotería","Más salud","Más paz"],"reply":"Tu deseo ha sido recibido. Que se cumpla poco a poco."},"heart":{"caption":"Todos estos pequeños recuerdos son para ti.","title":"Feliz cumpleaños{,receiver}.","subtitle":"Hoy mereces que te celebren.","next":"Hay una carta para ti →"},"letter":{"kicker":"Una pequeña carta","body":"No se me dan bien las palabras bonitas, así que lo diré sencillo: feliz cumpleaños.\n\nEste último año no debe de haber sido fácil, y aun así aquí estás — eres más fuerte de lo que crees.\n\nSolo deseo que comas bien, duermas lo suficiente, te preocupes un poco menos y recuerdes que siempre hay alguien aquí cuando lo necesites.","signature":"— {sender}","next":"Todavía hay más →"},"final":{"kicker":"Para ti","title":"Feliz cumpleaños{,receiver}","from":"de {sender}","message":"Que el deseo que acabas de elegir encuentre de verdad el camino hacia ti este año.","starButton":"Enviar el deseo al cielo ✨","repeatButton":"Empezar de nuevo desde el principio"},"starlight":{"kicker":"Hacia el cielo","title":"Convierte el deseo en una estrella fugaz","subtitle":"Toca la estrella para enviar tu deseo al cielo nocturno.","wishFallback":"Tu deseo","sentTitle":"El deseo ha sido enviado ✨","sentMessage":"Dicen que un deseo que viaja en una estrella fugaz tarde o temprano se cumple. Desde esta noche, siempre habrá una estrella allá arriba guardando ese deseo por ti.","tapHint":"Toca el cielo para dejar caer más estrellas fugaces ✧","backButton":"Volver a la tarjeta","repeatButton":"Empezar de nuevo desde el principio"},"ui":{"months":["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],"monthLabel":"{monthName}","heartTapHint":"Toca el corazón para ver las fotos ♡","viewPhoto":"Ver foto","tapToClose":"Toca para cerrar","languageLabel":"Idioma"}}};
@@ -182,6 +184,7 @@
     lightboxPhotoIndex: 0,
     letterTypedChars: 0,
     letterDone: false,
+    letterShown: false,
     starLaunched: false,
     starBurst: null,
     langMenuOpen: false,
@@ -209,6 +212,14 @@
     }
   }
   document.addEventListener('pointerdown', ensureAudio);
+
+  // Close language menu when clicking outside (registered ONCE)
+  document.addEventListener('pointerdown', (e) => {
+    if (state.langMenuOpen && !e.target.closest('#lang-selector-root')) {
+      state.langMenuOpen = false;
+      render();
+    }
+  });
 
   // Preload images
   [IMAGES.garland, IMAGES.cake, IMAGES.wishTag, IMAGES.paper, ...IMAGES.girls, ...IMAGES.petals].forEach(src => {
@@ -342,8 +353,8 @@
         
         <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-10 bg-black"
              style="opacity:${lit ? 0 : 0.62};transition:opacity 1.1s ease"></div>
-        <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-20 bg-black"
-             style="opacity:${p};transition:${holding ? 'none' : 'opacity 0.6s ease'}"></div>
+        <div id="candle-darken-overlay" aria-hidden="true" class="pointer-events-none fixed inset-0 z-20 bg-black"
+             style="opacity:${p};transition:${holding ? 'none' : 'opacity 0.6s ease'};will-change:opacity"></div>
         
         <div id="candle-interactive-area" class="relative z-30 mt-3 cursor-pointer touch-none sm:mt-2">
           <div class="lovegift-sway relative w-[clamp(230px,66vw,310px)]">
@@ -537,12 +548,17 @@
     `;
   }
 
-  // --- RENDER STAGE 7: LETTER ---
+  // --- RENDER STAGE 7: LETTER (FIXED) ---
+  // Chữ đã gõ + con trỏ + phần chưa gõ nằm chung một dòng chảy (không còn chồng lớp),
+  // phần chưa gõ ẩn bằng visibility:hidden để khung thư vẫn giữ nguyên chiều cao.
   function renderLetter(c) {
     const fullBody = c.letter.body;
-    const typed = fullBody.slice(0, state.letterTypedChars);
+    const n = state.letterTypedChars;
+    const typed = fullBody.slice(0, n);
+    const rest = fullBody.slice(n);
     return `
-      <section class="lovegift-fade-up lovegift-scroll-soft relative flex max-h-[calc(100dvh-3rem)] w-full max-w-md flex-col items-center overflow-y-auto overscroll-contain px-1 text-center sm:max-h-[calc(100dvh-8rem)]">
+      <section id="letter-section" class="lovegift-scroll-soft relative flex max-h-[calc(100dvh-3rem)] w-full max-w-md flex-col items-center overflow-y-auto overscroll-contain px-1 text-center sm:max-h-[calc(100dvh-8rem)]"
+               style="opacity:${state.letterShown ? 1 : 0};transform:translateY(${state.letterShown ? 0 : 14}px);transition:opacity 0.7s ease, transform 0.7s ease">
         <p class="lovegift-kicker">${c.letter.kicker}</p>
         <div id="letter-paper-wrapper" class="lovegift-letter-paper relative mt-[104px] cursor-pointer select-none bg-[length:100%_100%] bg-no-repeat"
              style="background-image:url('${IMAGES.paper}')">
@@ -552,15 +568,12 @@
           </div>
           <div id="letter-scroll-inner" class="lovegift-letter-scroll absolute inset-0 overflow-y-auto overscroll-contain px-8 py-10 text-left sm:px-10 sm:py-12">
             <div class="flex min-h-full flex-col justify-center">
-              <p class="relative whitespace-pre-line font-hand text-[15px] font-semibold leading-relaxed text-[#4a3527] sm:text-[18px]">
-                <span class="invisible">${fullBody}</span>
-                <span class="absolute inset-0 whitespace-pre-line">${typed}<span id="letter-cursor" class="inline-block w-0 align-baseline"></span></span>
-              </p>
-              <p class="mt-4 self-end font-hand text-[15px] font-semibold text-[#4a3527] transition-opacity duration-700 sm:text-[18px] ${state.letterDone ? 'opacity-100' : 'opacity-0'}">${c.letter.signature}</p>
+              <p class="whitespace-pre-line font-hand text-[15px] font-semibold leading-relaxed text-[#4a3527] sm:text-[18px]"><span id="letter-typed-text">${typed}</span><span id="letter-cursor" class="inline-block w-0 align-baseline" style="height:1em"></span><span id="letter-rest-text" style="visibility:hidden">${rest}</span></p>
+              <p id="letter-signature" class="mt-4 self-end font-hand text-[15px] font-semibold text-[#4a3527] transition-opacity duration-700 sm:text-[18px] ${state.letterDone ? 'opacity-100' : 'opacity-0'}">${c.letter.signature}</p>
             </div>
           </div>
         </div>
-        <div class="mt-8 transition-opacity duration-700 ${state.letterDone ? 'opacity-100' : 'pointer-events-none opacity-0'}">
+        <div id="letter-next-wrap" class="mt-8 transition-opacity duration-700 ${state.letterDone ? 'opacity-100' : 'pointer-events-none opacity-0'}">
           <button id="btn-to-final" type="button" class="rounded-full border border-[#f6ead8]/40 px-6 py-3 font-sans text-sm text-cream transition hover:bg-[#f6ead8]/10">${c.letter.next}</button>
         </div>
       </section>
@@ -693,28 +706,32 @@
         render();
       };
     }
+
     const locBtns = document.querySelectorAll('[data-locale]');
     locBtns.forEach(btn => {
       btn.onclick = (e) => {
         e.stopPropagation();
         state.locale = btn.getAttribute('data-locale');
         state.langMenuOpen = false;
-        render();
-      };
-    });
 
-    // Close lang menu if clicked outside
-    document.addEventListener('pointerdown', (e) => {
-      if (state.langMenuOpen && !e.target.closest('#lang-selector-root')) {
-        state.langMenuOpen = false;
-        render();
-      }
+        if (state.stage === 'letter') {
+          // Đổi ngôn ngữ khi đang ở thư: tránh bị kẹt animation
+          stopTypewriter();
+          const body = getActiveContent().letter.body;
+          if (state.letterDone) {
+            state.letterTypedChars = body.length;
+            render();
+          } else {
+            startLetterSequence(true);
+          }
+        } else {
+          render();
+        }
+      };
     });
 
     // 2. Stage-specific logic:
     if (state.stage === 'opening') {
-      // Automatic progression to intro
-      // After 4.8s, fade out opening
       window.clearTimeout(window.__openingTimer1);
       window.clearTimeout(window.__openingTimer2);
 
@@ -734,7 +751,6 @@
     }
 
     else if (state.stage === 'intro') {
-      // At 1850ms, light the candle
       if (!state.candleLit && !state.candleExtinguished) {
         window.clearTimeout(window.__lightTimer);
         window.__lightTimer = window.setTimeout(() => {
@@ -743,7 +759,6 @@
         }, 1850);
       }
 
-      // Candle interactive hold
       const candleArea = document.getElementById('candle-interactive-area');
       if (candleArea) {
         const startHold = (e) => {
@@ -751,11 +766,19 @@
           state.candleHolding = true;
           candleHoldStartTime = performance.now();
 
+          // Khi bắt đầu giữ nến, tắt transition CSS để lớp phủ bám sát tiến trình
+          // từng frame, thay vì chờ đến lần render khi nến tắt mới chuyển sang màu đen.
+          const blackoutOverlay = document.getElementById('candle-darken-overlay');
+          if (blackoutOverlay) blackoutOverlay.style.transition = 'none';
+
           const loop = (now) => {
             const prog = Math.min(1, (now - candleHoldStartTime) / 2600);
             state.candleProgress = prog;
-            
-            // update dom directly for high 60fps performance
+
+            // Làm nền tối dần liên tục theo thời gian giữ (0 -> 1 trong 2.6 giây).
+            const overlay = document.getElementById('candle-darken-overlay');
+            if (overlay) overlay.style.opacity = String(prog);
+
             const circle = document.getElementById('candle-progress-circle');
             if (circle) {
               const circ = 2 * Math.PI * 46;
@@ -769,7 +792,6 @@
               state.candleExtinguished = true;
               render();
 
-              // After 1600ms, go to beats
               window.setTimeout(() => {
                 state.stage = 'beats';
                 state.beatsIndex = 0;
@@ -811,7 +833,6 @@
           state.selectedWishIndex = idx;
           render();
 
-          // After 2500ms, go to heart
           window.setTimeout(() => {
             state.stage = 'heart';
             state.lightboxOpen = false;
@@ -822,7 +843,6 @@
     }
 
     else if (state.stage === 'heart') {
-      // Photo tiles open lightbox
       const photoTiles = document.querySelectorAll('[data-photo-idx]');
       photoTiles.forEach(tile => {
         tile.onclick = () => {
@@ -834,7 +854,6 @@
         };
       });
 
-      // Lightbox close
       const lightboxBackdrop = document.getElementById('lightbox-backdrop');
       if (lightboxBackdrop) {
         lightboxBackdrop.onclick = () => {
@@ -844,34 +863,40 @@
         };
       }
 
-      // Next to letter
       const btnLetter = document.getElementById('btn-to-letter');
       if (btnLetter) {
         btnLetter.onclick = () => {
+          if (lightboxTimer) clearInterval(lightboxTimer);
+          state.lightboxOpen = false;
           state.stage = 'letter';
-          state.letterTypedChars = 0;
-          state.letterDone = false;
-          render();
-          runLetterTypewriter(getActiveContent());
+          startLetterSequence();
         };
       }
     }
 
     else if (state.stage === 'letter') {
+      // Ép hiển thị: bỏ mọi animation CSS có thể đang giữ thư ở opacity 0
+      document.querySelectorAll('#letter-section .lovegift-kicker, #letter-paper-wrapper').forEach(el => {
+        el.style.animation = 'none';
+        el.style.opacity = '1';
+        el.style.visibility = 'visible';
+      });
       const paperWrapper = document.getElementById('letter-paper-wrapper');
       if (paperWrapper) {
-        // click skips typing
+        // Chạm để bỏ qua hiệu ứng gõ (bỏ qua 0.6s đầu để tránh chạm nhầm)
         paperWrapper.onclick = () => {
-          if (typewriterRaf) cancelAnimationFrame(typewriterRaf);
-          state.letterTypedChars = c.letter.body.length;
-          state.letterDone = true;
-          render();
+          if (state.letterDone) return;
+          if (performance.now() - letterStartTime < 600) return;
+          stopTypewriter();
+          setLetterChars(c.letter.body, c.letter.body.length);
+          showLetterDone();
         };
       }
 
       const btnFinal = document.getElementById('btn-to-final');
       if (btnFinal) {
         btnFinal.onclick = () => {
+          stopTypewriter();
           state.stage = 'final';
           render();
         };
@@ -902,15 +927,13 @@
         launchBtn.onclick = (e) => {
           if (state.starLaunched) return;
           state.starLaunched = true;
-          
-          // Star burst position
+
           const rect = launchBtn.getBoundingClientRect();
           state.starBurst = {
             x: ((rect.left + rect.width / 2 + 48) / window.innerWidth) * 100,
             y: ((rect.top + rect.height / 2 - 0.26 * window.innerHeight) / window.innerHeight) * 100
           };
 
-          // 14 initial meteors
           const initialMeteors = Array.from({length: 14}, (e, t) => ({
             id: ++state.meteorId,
             x: 4 + (37 * t + 13) % 88,
@@ -924,7 +947,6 @@
         };
       }
 
-      // Tap on sky creates shooting star
       const skyLayer = document.getElementById('starlight-sky-layer');
       if (skyLayer) {
         skyLayer.onpointerdown = (e) => {
@@ -965,7 +987,6 @@
     const totalBeats = c.beats.length;
 
     function nextBeat() {
-      // Hide current
       state.beatsVisible = false;
       render();
 
@@ -977,7 +998,6 @@
           render();
           window.setTimeout(nextBeat, 2800);
         } else {
-          // All beats finished, go to blackout
           state.stage = 'blackout';
           render();
           window.setTimeout(() => {
@@ -1001,27 +1021,91 @@
     }, 3500);
   }
 
-  // --- LETTER TYPEWRITER ---
+  // --- LETTER TYPEWRITER (FIXED) ---
+  let letterStartTime = 0;
+
+  function stopTypewriter() {
+    window.clearTimeout(letterRevealTimer);
+    if (typewriterRaf) {
+      cancelAnimationFrame(typewriterRaf);
+      typewriterRaf = null;
+    }
+  }
+
+  function setLetterChars(fullText, chars) {
+    state.letterTypedChars = chars;
+    const typedEl = document.getElementById('letter-typed-text');
+    const restEl = document.getElementById('letter-rest-text');
+    if (typedEl) typedEl.textContent = fullText.slice(0, chars);
+    if (restEl) restEl.textContent = fullText.slice(chars);
+
+    // Cuộn theo con trỏ (không cuộn thẳng xuống đáy)
+    const scrollEl = document.getElementById('letter-scroll-inner');
+    const cursor = document.getElementById('letter-cursor');
+    if (scrollEl && cursor) {
+      const cr = cursor.getBoundingClientRect();
+      const sr = scrollEl.getBoundingClientRect();
+      const limit = sr.bottom - 40;
+      if (cr.bottom > limit) scrollEl.scrollTop += cr.bottom - limit;
+    }
+  }
+
+  function showLetterDone() {
+    state.letterDone = true;
+    const scrollEl2 = document.getElementById('letter-scroll-inner');
+    if (scrollEl2) { try { scrollEl2.scrollTo({ top: scrollEl2.scrollHeight, behavior: 'smooth' }); } catch (e) { scrollEl2.scrollTop = scrollEl2.scrollHeight; } }
+    const sig = document.getElementById('letter-signature');
+    if (sig) { sig.classList.remove('opacity-0'); sig.classList.add('opacity-100'); }
+    const wrap = document.getElementById('letter-next-wrap');
+    if (wrap) {
+      wrap.classList.remove('pointer-events-none', 'opacity-0');
+      wrap.classList.add('opacity-100');
+    }
+  }
+
+  let letterRevealTimer = null;
+
+  // Hiện thư trước (fade-in), đợi nó hiện rõ rồi mới bắt đầu gõ chữ
+  function startLetterSequence(skipFade) {
+    stopTypewriter();
+    window.clearTimeout(letterRevealTimer);
+    state.letterTypedChars = 0;
+    state.letterDone = false;
+    state.letterShown = !!skipFade;
+    render();
+
+    if (!skipFade) {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        state.letterShown = true;
+        const sec = document.getElementById('letter-section');
+        if (sec) { sec.style.opacity = '1'; sec.style.transform = 'translateY(0)'; }
+      }));
+    }
+
+    letterRevealTimer = window.setTimeout(() => {
+      if (state.stage === 'letter') runLetterTypewriter(getActiveContent());
+    }, skipFade ? 200 : 1000);
+  }
+
   function runLetterTypewriter(c) {
+    stopTypewriter();
     const fullText = c.letter.body;
     const len = fullText.length;
-    const startTime = performance.now();
-    const speed = Math.max(33, len / 42);
+    const charsPerSecond = 35; // chỉnh tốc độ gõ ở đây
+    letterStartTime = performance.now();
+    let lastChars = -1;
 
-    function step(now) {
-      const chars = Math.min(len, Math.floor(((now - startTime) / 1000) * speed));
-      state.letterTypedChars = chars;
-      
-      const scrollEl = document.getElementById('letter-scroll-inner');
-      if (scrollEl) {
-        scrollEl.scrollTop = scrollEl.scrollHeight;
+    function step() {
+      const elapsed = Math.max(0, performance.now() - letterStartTime);
+      const chars = Math.min(len, Math.floor((elapsed / 1000) * charsPerSecond));
+      if (chars !== lastChars) {
+        lastChars = chars;
+        setLetterChars(fullText, chars);
       }
-
       if (chars >= len) {
-        state.letterDone = true;
-        render();
+        typewriterRaf = null;
+        showLetterDone(); // không render() lại nữa
       } else {
-        render();
         typewriterRaf = requestAnimationFrame(step);
       }
     }
@@ -1030,6 +1114,8 @@
 
   // --- RESTART ---
   function restartExperience() {
+    stopTypewriter();
+    if (lightboxTimer) clearInterval(lightboxTimer);
     state.stage = 'intro';
     state.candleLit = false;
     state.candleHolding = false;
@@ -1041,6 +1127,7 @@
     state.lightboxOpen = false;
     state.letterTypedChars = 0;
     state.letterDone = false;
+    state.letterShown = false;
     state.starLaunched = false;
     state.starBurst = null;
     state.meteors = [];
