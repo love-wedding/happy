@@ -6,7 +6,7 @@
   'use strict';
 
   // --- RAW LOCALES DICTIONARY ---
-  const RAW_CONTENTS = {"vi":{"senderName":"Tớ","receiverName":"Cậu","opening":{"subtitle":"my bestfriend","continueLabel":"Tiếp tục","greeting":"Happy Birthday","day":20,"month":12},"intro":{"cakeWriting":{"title":"Happy Birthday","wish":"Chuc em lon xinh nhu hoa"},"line1":"Có một món quà nhỏ dành cho cậu…","line2":"Nhưng trước khi mở, thổi nến trước nhé 🎂","idleHint":"👆 Nhấn & giữ ngọn nến cho đến khi tắt","holdingHint":"giữ nữa… giữ tiếp…","lightingHint":"đang thắp nến cho cậu…"},"voice":{"notice":"Khoan đã… có một cuộn băng nhỏ gửi riêng cho cậu 📼","kicker":"Cuộn băng dành riêng cho cậu","title":"Có những điều tớ không viết thành chữ được, nên tớ đã thu âm lại…","hint":"Nhấn nút ▶ trên máy để nghe lời nhắn nhé, nhớ bật loa lên 🔊","playing":"Đang phát… cứ nghe hết nhé, từng chữ đều là thật lòng đó 💛","ended":"Cảm ơn cậu đã lắng nghe đến cuối 💛","play":"Nghe","pause":"Tạm dừng","next":"Còn nữa nè →"},"age":{"kicker":"Tuổi mới","title":"{age} tuổi rồi đó nha!","days":"= {days} ngày có mặt trên đời","laughs":"= khoảng {laughs} lần cười","closing":"Tuổi {age} — mong cậu vẫn là cậu, chỉ là vui hơn một chút thôi.","fallbackTitle":"Thêm một tuổi mới 🎉","fallbackClosing":"Tuổi mới — mong cậu vẫn là cậu, chỉ là vui hơn một chút thôi.","next":"Xem quà tiếp →"},"heart":{"caption":"Mấy tấm dìm hàng này tớ giữ kỹ lắm đó 😌","title":"Chúc Mừng Sinh Nhật, Cậu!","subtitle":"Hôm nay cậu là nhân vật chính nha 🎈","next":"Có thư nè →"},"letter":{"kicker":"Lá thư nhỏ","body":"Tớ không giỏi nói mấy lời hoa mỹ, nên viết đơn giản thôi: chúc mừng sinh nhật cậu nhé.\n\nNăm vừa rồi chắc chẳng dễ dàng gì, vậy mà cậu vẫn đi tới được hôm nay — giỏi hơn cậu nghĩ nhiều đấy.\n\nTớ chỉ mong cậu ăn ngon ngủ đủ, bớt lo một chút, và nhớ là luôn có người ở đây khi cậu cần.","signature":"— Tớ","next":"Vẫn còn nữa →","flipHint":"Chạm vào tấm thiệp để lật mặt sau ↻","to":"Gửi","certTitle":"Chứng nhận tuổi mới","certUnit":"tuổi","certFallback":"Tuổi mới","zoomHint":"Chạm vào con tem để xem ảnh to ✦"},"hug":{"idleHint":"👆 Đặt tay lên và giữ nhé","next":"Còn một điều ước nữa →","love":{"prompt":"Một nửa ở chỗ tớ, một nửa ở chỗ cậu… đặt tay lên để ghép lại nhé.","holdingHint":"gần thêm chút nữa… thấy tim tớ không…","done":"Ghép lại rồi đó. Xa mấy thì tim tớ vẫn ở cạnh cậu."},"friend":{"prompt":"Không qua chúc tận nơi được… thì cụng tay qua màn hình nhé!","holdingHint":"lấy đà… 1… 2…","done":"Bụp! Cụng rồi nha. Sinh nhật vui vẻ, bạn thân!"},"family":{"prompt":"Năm nay không ở cạnh nhau được… mình ngoéo tay hứa một điều nhé.","holdingHint":"ngoéo thật chặt vào…","done":"Hứa rồi đó: ở đâu đi nữa, mình vẫn là nhà của nhau."}},"thanks":{"teaser":"Còn một điều cuối…","line":"Cảm ơn cậu vì đã được sinh ra.","repeat":"Xem lại từ đầu"},"wish":{"kicker":"Ước một điều","title":"Nhắm mắt lại… rồi ước một điều cho tuổi mới nhé","subtitle":"Viết vào mảnh giấy này, tớ sẽ gấp nó thành một ngôi sao cho cậu.","slipHeader":"điều ước tuổi mới ✨","placeholder":"vd. mong năm nay mình dũng cảm hơn với ước mơ của chính mình…","fold":"Gấp thành ngôi sao ⭐","skip":"Giữ điều ước trong lòng"},"jar":{"kicker":"Hũ sao điều ước","tag":"gửi cậu ♡","lastHint":"Còn một ngôi sao cuối cùng… ngôi sao tớ để dành đến cuối ✨","lastHeader":"điều tớ muốn nói nhất…","lastWish":"Cảm ơn cậu vì đã luôn ở đây. Tuổi mới, dù có chuyện gì, tớ vẫn sẽ ở cạnh cậu như thế.","landed":"Ngôi sao của cậu đã nằm trong hũ rồi ✨","intro":"Trong hũ còn {n} ngôi sao tớ gấp sẵn cho cậu… mỗi ngôi sao là một điều tớ ước cho cậu.","tapHint":"Chạm vào từng ngôi sao để mở ra nhé ⭐","progress":"Đã mở {read}/{n} ngôi sao","fromSender":"tớ ước cho cậu…","yours":"điều ước của cậu","secret":"Một điều ước bí mật 🤫","close":"Gấp lại ⭐","later":"Để dành mấy ngôi sao kia đọc sau →","finaleTitle":"Sinh nhật vui vẻ, Cậu ✨","finaleLine":"Từ nay trên trời có một chòm sao của riêng cậu: điều ước của cậu ở giữa, những điều tớ ước cho cậu ở quanh.","constellation":"✦ Chòm sao của cậu · {date} ✦","wishes":{"love":["Mong cậu luôn được yêu thương nhiều như cách cậu yêu thương mọi người.","Mong mỗi sáng thức dậy, cậu đều có một lý do để mỉm cười.","Mong tuổi mới cậu bớt lo nghĩ, ngủ thật ngon, ăn thật nhiều.","Mong những ước mơ cậu đang ấp ủ, năm nay sẽ thành sự thật.","Mong cậu biết rằng, cậu là điều tuyệt vời nhất của tớ.","Mong sinh nhật năm sau, tớ được ở ngay bên cạnh cậu."],"friend":["Mong cậu tuổi mới vẫn lầy như cũ, nhưng giàu hơn nhiều.","Mong deadline nể cậu, sếp thương cậu, lương tăng đều đều.","Mong cậu gặp được người thương cậu thật lòng.","Mong cậu khoẻ mạnh, ăn không béo, ngủ thật ngon.","Mong mình vẫn là bạn thân thêm thật nhiều năm nữa.","Mong lúc nào buồn, cậu cũng nhớ là còn có tớ."],"family":["Mong nhà mình lúc nào cũng đủ đầy, ấm áp.","Mong ngày nào cũng có người hỏi han, nhắc ăn đúng bữa.","Mong mọi con đường phía trước đều bằng phẳng, bình an.","Mong dù lớn thế nào, vẫn luôn có một nơi để trở về.","Mong năm nay bớt vất vả, thêm thật nhiều niềm vui.","Mong mình mãi là chỗ dựa của nhau."]}},"ui":{"months":["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"],"monthLabel":"Tháng {month}","heartTapHint":"Chạm vào trái tim để xem ảnh ♡","viewPhoto":"Xem ảnh","tapToClose":"Chạm để đóng","languageLabel":"Ngôn ngữ"}},"en":{"senderName":"me","receiverName":"you","opening":{"subtitle":"my bestfriend","continueLabel":"Continue","greeting":"Happy Birthday","day":20,"month":12},"intro":{"line1":"There's a little gift here for you…","line2":"But before you open it, blow out the candle first 🎂","idleHint":"👆 Press & hold the flame until it goes out","holdingHint":"keep holding… almost there…","lightingHint":"lighting the candle for you…"},"voice":{"notice":"Wait… a little tape was recorded just for you 📼","kicker":"A tape just for you","title":"Some things I couldn't put into writing, so I recorded them…","hint":"Press ▶ on the player to hear the message — sound on 🔊","playing":"Playing… listen till the end, I meant every word 💛","ended":"Thank you for listening all the way through 💛","play":"Play","pause":"Pause","next":"There's more →"},"age":{"kicker":"New age","title":"{age} years old, officially!","days":"= {days} days on this planet","laughs":"= about {laughs} laughs","closing":"At {age} — stay exactly who you are, just a little happier.","fallbackTitle":"One more year 🎉","fallbackClosing":"New age — stay exactly who you are, just a little happier.","next":"Next surprise →"},"heart":{"caption":"I've kept all these embarrassing photos very safe 😌","title":"Happy Birthday{,receiver}!","subtitle":"Today you're the main character 🎈","next":"Got a letter for you →"},"letter":{"kicker":"A little letter","body":"I'm not good with fancy words, so I'll keep it simple: happy birthday.\n\nThis past year can't have been easy, and yet here you are — you're stronger than you think.\n\nAll I wish is that you eat well, sleep enough, worry a little less, and remember that someone is always here when you need them.","signature":"— {sender}","next":"There's more →","flipHint":"Tap the postcard to turn it over ↻","to":"To","certTitle":"Officially a year older","certUnit":"years","certFallback":"New age","zoomHint":"Tap the stamp to see the photo ✦"},"hug":{"idleHint":"👆 Place your hand and hold","next":"One more wish →","love":{"prompt":"Half of it is with me, half with you… hold here to make it whole.","holdingHint":"a little closer… can you feel my heart?","done":"There, whole again. However far, my heart is right beside you."},"friend":{"prompt":"Can't be there to celebrate… so fist bump through the screen!","holdingHint":"wind up… 1… 2…","done":"Boom! Bumped. Happy birthday, bestie!"},"family":{"prompt":"We can't be together this year… so let's pinky promise something.","holdingHint":"hook it tight…","done":"Promised: wherever we are, we're still each other's home."}},"thanks":{"teaser":"One last thing…","line":"Thank you for being born.","repeat":"Watch again"},"wish":{"kicker":"Make a wish","title":"Close your eyes… and make a wish for the year ahead","subtitle":"Write it on this slip, and I'll fold it into a star for you.","slipHeader":"my birthday wish ✨","placeholder":"e.g. this year I hope to be braver about my own dreams…","fold":"Fold it into a star ⭐","skip":"Keep my wish to myself"},"jar":{"kicker":"A jar of wishes","tag":"for {receiver} ♡","lastHint":"One last star… the one I saved for the very end ✨","lastHeader":"what I most want to say…","lastWish":"Thank you for always being here. Whatever this new year brings, I'll be right beside you, just like this.","landed":"Your star is in the jar now ✨","intro":"There are {n} more stars in here that I folded for you… each one is a wish I made for you.","tapHint":"Tap each star to open it ⭐","progress":"{read}/{n} stars opened","fromSender":"I wish for you…","yours":"your wish","secret":"A secret wish 🤫","close":"Fold it back ⭐","later":"Save the rest for later →","finaleTitle":"Happy Birthday{,receiver} ✨","finaleLine":"From tonight there's a constellation of your own up there: your wish in the middle, and my wishes for you all around it.","constellation":"✦ A constellation for {receiver} · {date} ✦","wishes":{"love":["That you're always loved as much as you love everyone else.","That every morning gives you a reason to smile.","That this year you worry less, sleep well and eat well.","That the dreams you've been holding onto come true this year.","That you know you're the best thing in my life.","That next birthday, I get to be right there beside you."],"friend":["That you stay just as silly this year, only a lot richer.","That deadlines go easy on you and your pay keeps going up.","That you meet someone who loves you for real.","That you stay healthy, eat everything and sleep like a baby.","That we stay best friends for many, many more years.","That whenever you're sad, you remember you've got me."],"family":["That home is always full and warm.","That someone always checks in and reminds you to eat.","That every road ahead is smooth and safe.","That no matter how grown up you get, there's always a place to come back to.","That this year is lighter and full of joy.","That we always stay each other's rock."]}},"ui":{"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthLabel":"{monthName}","heartTapHint":"Touch the heart to see the photos ♡","viewPhoto":"View photo","tapToClose":"Tap to close","languageLabel":"Language"}},"ko":{"senderName":"나","receiverName":"너","opening":{"subtitle":"my bestfriend","continueLabel":"계속","greeting":"생일 축하해","day":20,"month":12},"intro":{"line1":"너에게 줄 작은 선물이 있어…","line2":"하지만 열기 전에, 먼저 촛불을 불어서 꺼줘 🎂","idleHint":"👆 촛불을 꺼질 때까지 길게 눌러줘","holdingHint":"조금만 더… 계속 눌러…","lightingHint":"너를 위해 초에 불을 붙이는 중이야…"},"voice":{"notice":"잠깐… 너만을 위해 녹음한 작은 테이프가 있어 📼","kicker":"너만을 위한 테이프","title":"글로는 다 못 적어서, 목소리로 담아 봤어…","hint":"플레이어의 ▶ 버튼을 눌러 메시지를 들어 줘, 소리 켜고 🔊","playing":"재생 중… 끝까지 들어 줘, 한 마디 한 마디 진심이야 💛","ended":"끝까지 들어 줘서 고마워 💛","play":"재생","pause":"일시정지","next":"아직 더 있어 →"},"age":{"kicker":"새로운 나이","title":"벌써 {age}살이다!","days":"= 세상에 온 지 {days}일","laughs":"= 대략 {laughs}번 웃음","closing":"{age}살에도 지금 그대로의 너이길, 조금만 더 행복하게.","fallbackTitle":"한 살 더 먹었네 🎉","fallbackClosing":"새로운 나이에도 지금 그대로의 너이길, 조금만 더 행복하게.","next":"다음 선물 →"},"heart":{"caption":"이 흑역사 사진들 내가 잘 간직하고 있었지 😌","title":"생일 축하해{,receiver}!","subtitle":"오늘은 네가 주인공이야 🎈","next":"편지 왔어 →"},"letter":{"kicker":"짧은 편지","body":"나는 화려한 말은 잘 못 해서, 그냥 간단히 말할게: 생일 축하해.\n\n지난 한 해가 쉽지 않았을 텐데, 그래도 여기까지 왔네 — 너는 네 생각보다 훨씬 강해.\n\n그저 잘 먹고 푹 자고, 걱정은 조금 덜고, 네가 필요할 때 늘 곁에 있는 사람이 있다는 걸 기억해줘.","signature":"— {sender}","next":"아직 더 있어 →","flipHint":"엽서를 눌러 뒤집어 봐 ↻","to":"받는 사람","certTitle":"새로운 나이 인증","certUnit":"살","certFallback":"새 나이","zoomHint":"우표를 눌러 사진을 크게 봐 ✦"},"hug":{"idleHint":"👆 손을 올리고 꾹 눌러 줘","next":"소원 하나 더 →","love":{"prompt":"반쪽은 나한테, 반쪽은 너한테… 여기를 눌러서 하나로 맞춰 줘.","holdingHint":"조금만 더 가까이… 내 심장 소리 들려?","done":"봐, 다시 하나가 됐어. 아무리 멀어도 내 마음은 네 곁에 있어."},"friend":{"prompt":"직접 가서 축하해 주지 못하니까… 화면 너머로 주먹 인사하자!","holdingHint":"준비… 1… 2…","done":"쾅! 주먹 인사 완료. 생일 축하해, 베프!"},"family":{"prompt":"올해는 함께 있지 못하니까… 새끼손가락 걸고 약속 하나 하자.","holdingHint":"꼭 걸어…","done":"약속했어. 어디에 있든 우리는 서로의 집이야."}},"thanks":{"teaser":"마지막으로 하나만…","line":"태어나 줘서 고마워.","repeat":"처음부터 다시 보기"},"wish":{"kicker":"소원 빌기","title":"눈을 감고… 새로운 한 해를 위한 소원을 하나 빌어 봐","subtitle":"이 쪽지에 적어 줘. 내가 별 모양으로 접어 줄게.","slipHeader":"생일 소원 ✨","placeholder":"예) 올해는 내 꿈에 조금 더 용기를 내고 싶어…","fold":"별로 접기 ⭐","skip":"소원은 마음속에 간직할래"},"jar":{"kicker":"소원 별병","tag":"{receiver}에게 ♡","lastHint":"마지막 별 하나… 끝까지 아껴 둔 별이야 ✨","lastHeader":"가장 하고 싶은 말…","lastWish":"항상 곁에 있어 줘서 고마워. 새로운 한 해에 무슨 일이 있어도, 지금처럼 네 곁에 있을게.","landed":"네 별이 병 속에 들어갔어 ✨","intro":"병 안에는 내가 너를 위해 접어 둔 별이 {n}개 더 있어… 하나하나가 너를 위한 소원이야.","tapHint":"별을 하나씩 눌러서 열어 봐 ⭐","progress":"{read}/{n}개 열었어","fromSender":"너를 위해 비는 소원…","yours":"너의 소원","secret":"비밀 소원 🤫","close":"다시 접기 ⭐","later":"나머지는 나중에 읽을래 →","finaleTitle":"생일 축하해{,receiver} ✨","finaleLine":"오늘 밤부터 하늘에 너만의 별자리가 생겼어. 가운데엔 너의 소원, 그 둘레엔 너를 위한 내 소원들.","constellation":"✦ {receiver}의 별자리 · {date} ✦","wishes":{"love":["네가 사람들을 아끼는 만큼, 너도 늘 사랑받기를.","매일 아침 웃을 이유가 하나씩 생기기를.","올해는 걱정은 줄고, 푹 자고, 맛있게 먹기를.","오래 품어 온 꿈이 올해 이루어지기를.","네가 내 인생에서 가장 좋은 사람이라는 걸 알아주기를.","내년 생일에는 네 바로 옆에 있을 수 있기를."],"friend":["올해도 지금처럼 웃기되, 훨씬 부자가 되기를.","마감은 너그럽고 월급은 쑥쑥 오르기를.","너를 진심으로 아껴 주는 사람을 만나기를.","건강하고, 먹어도 살 안 찌고, 꿀잠 자기를.","앞으로도 오래오래 베프로 남기를.","슬플 땐 내가 있다는 걸 꼭 기억하기를."],"family":["집이 언제나 따뜻하고 넉넉하기를.","늘 누군가 안부를 묻고 밥 챙겨 먹으라고 말해 주기를.","앞으로의 모든 길이 평탄하고 안전하기를.","아무리 커도 언제나 돌아올 곳이 있기를.","올해는 덜 힘들고 기쁜 일이 가득하기를.","우리가 언제나 서로의 버팀목이 되기를."]}},"ui":{"months":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"monthLabel":"{month}월","heartTapHint":"하트를 터치해서 사진을 봐 ♡","viewPhoto":"사진 보기","tapToClose":"터치하면 닫혀","languageLabel":"언어"}},"ja":{"senderName":"わたし","receiverName":"あなた","opening":{"subtitle":"my bestfriend","continueLabel":"次へ","greeting":"お誕生日おめでとう","day":20,"month":12},"intro":{"line1":"あなたに小さな贈り物があるの…","line2":"でも開ける前に、まずはろうそくを吹き消してね 🎂","idleHint":"👆 消えるまで炎を長押ししてね","holdingHint":"もう少し…そのまま押していて…","lightingHint":"あなたのためにろうそくを灯しているよ…"},"voice":{"notice":"待って…きみのためだけに録ったテープがあるよ 📼","kicker":"きみだけのテープ","title":"文字にできない想いがあって、声で残したの…","hint":"プレーヤーの ▶ を押してメッセージを聴いてね、音はオンで 🔊","playing":"再生中…最後まで聴いてね、全部本当の気持ちだよ 💛","ended":"最後まで聴いてくれてありがとう 💛","play":"再生","pause":"一時停止","next":"まだあるよ →"},"age":{"kicker":"新しい年齢","title":"ついに{age}歳！","days":"= この世界にきて{days}日","laughs":"= だいたい{laughs}回の笑顔","closing":"{age}歳も、そのままのあなたで。ただ、もう少しだけ楽しく。","fallbackTitle":"またひとつ大人に 🎉","fallbackClosing":"新しい一年も、そのままのあなたで。ただ、もう少しだけ楽しく。","next":"次のプレゼント →"},"heart":{"caption":"この黒歴史写真、ちゃんと大事にとってあるよ 😌","title":"お誕生日おめでとう{,receiver}！","subtitle":"今日の主役はあなただよ 🎈","next":"手紙があるよ →"},"letter":{"kicker":"小さな手紙","body":"きれいな言葉は得意じゃないから、シンプルに言うね：お誕生日おめでとう。\n\nこの一年は簡単じゃなかったはず、それでもここまで来たね — あなたは自分で思うよりずっと強いよ。\n\nちゃんと食べて、しっかり眠って、心配は少しだけ減らして、必要なときにはいつもそばにいる人がいるって覚えていてね。","signature":"— {sender}","next":"まだ続きがあるよ →","flipHint":"はがきをタップして裏返してね ↻","to":"宛先","certTitle":"新しい年齢 認定","certUnit":"歳","certFallback":"新しい一年","zoomHint":"切手をタップして写真を大きく見てね ✦"},"hug":{"idleHint":"👆 手を置いて、そのまま押さえてね","next":"もうひとつ願いごと →","love":{"prompt":"半分はわたしのところ、半分はあなたのところ…ここを押さえてひとつにしよう。","holdingHint":"もう少し近くに…わたしの鼓動、聞こえる？","done":"ほら、ひとつに戻ったよ。どんなに遠くても、わたしの心はそばにいるよ。"},"friend":{"prompt":"お祝いしに行けないから…画面越しにグータッチしよう！","holdingHint":"せーの…1…2…","done":"ゴツン！タッチ完了。誕生日おめでとう、親友！"},"family":{"prompt":"今年は一緒にいられないから…指切りして、ひとつ約束しよう。","holdingHint":"ぎゅっと結んで…","done":"約束したよ。どこにいても、わたしたちはお互いの帰る場所だよ。"}},"thanks":{"teaser":"最後にひとつだけ…","line":"生まれてきてくれて、ありがとう。","repeat":"最初からもう一度"},"wish":{"kicker":"願いごと","title":"目を閉じて…新しい一年への願いごとをひとつ","subtitle":"この紙に書いてね。あなたのために星の形に折ってあげる。","slipHeader":"誕生日の願いごと ✨","placeholder":"例：今年は自分の夢にもっと勇気を出せますように…","fold":"星に折る ⭐","skip":"願いごとは心にしまっておく"},"jar":{"kicker":"願いごとの星びん","tag":"{receiver}へ ♡","lastHint":"最後にもうひとつ…いちばん最後までとっておいた星 ✨","lastHeader":"いちばん伝えたいこと…","lastWish":"いつもそばにいてくれてありがとう。新しい一年に何があっても、わたしはこうしてずっと隣にいるよ。","landed":"あなたの星がびんに入ったよ ✨","intro":"びんの中には、わたしがあなたのために折った星があと{n}つ…ひとつひとつが、あなたへの願いごと。","tapHint":"星をひとつずつタップして開いてね ⭐","progress":"{read}/{n}こ開いた","fromSender":"あなたに願うこと…","yours":"あなたの願いごと","secret":"ひみつの願いごと 🤫","close":"また折りたたむ ⭐","later":"残りはあとで読む →","finaleTitle":"お誕生日おめでとう{,receiver} ✨","finaleLine":"今夜から、空にあなただけの星座がひとつ。真ん中にあなたの願い、そのまわりにわたしからの願い。","constellation":"✦ {receiver}の星座 · {date} ✦","wishes":{"love":["あなたがみんなを想うのと同じくらい、いつも愛されますように。","毎朝、笑顔になれる理由がひとつありますように。","今年は心配ごとが減って、よく眠れて、おいしく食べられますように。","大切にあたためてきた夢が、今年叶いますように。","あなたがわたしの一番の宝物だって、伝わりますように。","来年の誕生日は、すぐ隣にいられますように。"],"friend":["今年もそのままのノリで、でもずっとお金持ちになりますように。","締め切りがやさしくて、お給料がどんどん上がりますように。","本気で大切にしてくれる人に出会えますように。","元気いっぱいで、何を食べても太らず、ぐっすり眠れますように。","これから何年も、ずっと親友でいられますように。","悲しいときは、わたしがいることを思い出せますように。"],"family":["家がいつもあたたかく、満ち足りていますように。","いつも誰かが気にかけて、ごはんを忘れないよう声をかけてくれますように。","これからの道が、なだらかで安全でありますように。","どんなに大きくなっても、帰れる場所がいつもありますように。","今年は苦労が減って、楽しいことがたくさんありますように。","ずっとお互いの支えでいられますように。"]}},"ui":{"months":["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],"monthLabel":"{month}月","heartTapHint":"ハートに触れて写真を見てね ♡","viewPhoto":"写真を見る","tapToClose":"タップで閉じる","languageLabel":"言語"}},"zh":{"senderName":"我","receiverName":"你","opening":{"subtitle":"my bestfriend","continueLabel":"继续","greeting":"生日快乐","day":20,"month":12},"intro":{"line1":"这里有一份小礼物要送给你…","line2":"不过在打开之前，先把蜡烛吹灭吧 🎂","idleHint":"👆 按住火苗，直到它熄灭","holdingHint":"再坚持一下…继续按着…","lightingHint":"正在为你点上蜡烛…"},"voice":{"notice":"等等…有一盘专门为你录的磁带 📼","kicker":"只属于你的磁带","title":"有些话写不出来，所以我把它录了下来…","hint":"按下播放器上的 ▶ 听听这段话吧，记得打开声音 🔊","playing":"正在播放…请听到最后，每一句都是真心的 💛","ended":"谢谢你一直听到最后 💛","play":"播放","pause":"暂停","next":"还有哦 →"},"age":{"kicker":"新的一岁","title":"{age}岁啦！","days":"= 来到这个世界{days}天","laughs":"= 大约笑了{laughs}次","closing":"{age}岁，愿你还是你，只是更开心一点。","fallbackTitle":"又长大一岁 🎉","fallbackClosing":"新的一岁，愿你还是你，只是更开心一点。","next":"下一个惊喜 →"},"heart":{"caption":"这些黑历史照片我可都好好保存着 😌","title":"生日快乐{,receiver}！","subtitle":"今天你是主角 🎈","next":"有一封信 →"},"letter":{"kicker":"一封小信","body":"我不太会说漂亮话，所以就简单点说：生日快乐。\n\n过去这一年一定不容易，可你还是走到了今天 —— 你比自己以为的要坚强得多。\n\n我只希望你吃得好、睡得够，少操点心，也记得在你需要的时候，总有一个人在这里。","signature":"— {sender}","next":"还有呢 →","flipHint":"轻触明信片，翻到背面看看 ↻","to":"致","certTitle":"新岁认证","certUnit":"岁","certFallback":"新的一岁","zoomHint":"轻触邮票查看大图 ✦"},"hug":{"idleHint":"👆 把手放上来，按住不放","next":"还有一个愿望 →","love":{"prompt":"一半在我这里，一半在你那里……按住这里，把它们合在一起吧。","holdingHint":"再近一点……听到我的心跳了吗……","done":"好了，又合成一颗了。不管多远，我的心都在你身边。"},"friend":{"prompt":"没法去现场为你庆祝……那就隔着屏幕碰个拳吧！","holdingHint":"预备……1……2……","done":"砰！碰拳成功。生日快乐，好朋友！"},"family":{"prompt":"今年我们没法在一起……那就拉个钩，约定一件事吧。","holdingHint":"钩紧一点……","done":"说好了：无论在哪里，我们永远是彼此的家。"}},"thanks":{"teaser":"最后还有一件事……","line":"谢谢你来到这个世界。","repeat":"从头再看一次"},"wish":{"kicker":"许个愿","title":"闭上眼睛……为新的一岁许一个愿吧","subtitle":"把它写在这张纸条上，我帮你折成一颗星星。","slipHeader":"生日愿望 ✨","placeholder":"例如：今年希望能更勇敢地追自己的梦……","fold":"折成星星 ⭐","skip":"把愿望藏在心里"},"jar":{"kicker":"许愿星星瓶","tag":"给{receiver} ♡","lastHint":"还有最后一颗星星……我一直留到最后的那颗 ✨","lastHeader":"我最想对你说的话……","lastWish":"谢谢你一直都在。新的一岁无论发生什么，我都会像现在这样陪在你身边。","landed":"你的星星已经放进瓶子里了 ✨","intro":"瓶子里还有{n}颗我为你折的星星……每一颗都是我为你许下的愿望。","tapHint":"点开每一颗星星看看吧 ⭐","progress":"已打开 {read}/{n} 颗","fromSender":"我为你许愿……","yours":"你的愿望","secret":"一个秘密愿望 🤫","close":"再折起来 ⭐","later":"剩下的留着以后看 →","finaleTitle":"生日快乐{,receiver} ✨","finaleLine":"从今晚起，天上有了一个只属于你的星座：你的愿望在中间，我为你许的愿望围在四周。","constellation":"✦ {receiver}的星座 · {date} ✦","wishes":{"love":["愿你被爱的程度，和你爱别人一样多。","愿每天早上醒来，都有一个让你微笑的理由。","愿新的一岁少一点烦恼，睡得好，吃得香。","愿你一直珍藏的梦想，今年都能实现。","愿你知道，你是我生命里最好的存在。","愿明年的生日，我能就在你身边。"],"friend":["愿你今年还是那么逗，但是有钱很多。","愿截止日期对你温柔，工资节节高升。","愿你遇到真心疼你的人。","愿你身体健康，吃不胖，睡得香。","愿我们再做很多很多年的好朋友。","愿你难过的时候，记得还有我。"],"family":["愿家里永远温暖又充实。","愿总有人问候你，提醒你按时吃饭。","愿前方的每条路都平坦又平安。","愿你不管长多大，总有一个可以回去的地方。","愿今年少些辛苦，多些快乐。","愿我们永远是彼此的依靠。"]}},"ui":{"months":["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],"monthLabel":"{month}月","heartTapHint":"轻触爱心查看照片 ♡","viewPhoto":"查看照片","tapToClose":"轻触关闭","languageLabel":"语言"}},"th":{"senderName":"ฉัน","receiverName":"เธอ","opening":{"subtitle":"my bestfriend","continueLabel":"ต่อไป","greeting":"สุขสันต์วันเกิด","day":20,"month":12},"intro":{"line1":"มีของขวัญชิ้นเล็ก ๆ สำหรับเธออยู่ตรงนี้…","line2":"แต่ก่อนจะเปิด เป่าเทียนให้ดับก่อนนะ 🎂","idleHint":"👆 กดค้างที่เปลวเทียนจนกว่ามันจะดับ","holdingHint":"กดต่ออีกนิด… ใกล้แล้ว…","lightingHint":"กำลังจุดเทียนให้เธออยู่…"},"voice":{"notice":"เดี๋ยวนะ… มีเทปเล็ก ๆ ที่อัดไว้ให้เธอคนเดียว 📼","kicker":"เทปม้วนนี้สำหรับเธอ","title":"มีบางเรื่องที่เขียนออกมาไม่ได้ เลยอัดเสียงไว้ให้…","hint":"กดปุ่ม ▶ บนเครื่องเพื่อฟังข้อความนะ อย่าลืมเปิดเสียง 🔊","playing":"กำลังเล่น… ฟังให้จบนะ ทุกคำมาจากใจจริง 💛","ended":"ขอบคุณที่ฟังจนจบนะ 💛","play":"เล่น","pause":"หยุด","next":"ยังมีอีกนะ →"},"age":{"kicker":"อายุใหม่","title":"{age} ปีแล้วนะ!","days":"= อยู่บนโลกมา {days} วัน","laughs":"= หัวเราะไปประมาณ {laughs} ครั้ง","closing":"อายุ {age} ขอให้ยังเป็นตัวเองแบบนี้ แค่มีความสุขขึ้นอีกนิด","fallbackTitle":"โตขึ้นอีกปีแล้ว 🎉","fallbackClosing":"อายุใหม่ ขอให้ยังเป็นตัวเองแบบนี้ แค่มีความสุขขึ้นอีกนิด","next":"เซอร์ไพรส์ถัดไป →"},"heart":{"caption":"รูปแฉเหล่านี้เก็บไว้อย่างดีเลยนะ 😌","title":"สุขสันต์วันเกิด{,receiver}!","subtitle":"วันนี้เธอคือตัวเอก 🎈","next":"มีจดหมายมาให้ →"},"letter":{"kicker":"จดหมายสั้น ๆ","body":"ฉันไม่เก่งเรื่องคำพูดสวยหรู เลยขอพูดง่าย ๆ ว่า สุขสันต์วันเกิดนะ\n\nปีที่ผ่านมาคงไม่ง่ายเลย แต่เธอก็มาถึงวันนี้ได้ — เธอเข้มแข็งกว่าที่ตัวเองคิดมากเลยนะ\n\nฉันแค่อยากให้เธอกินอิ่ม นอนหลับพอ กังวลให้น้อยลงสักนิด และจำไว้ว่ามีคนอยู่ตรงนี้เสมอเมื่อเธอต้องการ","signature":"— {sender}","next":"ยังมีอีกนะ →","flipHint":"แตะโปสการ์ดเพื่อพลิกดูด้านหลัง ↻","to":"ถึง","certTitle":"รับรองอายุใหม่","certUnit":"ปี","certFallback":"อายุใหม่","zoomHint":"แตะแสตมป์เพื่อดูรูปใหญ่ ✦"},"hug":{"idleHint":"👆 วางมือแล้วกดค้างไว้นะ","next":"ยังมีคำอธิษฐานอีกข้อ →","love":{"prompt":"ครึ่งหนึ่งอยู่กับฉัน อีกครึ่งอยู่กับเธอ… กดค้างไว้ให้กลับมาเป็นหนึ่งเดียวนะ","holdingHint":"ใกล้อีกนิด… ได้ยินหัวใจฉันไหม…","done":"เห็นไหม กลับมาเป็นหนึ่งแล้ว ไกลแค่ไหน หัวใจฉันก็อยู่ข้างเธอ"},"friend":{"prompt":"ไปฉลองด้วยไม่ได้… งั้นชนกำปั้นผ่านหน้าจอกันนะ!","holdingHint":"เตรียม… 1… 2…","done":"ปัง! ชนแล้ว สุขสันต์วันเกิดนะ เพื่อนรัก!"},"family":{"prompt":"ปีนี้เราไม่ได้อยู่ด้วยกัน… มาเกี่ยวก้อยสัญญากันสักข้อนะ","holdingHint":"เกี่ยวให้แน่นๆ…","done":"สัญญาแล้วนะ อยู่ที่ไหน เราก็ยังเป็นบ้านของกันและกัน"}},"thanks":{"teaser":"อีกเรื่องสุดท้าย…","line":"ขอบคุณที่เกิดมานะ","repeat":"ดูอีกครั้งตั้งแต่ต้น"},"wish":{"kicker":"อธิษฐาน","title":"หลับตาลง… แล้วอธิษฐานสักข้อสำหรับปีใหม่ของชีวิตนะ","subtitle":"เขียนลงในกระดาษแผ่นนี้ แล้วฉันจะพับเป็นดาวให้เธอ","slipHeader":"คำอธิษฐานวันเกิด ✨","placeholder":"เช่น ปีนี้อยากกล้าทำตามความฝันของตัวเองมากขึ้น…","fold":"พับเป็นดาว ⭐","skip":"เก็บคำอธิษฐานไว้ในใจ"},"jar":{"kicker":"โหลดาวแห่งคำอธิษฐาน","tag":"ถึง{receiver} ♡","lastHint":"ยังเหลือดาวดวงสุดท้าย… ดวงที่ฉันเก็บไว้จนถึงตอนจบ ✨","lastHeader":"สิ่งที่ฉันอยากบอกที่สุด…","lastWish":"ขอบคุณที่อยู่ตรงนี้เสมอนะ ปีใหม่ของชีวิตนี้จะเป็นยังไง ฉันก็จะอยู่ข้างๆ เธอแบบนี้","landed":"ดาวของเธออยู่ในโหลแล้วนะ ✨","intro":"ในโหลยังมีดาวอีก {n} ดวงที่ฉันพับไว้ให้เธอ… แต่ละดวงคือคำอธิษฐานที่ฉันขอให้เธอ","tapHint":"แตะดาวทีละดวงเพื่อเปิดอ่านนะ ⭐","progress":"เปิดแล้ว {read}/{n} ดวง","fromSender":"ฉันขอให้เธอ…","yours":"คำอธิษฐานของเธอ","secret":"คำอธิษฐานลับ 🤫","close":"พับกลับ ⭐","later":"เก็บที่เหลือไว้อ่านทีหลัง →","finaleTitle":"สุขสันต์วันเกิด{,receiver} ✨","finaleLine":"ตั้งแต่คืนนี้ บนฟ้ามีกลุ่มดาวของเธอเอง คำอธิษฐานของเธออยู่ตรงกลาง และคำอธิษฐานที่ฉันขอให้เธออยู่รอบๆ","constellation":"✦ กลุ่มดาวของ{receiver} · {date} ✦","wishes":{"love":["ขอให้เธอได้รับความรักมากเท่าที่เธอรักทุกคน","ขอให้ทุกเช้ามีเหตุผลให้เธอยิ้ม","ขอให้ปีนี้เธอกังวลน้อยลง นอนหลับสบาย กินอร่อย","ขอให้ความฝันที่เธอเก็บไว้เป็นจริงในปีนี้","ขอให้เธอรู้ว่าเธอคือสิ่งที่ดีที่สุดในชีวิตฉัน","ขอให้วันเกิดปีหน้า ฉันได้อยู่ข้างๆ เธอ"],"friend":["ขอให้ปีนี้ยังบ้าบอเหมือนเดิม แต่รวยขึ้นเยอะๆ","ขอให้เดดไลน์ใจดี เงินเดือนขึ้นรัวๆ","ขอให้เจอคนที่รักเธอจริงๆ","ขอให้แข็งแรง กินไม่อ้วน นอนหลับเป็นตาย","ขอให้เรายังเป็นเพื่อนรักกันไปอีกนานแสนนาน","ขอให้ตอนเศร้า เธอจำได้ว่ายังมีฉันอยู่"],"family":["ขอให้บ้านอบอุ่นและอิ่มเอมเสมอ","ขอให้มีคนคอยถามไถ่และเตือนให้กินข้าวตรงเวลา","ขอให้ทุกเส้นทางข้างหน้าราบรื่นและปลอดภัย","ขอให้ไม่ว่าจะโตแค่ไหน ก็ยังมีที่ให้กลับมาเสมอ","ขอให้ปีนี้เหนื่อยน้อยลง มีความสุขมากขึ้น","ขอให้เราเป็นที่พึ่งของกันและกันตลอดไป"]}},"ui":{"months":["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"],"monthLabel":"{monthName}","heartTapHint":"แตะที่หัวใจเพื่อดูรูปภาพ ♡","viewPhoto":"ดูรูปภาพ","tapToClose":"แตะเพื่อปิด","languageLabel":"ภาษา"}},"de":{"senderName":"ich","receiverName":"dich","opening":{"subtitle":"my bestfriend","continueLabel":"Weiter","greeting":"Alles Gute zum Geburtstag","day":20,"month":12},"intro":{"line1":"Hier ist ein kleines Geschenk für dich…","line2":"Aber bevor du es öffnest, blas zuerst die Kerze aus 🎂","idleHint":"👆 Halte die Flamme gedrückt, bis sie erlischt","holdingHint":"halt noch durch… gleich geschafft…","lightingHint":"ich zünde die Kerze für dich an…"},"voice":{"notice":"Moment… da ist eine kleine Kassette, nur für dich aufgenommen 📼","kicker":"Eine Kassette nur für dich","title":"Manches konnte ich nicht aufschreiben – also habe ich es aufgenommen…","hint":"Drück ▶ am Player, um die Nachricht zu hören – Ton an 🔊","playing":"Läuft… hör bis zum Ende, jedes Wort kommt von Herzen 💛","ended":"Danke, dass du bis zum Schluss zugehört hast 💛","play":"Abspielen","pause":"Pause","next":"Da kommt noch was →"},"age":{"kicker":"Neues Lebensjahr","title":"{age} Jahre, ganz offiziell!","days":"= {days} Tage auf dieser Welt","laughs":"= ungefähr {laughs} Lacher","closing":"Mit {age} — bleib genau so, wie du bist, nur ein bisschen glücklicher.","fallbackTitle":"Ein Jahr mehr 🎉","fallbackClosing":"Neues Jahr — bleib genau so, wie du bist, nur ein bisschen glücklicher.","next":"Nächste Überraschung →"},"heart":{"caption":"Diese peinlichen Fotos habe ich gut aufbewahrt 😌","title":"Alles Gute zum Geburtstag{,receiver}!","subtitle":"Heute bist du die Hauptfigur 🎈","next":"Da ist ein Brief für dich →"},"letter":{"kicker":"Ein kleiner Brief","body":"Ich bin nicht gut in schönen Worten, also sag ich es einfach: alles Gute zum Geburtstag.\n\nDieses Jahr war bestimmt nicht leicht, und trotzdem bist du bis hierher gekommen — du bist stärker, als du denkst.\n\nIch wünsche mir nur, dass du gut isst, genug schläfst, dir etwas weniger Sorgen machst und daran denkst, dass immer jemand da ist, wenn du ihn brauchst.","signature":"— {sender}","next":"Es gibt noch mehr →","flipHint":"Tipp auf die Postkarte, um sie umzudrehen ↻","to":"An","certTitle":"Offiziell ein Jahr älter","certUnit":"Jahre","certFallback":"Neues Jahr","zoomHint":"Tipp auf die Briefmarke, um das Foto groß zu sehen ✦"},"hug":{"idleHint":"👆 Hand auflegen und halten","next":"Noch ein Wunsch →","love":{"prompt":"Eine Hälfte ist bei mir, eine bei dir … halt hier, damit es wieder eins wird.","holdingHint":"noch ein bisschen näher … spürst du mein Herz?","done":"Siehst du, wieder ganz. Egal wie weit, mein Herz ist bei dir."},"friend":{"prompt":"Ich kann nicht vorbeikommen … also Faust-Check durch den Bildschirm!","holdingHint":"Anlauf … 1 … 2 …","done":"Bumm! Check. Alles Gute zum Geburtstag, du Lieblingsmensch!"},"family":{"prompt":"Dieses Jahr sind wir nicht zusammen … also lass uns etwas mit dem kleinen Finger versprechen.","holdingHint":"ganz fest einhaken …","done":"Versprochen: Wo wir auch sind, wir bleiben füreinander Zuhause."}},"thanks":{"teaser":"Eine letzte Sache …","line":"Danke, dass es dich gibt.","repeat":"Nochmal von vorn"},"wish":{"kicker":"Wünsch dir was","title":"Schließ die Augen … und wünsch dir etwas für das neue Lebensjahr","subtitle":"Schreib es auf diesen Zettel, ich falte ihn dir zu einem Stern.","slipHeader":"mein Geburtstagswunsch ✨","placeholder":"z. B. dieses Jahr möchte ich mutiger für meine Träume sein …","fold":"Zu einem Stern falten ⭐","skip":"Meinen Wunsch für mich behalten"},"jar":{"kicker":"Ein Glas voller Wünsche","tag":"für {receiver} ♡","lastHint":"Ein letzter Stern … den habe ich mir bis zum Schluss aufgehoben ✨","lastHeader":"was ich dir am meisten sagen will …","lastWish":"Danke, dass du immer da bist. Was auch immer dein neues Jahr bringt, ich bleibe genau so an deiner Seite.","landed":"Dein Stern liegt jetzt im Glas ✨","intro":"Darin sind noch {n} Sterne, die ich für dich gefaltet habe … jeder ist ein Wunsch für dich.","tapHint":"Tipp jeden Stern an, um ihn zu öffnen ⭐","progress":"{read}/{n} Sterne geöffnet","fromSender":"Ich wünsche dir …","yours":"dein Wunsch","secret":"Ein geheimer Wunsch 🤫","close":"Wieder zufalten ⭐","later":"Den Rest für später aufheben →","finaleTitle":"Alles Gute zum Geburtstag{,receiver} ✨","finaleLine":"Ab heute gibt es dort oben ein Sternbild nur für dich: dein Wunsch in der Mitte, meine Wünsche für dich rundherum.","constellation":"✦ Ein Sternbild für {receiver} · {date} ✦","wishes":{"love":["Dass du immer so sehr geliebt wirst, wie du andere liebst.","Dass dir jeder Morgen einen Grund zum Lächeln schenkt.","Dass du dieses Jahr weniger grübelst, gut schläfst und gut isst.","Dass die Träume, an denen du festhältst, dieses Jahr wahr werden.","Dass du weißt: Du bist das Schönste in meinem Leben.","Dass ich am nächsten Geburtstag direkt neben dir bin."],"friend":["Dass du so verrückt bleibst wie immer, nur viel reicher.","Dass Deadlines nett zu dir sind und dein Gehalt steigt.","Dass du jemanden triffst, der dich ehrlich liebt.","Dass du gesund bleibst, alles isst und schläfst wie ein Baby.","Dass wir noch viele, viele Jahre beste Freunde bleiben.","Dass du, wenn du traurig bist, weißt: Du hast mich."],"family":["Dass es zu Hause immer warm und reichlich ist.","Dass immer jemand nachfragt und dich ans Essen erinnert.","Dass jeder Weg vor dir eben und sicher ist.","Dass es, egal wie groß du wirst, immer einen Ort zum Heimkommen gibt.","Dass dieses Jahr leichter und voller Freude wird.","Dass wir immer füreinander da sind."]}},"ui":{"months":["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],"monthLabel":"{monthName}","heartTapHint":"Berühre das Herz, um die Fotos zu sehen ♡","viewPhoto":"Foto ansehen","tapToClose":"Zum Schließen tippen","languageLabel":"Sprache"}},"fr":{"senderName":"moi","receiverName":"toi","opening":{"subtitle":"my bestfriend","continueLabel":"Continuer","greeting":"Joyeux anniversaire","day":20,"month":12},"intro":{"line1":"Il y a un petit cadeau pour toi ici…","line2":"Mais avant de l'ouvrir, souffle d'abord la bougie 🎂","idleHint":"👆 Appuie et garde le doigt sur la flamme jusqu'à ce qu'elle s'éteigne","holdingHint":"continue… encore un peu…","lightingHint":"j'allume la bougie pour toi…"},"voice":{"notice":"Attends… une petite cassette a été enregistrée rien que pour toi 📼","kicker":"Une cassette rien que pour toi","title":"Il y a des choses que je n'arrivais pas à écrire, alors je les ai enregistrées…","hint":"Appuie sur ▶ pour écouter le message — monte le son 🔊","playing":"Lecture… écoute jusqu'au bout, chaque mot est sincère 💛","ended":"Merci d'avoir écouté jusqu'au bout 💛","play":"Écouter","pause":"Pause","next":"Ce n'est pas fini →"},"age":{"kicker":"Nouvel âge","title":"{age} ans, officiellement !","days":"= {days} jours sur cette planète","laughs":"= environ {laughs} fous rires","closing":"À {age} ans — reste exactement toi, juste un peu plus heureux·se.","fallbackTitle":"Une année de plus 🎉","fallbackClosing":"Nouvelle année — reste exactement toi, juste un peu plus heureux·se.","next":"Surprise suivante →"},"heart":{"caption":"J'ai gardé précieusement toutes ces photos gênantes 😌","title":"Joyeux anniversaire{,receiver} !","subtitle":"Aujourd'hui, c'est toi la star 🎈","next":"Il y a une lettre pour toi →"},"letter":{"kicker":"Une petite lettre","body":"Je ne suis pas doué pour les belles phrases, alors je fais simple : joyeux anniversaire.\n\nCette année n'a sûrement pas été facile, et pourtant te voilà arrivé jusqu'ici — tu es plus fort que tu ne le crois.\n\nJe souhaite juste que tu manges bien, que tu dormes assez, que tu t'inquiètes un peu moins, et que tu te souviennes qu'il y a toujours quelqu'un ici quand tu en as besoin.","signature":"— {sender}","next":"Ce n'est pas fini →","flipHint":"Touche la carte pour la retourner ↻","to":"À","certTitle":"Officiellement un an de plus","certUnit":"ans","certFallback":"Nouvel âge","zoomHint":"Touche le timbre pour voir la photo en grand ✦"},"hug":{"idleHint":"👆 Pose ta main et maintiens","next":"Encore un vœu →","love":{"prompt":"Une moitié est avec moi, l'autre avec toi… maintiens ici pour les réunir.","holdingHint":"encore un peu plus près… tu sens mon cœur ?","done":"Voilà, de nouveau entier. Si loin soit-il, mon cœur est près de toi."},"friend":{"prompt":"Je ne peux pas venir fêter ça… alors check du poing à travers l'écran !","holdingHint":"prends de l'élan… 1… 2…","done":"Boum ! Check. Joyeux anniversaire, bestie !"},"family":{"prompt":"Cette année on n'est pas ensemble… alors faisons une promesse du petit doigt.","holdingHint":"accroche bien fort…","done":"Promis : où qu'on soit, on reste la maison l'un de l'autre."}},"thanks":{"teaser":"Une dernière chose…","line":"Merci d'être né·e.","repeat":"Revoir depuis le début"},"wish":{"kicker":"Fais un vœu","title":"Ferme les yeux… et fais un vœu pour ta nouvelle année","subtitle":"Écris-le sur ce papier, je le plierai en étoile pour toi.","slipHeader":"mon vœu d'anniversaire ✨","placeholder":"ex. cette année, j'aimerais oser davantage pour mes rêves…","fold":"Le plier en étoile ⭐","skip":"Garder mon vœu pour moi"},"jar":{"kicker":"Un bocal à vœux","tag":"pour {receiver} ♡","lastHint":"Il reste une dernière étoile… celle que j'ai gardée pour la fin ✨","lastHeader":"ce que je veux te dire le plus…","lastWish":"Merci d'être toujours là. Quoi que t'apporte cette nouvelle année, je resterai à tes côtés, comme maintenant.","landed":"Ton étoile est dans le bocal maintenant ✨","intro":"Il reste {n} étoiles que j'ai pliées pour toi… chacune est un vœu que j'ai fait pour toi.","tapHint":"Touche chaque étoile pour l'ouvrir ⭐","progress":"{read}/{n} étoiles ouvertes","fromSender":"Je te souhaite…","yours":"ton vœu","secret":"Un vœu secret 🤫","close":"La replier ⭐","later":"Garder les autres pour plus tard →","finaleTitle":"Joyeux anniversaire{,receiver} ✨","finaleLine":"Dès ce soir, il y a là-haut une constellation rien qu'à toi : ton vœu au milieu, et mes vœux pour toi tout autour.","constellation":"✦ Une constellation pour {receiver} · {date} ✦","wishes":{"love":["Que tu sois toujours aimé·e autant que tu aimes les autres.","Que chaque matin t'offre une raison de sourire.","Que cette année tu t'inquiètes moins, dormes bien et manges bien.","Que les rêves que tu gardes au fond de toi se réalisent cette année.","Que tu saches que tu es ce qu'il y a de plus beau dans ma vie.","Qu'à ton prochain anniversaire, je sois juste à côté de toi."],"friend":["Que tu restes aussi fou·folle cette année, mais beaucoup plus riche.","Que les deadlines soient douces avec toi et ton salaire grimpe.","Que tu rencontres quelqu'un qui t'aime sincèrement.","Que tu restes en forme, manges de tout et dormes comme un bébé.","Qu'on reste meilleurs amis encore très, très longtemps.","Que quand tu es triste, tu te rappelles que tu m'as."],"family":["Que la maison soit toujours chaleureuse et bien remplie.","Qu'il y ait toujours quelqu'un pour prendre de tes nouvelles et te rappeler de manger.","Que chaque chemin devant toi soit doux et sûr.","Que, même en grandissant, tu aies toujours un endroit où revenir.","Que cette année soit plus légère et pleine de joie.","Qu'on reste toujours le pilier l'un de l'autre."]}},"ui":{"months":["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],"monthLabel":"{monthName}","heartTapHint":"Touche le cœur pour voir les photos ♡","viewPhoto":"Voir la photo","tapToClose":"Touche pour fermer","languageLabel":"Langue"}},"es":{"senderName":"yo","receiverName":"ti","opening":{"subtitle":"my bestfriend","continueLabel":"Continuar","greeting":"Feliz cumpleaños","day":20,"month":12},"intro":{"line1":"Aquí hay un pequeño regalo para ti…","line2":"Pero antes de abrirlo, sopla primero la vela 🎂","idleHint":"👆 Mantén pulsada la llama hasta que se apague","holdingHint":"aguanta un poco más… ya casi…","lightingHint":"estoy encendiendo la vela para ti…"},"voice":{"notice":"Espera… hay un pequeño casete grabado solo para ti 📼","kicker":"Un casete solo para ti","title":"Hay cosas que no supe escribir, así que las grabé…","hint":"Pulsa ▶ en el reproductor para escuchar el mensaje — sube el volumen 🔊","playing":"Reproduciendo… escúchalo hasta el final, cada palabra es sincera 💛","ended":"Gracias por escuchar hasta el final 💛","play":"Escuchar","pause":"Pausa","next":"Aún hay más →"},"age":{"kicker":"Nueva edad","title":"¡{age} años, oficialmente!","days":"= {days} días en este planeta","laughs":"= unas {laughs} carcajadas","closing":"A los {age} — sigue siendo tú, solo un poquito más feliz.","fallbackTitle":"Un año más 🎉","fallbackClosing":"Nuevo año — sigue siendo tú, solo un poquito más feliz.","next":"Siguiente sorpresa →"},"heart":{"caption":"Guardé muy bien todas estas fotos vergonzosas 😌","title":"¡Feliz cumpleaños{,receiver}!","subtitle":"Hoy tú eres protagonista 🎈","next":"Hay una carta para ti →"},"letter":{"kicker":"Una pequeña carta","body":"No se me dan bien las palabras bonitas, así que lo diré sencillo: feliz cumpleaños.\n\nEste último año no debe de haber sido fácil, y aun así aquí estás — eres más fuerte de lo que crees.\n\nSolo deseo que comas bien, duermas lo suficiente, te preocupes un poco menos y recuerdes que siempre hay alguien aquí cuando lo necesites.","signature":"— {sender}","next":"Todavía hay más →","flipHint":"Toca la postal para darle la vuelta ↻","to":"Para","certTitle":"Oficialmente un año más","certUnit":"años","certFallback":"Nueva edad","zoomHint":"Toca el sello para ver la foto en grande ✦"},"hug":{"idleHint":"👆 Pon tu mano y mantén","next":"Un deseo más →","love":{"prompt":"Una mitad está conmigo y la otra contigo… mantén aquí para unirlas.","holdingHint":"un poco más cerca… ¿sientes mi corazón?","done":"Listo, otra vez uno. Por lejos que esté, mi corazón está a tu lado."},"friend":{"prompt":"No puedo ir a celebrarlo contigo… ¡así que choquemos puños a través de la pantalla!","holdingHint":"toma impulso… 1… 2…","done":"¡Pum! Chocados. ¡Feliz cumple, bestie!"},"family":{"prompt":"Este año no podemos estar juntos… así que hagamos una promesa de meñique.","holdingHint":"engancha fuerte…","done":"Prometido: estemos donde estemos, seguimos siendo el hogar del otro."}},"thanks":{"teaser":"Una última cosa…","line":"Gracias por haber nacido.","repeat":"Ver de nuevo"},"wish":{"kicker":"Pide un deseo","title":"Cierra los ojos… y pide un deseo para tu nuevo año","subtitle":"Escríbelo en este papelito y lo doblaré en una estrella para ti.","slipHeader":"mi deseo de cumpleaños ✨","placeholder":"p. ej. este año quiero ser más valiente con mis sueños…","fold":"Doblarlo en una estrella ⭐","skip":"Guardar mi deseo para mí"},"jar":{"kicker":"Un frasco de deseos","tag":"para {receiver} ♡","lastHint":"Queda una última estrella… la que guardé para el final ✨","lastHeader":"lo que más quiero decirte…","lastWish":"Gracias por estar siempre aquí. Pase lo que pase este nuevo año, seguiré a tu lado, igual que ahora.","landed":"Tu estrella ya está en el frasco ✨","intro":"Aquí dentro hay {n} estrellas más que doblé para ti… cada una es un deseo que pedí por ti.","tapHint":"Toca cada estrella para abrirla ⭐","progress":"{read}/{n} estrellas abiertas","fromSender":"Te deseo…","yours":"tu deseo","secret":"Un deseo secreto 🤫","close":"Volver a doblarla ⭐","later":"Guardar el resto para después →","finaleTitle":"Feliz cumpleaños{,receiver} ✨","finaleLine":"Desde esta noche hay allá arriba una constelación solo tuya: tu deseo en el centro y mis deseos para ti a su alrededor.","constellation":"✦ Una constelación para {receiver} · {date} ✦","wishes":{"love":["Que siempre te quieran tanto como tú quieres a los demás.","Que cada mañana te dé un motivo para sonreír.","Que este año te preocupes menos, duermas bien y comas rico.","Que los sueños que guardas se cumplan este año.","Que sepas que eres lo mejor de mi vida.","Que el próximo cumpleaños pueda estar justo a tu lado."],"friend":["Que sigas igual de loco este año, pero mucho más rico.","Que los plazos te traten bien y tu sueldo no pare de subir.","Que conozcas a alguien que te quiera de verdad.","Que tengas salud, comas de todo y duermas como un bebé.","Que sigamos siendo mejores amigos muchos, muchos años más.","Que cuando estés triste, recuerdes que me tienes a mí."],"family":["Que en casa siempre haya calor y abundancia.","Que siempre haya alguien que pregunte cómo estás y te recuerde comer.","Que cada camino por delante sea llano y seguro.","Que, por mucho que crezcas, siempre tengas un lugar al que volver.","Que este año sea más ligero y lleno de alegría.","Que siempre seamos el apoyo del otro."]}},"ui":{"months":["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],"monthLabel":"{monthName}","heartTapHint":"Toca el corazón para ver las fotos ♡","viewPhoto":"Ver foto","tapToClose":"Toca para cerrar","languageLabel":"Idioma"}}};
+  const RAW_CONTENTS = { "vi": { "senderName": "Tớ", "receiverName": "Cậu", "opening": { "subtitle": "my bestfriend", "continueLabel": "Tiếp tục", "greeting": "Happy Birthday", "day": 20, "month": 12 }, "intro": { "cakeWriting": { "title": "Happy Birthday", "wish": "Chuc em lon xinh nhu hoa" }, "line1": "Có một món quà nhỏ dành cho cậu…", "line2": "Nhưng trước khi mở, thổi nến trước nhé 🎂", "idleHint": "👆 Nhấn & giữ ngọn nến cho đến khi tắt", "holdingHint": "giữ nữa… giữ tiếp…", "lightingHint": "đang thắp nến cho cậu…" }, "voice": { "notice": "Khoan đã… có một cuộn băng nhỏ gửi riêng cho cậu 📼", "kicker": "Cuộn băng dành riêng cho cậu", "title": "Có những điều tớ không viết thành chữ được, nên tớ đã thu âm lại…", "hint": "Nhấn nút ▶ trên máy để nghe lời nhắn nhé, nhớ bật loa lên 🔊", "playing": "Đang phát… cứ nghe hết nhé, từng chữ đều là thật lòng đó 💛", "ended": "Cảm ơn cậu đã lắng nghe đến cuối 💛", "play": "Nghe", "pause": "Tạm dừng", "next": "Còn nữa nè →" }, "age": { "kicker": "Tuổi mới", "title": "{age} tuổi rồi đó nha!", "days": "= {days} ngày có mặt trên đời", "laughs": "= khoảng {laughs} lần cười", "closing": "Tuổi {age} — mong cậu vẫn là cậu, chỉ là vui hơn một chút thôi.", "fallbackTitle": "Thêm một tuổi mới 🎉", "fallbackClosing": "Tuổi mới — mong cậu vẫn là cậu, chỉ là vui hơn một chút thôi.", "next": "Xem quà tiếp →" }, "heart": { "caption": "Mấy tấm dìm hàng này tớ giữ kỹ lắm đó 😌", "title": "Chúc Mừng Sinh Nhật, Cậu!", "subtitle": "Hôm nay cậu là nhân vật chính nha 🎈", "next": "Có thư nè →" }, "letter": { "kicker": "Lá thư nhỏ", "body": "Tớ không giỏi nói mấy lời hoa mỹ, nên viết đơn giản thôi: chúc mừng sinh nhật cậu nhé.\n\nNăm vừa rồi chắc chẳng dễ dàng gì, vậy mà cậu vẫn đi tới được hôm nay — giỏi hơn cậu nghĩ nhiều đấy.\n\nTớ chỉ mong cậu ăn ngon ngủ đủ, bớt lo một chút, và nhớ là luôn có người ở đây khi cậu cần.", "signature": "— Tớ", "next": "Vẫn còn nữa →", "flipHint": "Chạm vào tấm thiệp để lật mặt sau ↻", "to": "Gửi", "certTitle": "Chứng nhận tuổi mới", "certUnit": "tuổi", "certFallback": "Tuổi mới", "zoomHint": "Chạm vào con tem để xem ảnh to ✦" }, "hug": { "idleHint": "👆 Đặt tay lên và giữ nhé", "next": "Còn một điều ước nữa →", "love": { "prompt": "Một nửa ở chỗ tớ, một nửa ở chỗ cậu… đặt tay lên để ghép lại nhé.", "holdingHint": "gần thêm chút nữa… thấy tim tớ không…", "done": "Ghép lại rồi đó. Xa mấy thì tim tớ vẫn ở cạnh cậu." }, "friend": { "prompt": "Không qua chúc tận nơi được… thì cụng tay qua màn hình nhé!", "holdingHint": "lấy đà… 1… 2…", "done": "Bụp! Cụng rồi nha. Sinh nhật vui vẻ, bạn thân!" }, "family": { "prompt": "Năm nay không ở cạnh nhau được… mình ngoéo tay hứa một điều nhé.", "holdingHint": "ngoéo thật chặt vào…", "done": "Hứa rồi đó: ở đâu đi nữa, mình vẫn là nhà của nhau." } }, "thanks": { "teaser": "Còn một điều cuối…", "line": "Cảm ơn cậu vì đã được sinh ra.", "repeat": "Xem lại từ đầu" }, "wish": { "kicker": "Ước một điều", "title": "Nhắm mắt lại… rồi ước một điều cho tuổi mới nhé", "subtitle": "Viết vào mảnh giấy này, tớ sẽ gấp nó thành một ngôi sao cho cậu.", "slipHeader": "điều ước tuổi mới ✨", "placeholder": "vd. mong năm nay mình dũng cảm hơn với ước mơ của chính mình…", "fold": "Gấp thành ngôi sao ⭐", "skip": "Giữ điều ước trong lòng" }, "jar": { "kicker": "Hũ sao điều ước", "tag": "gửi cậu ♡", "lastHint": "Còn một ngôi sao cuối cùng… ngôi sao tớ để dành đến cuối ✨", "lastHeader": "điều tớ muốn nói nhất…", "lastWish": "Cảm ơn cậu vì đã luôn ở đây. Tuổi mới, dù có chuyện gì, tớ vẫn sẽ ở cạnh cậu như thế.", "landed": "Ngôi sao của cậu đã nằm trong hũ rồi ✨", "intro": "Trong hũ còn {n} ngôi sao tớ gấp sẵn cho cậu… mỗi ngôi sao là một điều tớ ước cho cậu.", "tapHint": "Chạm vào từng ngôi sao để mở ra nhé ⭐", "progress": "Đã mở {read}/{n} ngôi sao", "fromSender": "tớ ước cho cậu…", "yours": "điều ước của cậu", "secret": "Một điều ước bí mật 🤫", "close": "Gấp lại ⭐", "later": "Để dành mấy ngôi sao kia đọc sau →", "finaleTitle": "Sinh nhật vui vẻ, Cậu ✨", "finaleLine": "Từ nay trên trời có một chòm sao của riêng cậu: điều ước của cậu ở giữa, những điều tớ ước cho cậu ở quanh.", "constellation": "✦ Chòm sao của cậu · {date} ✦", "wishes": { "love": ["Mong cậu luôn được yêu thương nhiều như cách cậu yêu thương mọi người.", "Mong mỗi sáng thức dậy, cậu đều có một lý do để mỉm cười.", "Mong tuổi mới cậu bớt lo nghĩ, ngủ thật ngon, ăn thật nhiều.", "Mong những ước mơ cậu đang ấp ủ, năm nay sẽ thành sự thật.", "Mong cậu biết rằng, cậu là điều tuyệt vời nhất của tớ.", "Mong sinh nhật năm sau, tớ được ở ngay bên cạnh cậu."], "friend": ["Mong cậu tuổi mới vẫn lầy như cũ, nhưng giàu hơn nhiều.", "Mong deadline nể cậu, sếp thương cậu, lương tăng đều đều.", "Mong cậu gặp được người thương cậu thật lòng.", "Mong cậu khoẻ mạnh, ăn không béo, ngủ thật ngon.", "Mong mình vẫn là bạn thân thêm thật nhiều năm nữa.", "Mong lúc nào buồn, cậu cũng nhớ là còn có tớ."], "family": ["Mong nhà mình lúc nào cũng đủ đầy, ấm áp.", "Mong ngày nào cũng có người hỏi han, nhắc ăn đúng bữa.", "Mong mọi con đường phía trước đều bằng phẳng, bình an.", "Mong dù lớn thế nào, vẫn luôn có một nơi để trở về.", "Mong năm nay bớt vất vả, thêm thật nhiều niềm vui.", "Mong mình mãi là chỗ dựa của nhau."] } }, "ui": { "months": ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"], "monthLabel": "Tháng {month}", "heartTapHint": "Chạm vào trái tim để xem ảnh ♡", "viewPhoto": "Xem ảnh", "tapToClose": "Chạm để đóng", "languageLabel": "Ngôn ngữ" } }, "en": { "senderName": "me", "receiverName": "you", "opening": { "subtitle": "my bestfriend", "continueLabel": "Continue", "greeting": "Happy Birthday", "day": 20, "month": 12 }, "intro": { "line1": "There's a little gift here for you…", "line2": "But before you open it, blow out the candle first 🎂", "idleHint": "👆 Press & hold the flame until it goes out", "holdingHint": "keep holding… almost there…", "lightingHint": "lighting the candle for you…" }, "voice": { "notice": "Wait… a little tape was recorded just for you 📼", "kicker": "A tape just for you", "title": "Some things I couldn't put into writing, so I recorded them…", "hint": "Press ▶ on the player to hear the message — sound on 🔊", "playing": "Playing… listen till the end, I meant every word 💛", "ended": "Thank you for listening all the way through 💛", "play": "Play", "pause": "Pause", "next": "There's more →" }, "age": { "kicker": "New age", "title": "{age} years old, officially!", "days": "= {days} days on this planet", "laughs": "= about {laughs} laughs", "closing": "At {age} — stay exactly who you are, just a little happier.", "fallbackTitle": "One more year 🎉", "fallbackClosing": "New age — stay exactly who you are, just a little happier.", "next": "Next surprise →" }, "heart": { "caption": "I've kept all these embarrassing photos very safe 😌", "title": "Happy Birthday{,receiver}!", "subtitle": "Today you're the main character 🎈", "next": "Got a letter for you →" }, "letter": { "kicker": "A little letter", "body": "I'm not good with fancy words, so I'll keep it simple: happy birthday.\n\nThis past year can't have been easy, and yet here you are — you're stronger than you think.\n\nAll I wish is that you eat well, sleep enough, worry a little less, and remember that someone is always here when you need them.", "signature": "— {sender}", "next": "There's more →", "flipHint": "Tap the postcard to turn it over ↻", "to": "To", "certTitle": "Officially a year older", "certUnit": "years", "certFallback": "New age", "zoomHint": "Tap the stamp to see the photo ✦" }, "hug": { "idleHint": "👆 Place your hand and hold", "next": "One more wish →", "love": { "prompt": "Half of it is with me, half with you… hold here to make it whole.", "holdingHint": "a little closer… can you feel my heart?", "done": "There, whole again. However far, my heart is right beside you." }, "friend": { "prompt": "Can't be there to celebrate… so fist bump through the screen!", "holdingHint": "wind up… 1… 2…", "done": "Boom! Bumped. Happy birthday, bestie!" }, "family": { "prompt": "We can't be together this year… so let's pinky promise something.", "holdingHint": "hook it tight…", "done": "Promised: wherever we are, we're still each other's home." } }, "thanks": { "teaser": "One last thing…", "line": "Thank you for being born.", "repeat": "Watch again" }, "wish": { "kicker": "Make a wish", "title": "Close your eyes… and make a wish for the year ahead", "subtitle": "Write it on this slip, and I'll fold it into a star for you.", "slipHeader": "my birthday wish ✨", "placeholder": "e.g. this year I hope to be braver about my own dreams…", "fold": "Fold it into a star ⭐", "skip": "Keep my wish to myself" }, "jar": { "kicker": "A jar of wishes", "tag": "for {receiver} ♡", "lastHint": "One last star… the one I saved for the very end ✨", "lastHeader": "what I most want to say…", "lastWish": "Thank you for always being here. Whatever this new year brings, I'll be right beside you, just like this.", "landed": "Your star is in the jar now ✨", "intro": "There are {n} more stars in here that I folded for you… each one is a wish I made for you.", "tapHint": "Tap each star to open it ⭐", "progress": "{read}/{n} stars opened", "fromSender": "I wish for you…", "yours": "your wish", "secret": "A secret wish 🤫", "close": "Fold it back ⭐", "later": "Save the rest for later →", "finaleTitle": "Happy Birthday{,receiver} ✨", "finaleLine": "From tonight there's a constellation of your own up there: your wish in the middle, and my wishes for you all around it.", "constellation": "✦ A constellation for {receiver} · {date} ✦", "wishes": { "love": ["That you're always loved as much as you love everyone else.", "That every morning gives you a reason to smile.", "That this year you worry less, sleep well and eat well.", "That the dreams you've been holding onto come true this year.", "That you know you're the best thing in my life.", "That next birthday, I get to be right there beside you."], "friend": ["That you stay just as silly this year, only a lot richer.", "That deadlines go easy on you and your pay keeps going up.", "That you meet someone who loves you for real.", "That you stay healthy, eat everything and sleep like a baby.", "That we stay best friends for many, many more years.", "That whenever you're sad, you remember you've got me."], "family": ["That home is always full and warm.", "That someone always checks in and reminds you to eat.", "That every road ahead is smooth and safe.", "That no matter how grown up you get, there's always a place to come back to.", "That this year is lighter and full of joy.", "That we always stay each other's rock."] } }, "ui": { "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "monthLabel": "{monthName}", "heartTapHint": "Touch the heart to see the photos ♡", "viewPhoto": "View photo", "tapToClose": "Tap to close", "languageLabel": "Language" } }, "ko": { "senderName": "나", "receiverName": "너", "opening": { "subtitle": "my bestfriend", "continueLabel": "계속", "greeting": "생일 축하해", "day": 20, "month": 12 }, "intro": { "line1": "너에게 줄 작은 선물이 있어…", "line2": "하지만 열기 전에, 먼저 촛불을 불어서 꺼줘 🎂", "idleHint": "👆 촛불을 꺼질 때까지 길게 눌러줘", "holdingHint": "조금만 더… 계속 눌러…", "lightingHint": "너를 위해 초에 불을 붙이는 중이야…" }, "voice": { "notice": "잠깐… 너만을 위해 녹음한 작은 테이프가 있어 📼", "kicker": "너만을 위한 테이프", "title": "글로는 다 못 적어서, 목소리로 담아 봤어…", "hint": "플레이어의 ▶ 버튼을 눌러 메시지를 들어 줘, 소리 켜고 🔊", "playing": "재생 중… 끝까지 들어 줘, 한 마디 한 마디 진심이야 💛", "ended": "끝까지 들어 줘서 고마워 💛", "play": "재생", "pause": "일시정지", "next": "아직 더 있어 →" }, "age": { "kicker": "새로운 나이", "title": "벌써 {age}살이다!", "days": "= 세상에 온 지 {days}일", "laughs": "= 대략 {laughs}번 웃음", "closing": "{age}살에도 지금 그대로의 너이길, 조금만 더 행복하게.", "fallbackTitle": "한 살 더 먹었네 🎉", "fallbackClosing": "새로운 나이에도 지금 그대로의 너이길, 조금만 더 행복하게.", "next": "다음 선물 →" }, "heart": { "caption": "이 흑역사 사진들 내가 잘 간직하고 있었지 😌", "title": "생일 축하해{,receiver}!", "subtitle": "오늘은 네가 주인공이야 🎈", "next": "편지 왔어 →" }, "letter": { "kicker": "짧은 편지", "body": "나는 화려한 말은 잘 못 해서, 그냥 간단히 말할게: 생일 축하해.\n\n지난 한 해가 쉽지 않았을 텐데, 그래도 여기까지 왔네 — 너는 네 생각보다 훨씬 강해.\n\n그저 잘 먹고 푹 자고, 걱정은 조금 덜고, 네가 필요할 때 늘 곁에 있는 사람이 있다는 걸 기억해줘.", "signature": "— {sender}", "next": "아직 더 있어 →", "flipHint": "엽서를 눌러 뒤집어 봐 ↻", "to": "받는 사람", "certTitle": "새로운 나이 인증", "certUnit": "살", "certFallback": "새 나이", "zoomHint": "우표를 눌러 사진을 크게 봐 ✦" }, "hug": { "idleHint": "👆 손을 올리고 꾹 눌러 줘", "next": "소원 하나 더 →", "love": { "prompt": "반쪽은 나한테, 반쪽은 너한테… 여기를 눌러서 하나로 맞춰 줘.", "holdingHint": "조금만 더 가까이… 내 심장 소리 들려?", "done": "봐, 다시 하나가 됐어. 아무리 멀어도 내 마음은 네 곁에 있어." }, "friend": { "prompt": "직접 가서 축하해 주지 못하니까… 화면 너머로 주먹 인사하자!", "holdingHint": "준비… 1… 2…", "done": "쾅! 주먹 인사 완료. 생일 축하해, 베프!" }, "family": { "prompt": "올해는 함께 있지 못하니까… 새끼손가락 걸고 약속 하나 하자.", "holdingHint": "꼭 걸어…", "done": "약속했어. 어디에 있든 우리는 서로의 집이야." } }, "thanks": { "teaser": "마지막으로 하나만…", "line": "태어나 줘서 고마워.", "repeat": "처음부터 다시 보기" }, "wish": { "kicker": "소원 빌기", "title": "눈을 감고… 새로운 한 해를 위한 소원을 하나 빌어 봐", "subtitle": "이 쪽지에 적어 줘. 내가 별 모양으로 접어 줄게.", "slipHeader": "생일 소원 ✨", "placeholder": "예) 올해는 내 꿈에 조금 더 용기를 내고 싶어…", "fold": "별로 접기 ⭐", "skip": "소원은 마음속에 간직할래" }, "jar": { "kicker": "소원 별병", "tag": "{receiver}에게 ♡", "lastHint": "마지막 별 하나… 끝까지 아껴 둔 별이야 ✨", "lastHeader": "가장 하고 싶은 말…", "lastWish": "항상 곁에 있어 줘서 고마워. 새로운 한 해에 무슨 일이 있어도, 지금처럼 네 곁에 있을게.", "landed": "네 별이 병 속에 들어갔어 ✨", "intro": "병 안에는 내가 너를 위해 접어 둔 별이 {n}개 더 있어… 하나하나가 너를 위한 소원이야.", "tapHint": "별을 하나씩 눌러서 열어 봐 ⭐", "progress": "{read}/{n}개 열었어", "fromSender": "너를 위해 비는 소원…", "yours": "너의 소원", "secret": "비밀 소원 🤫", "close": "다시 접기 ⭐", "later": "나머지는 나중에 읽을래 →", "finaleTitle": "생일 축하해{,receiver} ✨", "finaleLine": "오늘 밤부터 하늘에 너만의 별자리가 생겼어. 가운데엔 너의 소원, 그 둘레엔 너를 위한 내 소원들.", "constellation": "✦ {receiver}의 별자리 · {date} ✦", "wishes": { "love": ["네가 사람들을 아끼는 만큼, 너도 늘 사랑받기를.", "매일 아침 웃을 이유가 하나씩 생기기를.", "올해는 걱정은 줄고, 푹 자고, 맛있게 먹기를.", "오래 품어 온 꿈이 올해 이루어지기를.", "네가 내 인생에서 가장 좋은 사람이라는 걸 알아주기를.", "내년 생일에는 네 바로 옆에 있을 수 있기를."], "friend": ["올해도 지금처럼 웃기되, 훨씬 부자가 되기를.", "마감은 너그럽고 월급은 쑥쑥 오르기를.", "너를 진심으로 아껴 주는 사람을 만나기를.", "건강하고, 먹어도 살 안 찌고, 꿀잠 자기를.", "앞으로도 오래오래 베프로 남기를.", "슬플 땐 내가 있다는 걸 꼭 기억하기를."], "family": ["집이 언제나 따뜻하고 넉넉하기를.", "늘 누군가 안부를 묻고 밥 챙겨 먹으라고 말해 주기를.", "앞으로의 모든 길이 평탄하고 안전하기를.", "아무리 커도 언제나 돌아올 곳이 있기를.", "올해는 덜 힘들고 기쁜 일이 가득하기를.", "우리가 언제나 서로의 버팀목이 되기를."] } }, "ui": { "months": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"], "monthLabel": "{month}월", "heartTapHint": "하트를 터치해서 사진을 봐 ♡", "viewPhoto": "사진 보기", "tapToClose": "터치하면 닫혀", "languageLabel": "언어" } }, "ja": { "senderName": "わたし", "receiverName": "あなた", "opening": { "subtitle": "my bestfriend", "continueLabel": "次へ", "greeting": "お誕生日おめでとう", "day": 20, "month": 12 }, "intro": { "line1": "あなたに小さな贈り物があるの…", "line2": "でも開ける前に、まずはろうそくを吹き消してね 🎂", "idleHint": "👆 消えるまで炎を長押ししてね", "holdingHint": "もう少し…そのまま押していて…", "lightingHint": "あなたのためにろうそくを灯しているよ…" }, "voice": { "notice": "待って…きみのためだけに録ったテープがあるよ 📼", "kicker": "きみだけのテープ", "title": "文字にできない想いがあって、声で残したの…", "hint": "プレーヤーの ▶ を押してメッセージを聴いてね、音はオンで 🔊", "playing": "再生中…最後まで聴いてね、全部本当の気持ちだよ 💛", "ended": "最後まで聴いてくれてありがとう 💛", "play": "再生", "pause": "一時停止", "next": "まだあるよ →" }, "age": { "kicker": "新しい年齢", "title": "ついに{age}歳！", "days": "= この世界にきて{days}日", "laughs": "= だいたい{laughs}回の笑顔", "closing": "{age}歳も、そのままのあなたで。ただ、もう少しだけ楽しく。", "fallbackTitle": "またひとつ大人に 🎉", "fallbackClosing": "新しい一年も、そのままのあなたで。ただ、もう少しだけ楽しく。", "next": "次のプレゼント →" }, "heart": { "caption": "この黒歴史写真、ちゃんと大事にとってあるよ 😌", "title": "お誕生日おめでとう{,receiver}！", "subtitle": "今日の主役はあなただよ 🎈", "next": "手紙があるよ →" }, "letter": { "kicker": "小さな手紙", "body": "きれいな言葉は得意じゃないから、シンプルに言うね：お誕生日おめでとう。\n\nこの一年は簡単じゃなかったはず、それでもここまで来たね — あなたは自分で思うよりずっと強いよ。\n\nちゃんと食べて、しっかり眠って、心配は少しだけ減らして、必要なときにはいつもそばにいる人がいるって覚えていてね。", "signature": "— {sender}", "next": "まだ続きがあるよ →", "flipHint": "はがきをタップして裏返してね ↻", "to": "宛先", "certTitle": "新しい年齢 認定", "certUnit": "歳", "certFallback": "新しい一年", "zoomHint": "切手をタップして写真を大きく見てね ✦" }, "hug": { "idleHint": "👆 手を置いて、そのまま押さえてね", "next": "もうひとつ願いごと →", "love": { "prompt": "半分はわたしのところ、半分はあなたのところ…ここを押さえてひとつにしよう。", "holdingHint": "もう少し近くに…わたしの鼓動、聞こえる？", "done": "ほら、ひとつに戻ったよ。どんなに遠くても、わたしの心はそばにいるよ。" }, "friend": { "prompt": "お祝いしに行けないから…画面越しにグータッチしよう！", "holdingHint": "せーの…1…2…", "done": "ゴツン！タッチ完了。誕生日おめでとう、親友！" }, "family": { "prompt": "今年は一緒にいられないから…指切りして、ひとつ約束しよう。", "holdingHint": "ぎゅっと結んで…", "done": "約束したよ。どこにいても、わたしたちはお互いの帰る場所だよ。" } }, "thanks": { "teaser": "最後にひとつだけ…", "line": "生まれてきてくれて、ありがとう。", "repeat": "最初からもう一度" }, "wish": { "kicker": "願いごと", "title": "目を閉じて…新しい一年への願いごとをひとつ", "subtitle": "この紙に書いてね。あなたのために星の形に折ってあげる。", "slipHeader": "誕生日の願いごと ✨", "placeholder": "例：今年は自分の夢にもっと勇気を出せますように…", "fold": "星に折る ⭐", "skip": "願いごとは心にしまっておく" }, "jar": { "kicker": "願いごとの星びん", "tag": "{receiver}へ ♡", "lastHint": "最後にもうひとつ…いちばん最後までとっておいた星 ✨", "lastHeader": "いちばん伝えたいこと…", "lastWish": "いつもそばにいてくれてありがとう。新しい一年に何があっても、わたしはこうしてずっと隣にいるよ。", "landed": "あなたの星がびんに入ったよ ✨", "intro": "びんの中には、わたしがあなたのために折った星があと{n}つ…ひとつひとつが、あなたへの願いごと。", "tapHint": "星をひとつずつタップして開いてね ⭐", "progress": "{read}/{n}こ開いた", "fromSender": "あなたに願うこと…", "yours": "あなたの願いごと", "secret": "ひみつの願いごと 🤫", "close": "また折りたたむ ⭐", "later": "残りはあとで読む →", "finaleTitle": "お誕生日おめでとう{,receiver} ✨", "finaleLine": "今夜から、空にあなただけの星座がひとつ。真ん中にあなたの願い、そのまわりにわたしからの願い。", "constellation": "✦ {receiver}の星座 · {date} ✦", "wishes": { "love": ["あなたがみんなを想うのと同じくらい、いつも愛されますように。", "毎朝、笑顔になれる理由がひとつありますように。", "今年は心配ごとが減って、よく眠れて、おいしく食べられますように。", "大切にあたためてきた夢が、今年叶いますように。", "あなたがわたしの一番の宝物だって、伝わりますように。", "来年の誕生日は、すぐ隣にいられますように。"], "friend": ["今年もそのままのノリで、でもずっとお金持ちになりますように。", "締め切りがやさしくて、お給料がどんどん上がりますように。", "本気で大切にしてくれる人に出会えますように。", "元気いっぱいで、何を食べても太らず、ぐっすり眠れますように。", "これから何年も、ずっと親友でいられますように。", "悲しいときは、わたしがいることを思い出せますように。"], "family": ["家がいつもあたたかく、満ち足りていますように。", "いつも誰かが気にかけて、ごはんを忘れないよう声をかけてくれますように。", "これからの道が、なだらかで安全でありますように。", "どんなに大きくなっても、帰れる場所がいつもありますように。", "今年は苦労が減って、楽しいことがたくさんありますように。", "ずっとお互いの支えでいられますように。"] } }, "ui": { "months": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], "monthLabel": "{month}月", "heartTapHint": "ハートに触れて写真を見てね ♡", "viewPhoto": "写真を見る", "tapToClose": "タップで閉じる", "languageLabel": "言語" } }, "zh": { "senderName": "我", "receiverName": "你", "opening": { "subtitle": "my bestfriend", "continueLabel": "继续", "greeting": "生日快乐", "day": 20, "month": 12 }, "intro": { "line1": "这里有一份小礼物要送给你…", "line2": "不过在打开之前，先把蜡烛吹灭吧 🎂", "idleHint": "👆 按住火苗，直到它熄灭", "holdingHint": "再坚持一下…继续按着…", "lightingHint": "正在为你点上蜡烛…" }, "voice": { "notice": "等等…有一盘专门为你录的磁带 📼", "kicker": "只属于你的磁带", "title": "有些话写不出来，所以我把它录了下来…", "hint": "按下播放器上的 ▶ 听听这段话吧，记得打开声音 🔊", "playing": "正在播放…请听到最后，每一句都是真心的 💛", "ended": "谢谢你一直听到最后 💛", "play": "播放", "pause": "暂停", "next": "还有哦 →" }, "age": { "kicker": "新的一岁", "title": "{age}岁啦！", "days": "= 来到这个世界{days}天", "laughs": "= 大约笑了{laughs}次", "closing": "{age}岁，愿你还是你，只是更开心一点。", "fallbackTitle": "又长大一岁 🎉", "fallbackClosing": "新的一岁，愿你还是你，只是更开心一点。", "next": "下一个惊喜 →" }, "heart": { "caption": "这些黑历史照片我可都好好保存着 😌", "title": "生日快乐{,receiver}！", "subtitle": "今天你是主角 🎈", "next": "有一封信 →" }, "letter": { "kicker": "一封小信", "body": "我不太会说漂亮话，所以就简单点说：生日快乐。\n\n过去这一年一定不容易，可你还是走到了今天 —— 你比自己以为的要坚强得多。\n\n我只希望你吃得好、睡得够，少操点心，也记得在你需要的时候，总有一个人在这里。", "signature": "— {sender}", "next": "还有呢 →", "flipHint": "轻触明信片，翻到背面看看 ↻", "to": "致", "certTitle": "新岁认证", "certUnit": "岁", "certFallback": "新的一岁", "zoomHint": "轻触邮票查看大图 ✦" }, "hug": { "idleHint": "👆 把手放上来，按住不放", "next": "还有一个愿望 →", "love": { "prompt": "一半在我这里，一半在你那里……按住这里，把它们合在一起吧。", "holdingHint": "再近一点……听到我的心跳了吗……", "done": "好了，又合成一颗了。不管多远，我的心都在你身边。" }, "friend": { "prompt": "没法去现场为你庆祝……那就隔着屏幕碰个拳吧！", "holdingHint": "预备……1……2……", "done": "砰！碰拳成功。生日快乐，好朋友！" }, "family": { "prompt": "今年我们没法在一起……那就拉个钩，约定一件事吧。", "holdingHint": "钩紧一点……", "done": "说好了：无论在哪里，我们永远是彼此的家。" } }, "thanks": { "teaser": "最后还有一件事……", "line": "谢谢你来到这个世界。", "repeat": "从头再看一次" }, "wish": { "kicker": "许个愿", "title": "闭上眼睛……为新的一岁许一个愿吧", "subtitle": "把它写在这张纸条上，我帮你折成一颗星星。", "slipHeader": "生日愿望 ✨", "placeholder": "例如：今年希望能更勇敢地追自己的梦……", "fold": "折成星星 ⭐", "skip": "把愿望藏在心里" }, "jar": { "kicker": "许愿星星瓶", "tag": "给{receiver} ♡", "lastHint": "还有最后一颗星星……我一直留到最后的那颗 ✨", "lastHeader": "我最想对你说的话……", "lastWish": "谢谢你一直都在。新的一岁无论发生什么，我都会像现在这样陪在你身边。", "landed": "你的星星已经放进瓶子里了 ✨", "intro": "瓶子里还有{n}颗我为你折的星星……每一颗都是我为你许下的愿望。", "tapHint": "点开每一颗星星看看吧 ⭐", "progress": "已打开 {read}/{n} 颗", "fromSender": "我为你许愿……", "yours": "你的愿望", "secret": "一个秘密愿望 🤫", "close": "再折起来 ⭐", "later": "剩下的留着以后看 →", "finaleTitle": "生日快乐{,receiver} ✨", "finaleLine": "从今晚起，天上有了一个只属于你的星座：你的愿望在中间，我为你许的愿望围在四周。", "constellation": "✦ {receiver}的星座 · {date} ✦", "wishes": { "love": ["愿你被爱的程度，和你爱别人一样多。", "愿每天早上醒来，都有一个让你微笑的理由。", "愿新的一岁少一点烦恼，睡得好，吃得香。", "愿你一直珍藏的梦想，今年都能实现。", "愿你知道，你是我生命里最好的存在。", "愿明年的生日，我能就在你身边。"], "friend": ["愿你今年还是那么逗，但是有钱很多。", "愿截止日期对你温柔，工资节节高升。", "愿你遇到真心疼你的人。", "愿你身体健康，吃不胖，睡得香。", "愿我们再做很多很多年的好朋友。", "愿你难过的时候，记得还有我。"], "family": ["愿家里永远温暖又充实。", "愿总有人问候你，提醒你按时吃饭。", "愿前方的每条路都平坦又平安。", "愿你不管长多大，总有一个可以回去的地方。", "愿今年少些辛苦，多些快乐。", "愿我们永远是彼此的依靠。"] } }, "ui": { "months": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], "monthLabel": "{month}月", "heartTapHint": "轻触爱心查看照片 ♡", "viewPhoto": "查看照片", "tapToClose": "轻触关闭", "languageLabel": "语言" } }, "th": { "senderName": "ฉัน", "receiverName": "เธอ", "opening": { "subtitle": "my bestfriend", "continueLabel": "ต่อไป", "greeting": "สุขสันต์วันเกิด", "day": 20, "month": 12 }, "intro": { "line1": "มีของขวัญชิ้นเล็ก ๆ สำหรับเธออยู่ตรงนี้…", "line2": "แต่ก่อนจะเปิด เป่าเทียนให้ดับก่อนนะ 🎂", "idleHint": "👆 กดค้างที่เปลวเทียนจนกว่ามันจะดับ", "holdingHint": "กดต่ออีกนิด… ใกล้แล้ว…", "lightingHint": "กำลังจุดเทียนให้เธออยู่…" }, "voice": { "notice": "เดี๋ยวนะ… มีเทปเล็ก ๆ ที่อัดไว้ให้เธอคนเดียว 📼", "kicker": "เทปม้วนนี้สำหรับเธอ", "title": "มีบางเรื่องที่เขียนออกมาไม่ได้ เลยอัดเสียงไว้ให้…", "hint": "กดปุ่ม ▶ บนเครื่องเพื่อฟังข้อความนะ อย่าลืมเปิดเสียง 🔊", "playing": "กำลังเล่น… ฟังให้จบนะ ทุกคำมาจากใจจริง 💛", "ended": "ขอบคุณที่ฟังจนจบนะ 💛", "play": "เล่น", "pause": "หยุด", "next": "ยังมีอีกนะ →" }, "age": { "kicker": "อายุใหม่", "title": "{age} ปีแล้วนะ!", "days": "= อยู่บนโลกมา {days} วัน", "laughs": "= หัวเราะไปประมาณ {laughs} ครั้ง", "closing": "อายุ {age} ขอให้ยังเป็นตัวเองแบบนี้ แค่มีความสุขขึ้นอีกนิด", "fallbackTitle": "โตขึ้นอีกปีแล้ว 🎉", "fallbackClosing": "อายุใหม่ ขอให้ยังเป็นตัวเองแบบนี้ แค่มีความสุขขึ้นอีกนิด", "next": "เซอร์ไพรส์ถัดไป →" }, "heart": { "caption": "รูปแฉเหล่านี้เก็บไว้อย่างดีเลยนะ 😌", "title": "สุขสันต์วันเกิด{,receiver}!", "subtitle": "วันนี้เธอคือตัวเอก 🎈", "next": "มีจดหมายมาให้ →" }, "letter": { "kicker": "จดหมายสั้น ๆ", "body": "ฉันไม่เก่งเรื่องคำพูดสวยหรู เลยขอพูดง่าย ๆ ว่า สุขสันต์วันเกิดนะ\n\nปีที่ผ่านมาคงไม่ง่ายเลย แต่เธอก็มาถึงวันนี้ได้ — เธอเข้มแข็งกว่าที่ตัวเองคิดมากเลยนะ\n\nฉันแค่อยากให้เธอกินอิ่ม นอนหลับพอ กังวลให้น้อยลงสักนิด และจำไว้ว่ามีคนอยู่ตรงนี้เสมอเมื่อเธอต้องการ", "signature": "— {sender}", "next": "ยังมีอีกนะ →", "flipHint": "แตะโปสการ์ดเพื่อพลิกดูด้านหลัง ↻", "to": "ถึง", "certTitle": "รับรองอายุใหม่", "certUnit": "ปี", "certFallback": "อายุใหม่", "zoomHint": "แตะแสตมป์เพื่อดูรูปใหญ่ ✦" }, "hug": { "idleHint": "👆 วางมือแล้วกดค้างไว้นะ", "next": "ยังมีคำอธิษฐานอีกข้อ →", "love": { "prompt": "ครึ่งหนึ่งอยู่กับฉัน อีกครึ่งอยู่กับเธอ… กดค้างไว้ให้กลับมาเป็นหนึ่งเดียวนะ", "holdingHint": "ใกล้อีกนิด… ได้ยินหัวใจฉันไหม…", "done": "เห็นไหม กลับมาเป็นหนึ่งแล้ว ไกลแค่ไหน หัวใจฉันก็อยู่ข้างเธอ" }, "friend": { "prompt": "ไปฉลองด้วยไม่ได้… งั้นชนกำปั้นผ่านหน้าจอกันนะ!", "holdingHint": "เตรียม… 1… 2…", "done": "ปัง! ชนแล้ว สุขสันต์วันเกิดนะ เพื่อนรัก!" }, "family": { "prompt": "ปีนี้เราไม่ได้อยู่ด้วยกัน… มาเกี่ยวก้อยสัญญากันสักข้อนะ", "holdingHint": "เกี่ยวให้แน่นๆ…", "done": "สัญญาแล้วนะ อยู่ที่ไหน เราก็ยังเป็นบ้านของกันและกัน" } }, "thanks": { "teaser": "อีกเรื่องสุดท้าย…", "line": "ขอบคุณที่เกิดมานะ", "repeat": "ดูอีกครั้งตั้งแต่ต้น" }, "wish": { "kicker": "อธิษฐาน", "title": "หลับตาลง… แล้วอธิษฐานสักข้อสำหรับปีใหม่ของชีวิตนะ", "subtitle": "เขียนลงในกระดาษแผ่นนี้ แล้วฉันจะพับเป็นดาวให้เธอ", "slipHeader": "คำอธิษฐานวันเกิด ✨", "placeholder": "เช่น ปีนี้อยากกล้าทำตามความฝันของตัวเองมากขึ้น…", "fold": "พับเป็นดาว ⭐", "skip": "เก็บคำอธิษฐานไว้ในใจ" }, "jar": { "kicker": "โหลดาวแห่งคำอธิษฐาน", "tag": "ถึง{receiver} ♡", "lastHint": "ยังเหลือดาวดวงสุดท้าย… ดวงที่ฉันเก็บไว้จนถึงตอนจบ ✨", "lastHeader": "สิ่งที่ฉันอยากบอกที่สุด…", "lastWish": "ขอบคุณที่อยู่ตรงนี้เสมอนะ ปีใหม่ของชีวิตนี้จะเป็นยังไง ฉันก็จะอยู่ข้างๆ เธอแบบนี้", "landed": "ดาวของเธออยู่ในโหลแล้วนะ ✨", "intro": "ในโหลยังมีดาวอีก {n} ดวงที่ฉันพับไว้ให้เธอ… แต่ละดวงคือคำอธิษฐานที่ฉันขอให้เธอ", "tapHint": "แตะดาวทีละดวงเพื่อเปิดอ่านนะ ⭐", "progress": "เปิดแล้ว {read}/{n} ดวง", "fromSender": "ฉันขอให้เธอ…", "yours": "คำอธิษฐานของเธอ", "secret": "คำอธิษฐานลับ 🤫", "close": "พับกลับ ⭐", "later": "เก็บที่เหลือไว้อ่านทีหลัง →", "finaleTitle": "สุขสันต์วันเกิด{,receiver} ✨", "finaleLine": "ตั้งแต่คืนนี้ บนฟ้ามีกลุ่มดาวของเธอเอง คำอธิษฐานของเธออยู่ตรงกลาง และคำอธิษฐานที่ฉันขอให้เธออยู่รอบๆ", "constellation": "✦ กลุ่มดาวของ{receiver} · {date} ✦", "wishes": { "love": ["ขอให้เธอได้รับความรักมากเท่าที่เธอรักทุกคน", "ขอให้ทุกเช้ามีเหตุผลให้เธอยิ้ม", "ขอให้ปีนี้เธอกังวลน้อยลง นอนหลับสบาย กินอร่อย", "ขอให้ความฝันที่เธอเก็บไว้เป็นจริงในปีนี้", "ขอให้เธอรู้ว่าเธอคือสิ่งที่ดีที่สุดในชีวิตฉัน", "ขอให้วันเกิดปีหน้า ฉันได้อยู่ข้างๆ เธอ"], "friend": ["ขอให้ปีนี้ยังบ้าบอเหมือนเดิม แต่รวยขึ้นเยอะๆ", "ขอให้เดดไลน์ใจดี เงินเดือนขึ้นรัวๆ", "ขอให้เจอคนที่รักเธอจริงๆ", "ขอให้แข็งแรง กินไม่อ้วน นอนหลับเป็นตาย", "ขอให้เรายังเป็นเพื่อนรักกันไปอีกนานแสนนาน", "ขอให้ตอนเศร้า เธอจำได้ว่ายังมีฉันอยู่"], "family": ["ขอให้บ้านอบอุ่นและอิ่มเอมเสมอ", "ขอให้มีคนคอยถามไถ่และเตือนให้กินข้าวตรงเวลา", "ขอให้ทุกเส้นทางข้างหน้าราบรื่นและปลอดภัย", "ขอให้ไม่ว่าจะโตแค่ไหน ก็ยังมีที่ให้กลับมาเสมอ", "ขอให้ปีนี้เหนื่อยน้อยลง มีความสุขมากขึ้น", "ขอให้เราเป็นที่พึ่งของกันและกันตลอดไป"] } }, "ui": { "months": ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"], "monthLabel": "{monthName}", "heartTapHint": "แตะที่หัวใจเพื่อดูรูปภาพ ♡", "viewPhoto": "ดูรูปภาพ", "tapToClose": "แตะเพื่อปิด", "languageLabel": "ภาษา" } }, "de": { "senderName": "ich", "receiverName": "dich", "opening": { "subtitle": "my bestfriend", "continueLabel": "Weiter", "greeting": "Alles Gute zum Geburtstag", "day": 20, "month": 12 }, "intro": { "line1": "Hier ist ein kleines Geschenk für dich…", "line2": "Aber bevor du es öffnest, blas zuerst die Kerze aus 🎂", "idleHint": "👆 Halte die Flamme gedrückt, bis sie erlischt", "holdingHint": "halt noch durch… gleich geschafft…", "lightingHint": "ich zünde die Kerze für dich an…" }, "voice": { "notice": "Moment… da ist eine kleine Kassette, nur für dich aufgenommen 📼", "kicker": "Eine Kassette nur für dich", "title": "Manches konnte ich nicht aufschreiben – also habe ich es aufgenommen…", "hint": "Drück ▶ am Player, um die Nachricht zu hören – Ton an 🔊", "playing": "Läuft… hör bis zum Ende, jedes Wort kommt von Herzen 💛", "ended": "Danke, dass du bis zum Schluss zugehört hast 💛", "play": "Abspielen", "pause": "Pause", "next": "Da kommt noch was →" }, "age": { "kicker": "Neues Lebensjahr", "title": "{age} Jahre, ganz offiziell!", "days": "= {days} Tage auf dieser Welt", "laughs": "= ungefähr {laughs} Lacher", "closing": "Mit {age} — bleib genau so, wie du bist, nur ein bisschen glücklicher.", "fallbackTitle": "Ein Jahr mehr 🎉", "fallbackClosing": "Neues Jahr — bleib genau so, wie du bist, nur ein bisschen glücklicher.", "next": "Nächste Überraschung →" }, "heart": { "caption": "Diese peinlichen Fotos habe ich gut aufbewahrt 😌", "title": "Alles Gute zum Geburtstag{,receiver}!", "subtitle": "Heute bist du die Hauptfigur 🎈", "next": "Da ist ein Brief für dich →" }, "letter": { "kicker": "Ein kleiner Brief", "body": "Ich bin nicht gut in schönen Worten, also sag ich es einfach: alles Gute zum Geburtstag.\n\nDieses Jahr war bestimmt nicht leicht, und trotzdem bist du bis hierher gekommen — du bist stärker, als du denkst.\n\nIch wünsche mir nur, dass du gut isst, genug schläfst, dir etwas weniger Sorgen machst und daran denkst, dass immer jemand da ist, wenn du ihn brauchst.", "signature": "— {sender}", "next": "Es gibt noch mehr →", "flipHint": "Tipp auf die Postkarte, um sie umzudrehen ↻", "to": "An", "certTitle": "Offiziell ein Jahr älter", "certUnit": "Jahre", "certFallback": "Neues Jahr", "zoomHint": "Tipp auf die Briefmarke, um das Foto groß zu sehen ✦" }, "hug": { "idleHint": "👆 Hand auflegen und halten", "next": "Noch ein Wunsch →", "love": { "prompt": "Eine Hälfte ist bei mir, eine bei dir … halt hier, damit es wieder eins wird.", "holdingHint": "noch ein bisschen näher … spürst du mein Herz?", "done": "Siehst du, wieder ganz. Egal wie weit, mein Herz ist bei dir." }, "friend": { "prompt": "Ich kann nicht vorbeikommen … also Faust-Check durch den Bildschirm!", "holdingHint": "Anlauf … 1 … 2 …", "done": "Bumm! Check. Alles Gute zum Geburtstag, du Lieblingsmensch!" }, "family": { "prompt": "Dieses Jahr sind wir nicht zusammen … also lass uns etwas mit dem kleinen Finger versprechen.", "holdingHint": "ganz fest einhaken …", "done": "Versprochen: Wo wir auch sind, wir bleiben füreinander Zuhause." } }, "thanks": { "teaser": "Eine letzte Sache …", "line": "Danke, dass es dich gibt.", "repeat": "Nochmal von vorn" }, "wish": { "kicker": "Wünsch dir was", "title": "Schließ die Augen … und wünsch dir etwas für das neue Lebensjahr", "subtitle": "Schreib es auf diesen Zettel, ich falte ihn dir zu einem Stern.", "slipHeader": "mein Geburtstagswunsch ✨", "placeholder": "z. B. dieses Jahr möchte ich mutiger für meine Träume sein …", "fold": "Zu einem Stern falten ⭐", "skip": "Meinen Wunsch für mich behalten" }, "jar": { "kicker": "Ein Glas voller Wünsche", "tag": "für {receiver} ♡", "lastHint": "Ein letzter Stern … den habe ich mir bis zum Schluss aufgehoben ✨", "lastHeader": "was ich dir am meisten sagen will …", "lastWish": "Danke, dass du immer da bist. Was auch immer dein neues Jahr bringt, ich bleibe genau so an deiner Seite.", "landed": "Dein Stern liegt jetzt im Glas ✨", "intro": "Darin sind noch {n} Sterne, die ich für dich gefaltet habe … jeder ist ein Wunsch für dich.", "tapHint": "Tipp jeden Stern an, um ihn zu öffnen ⭐", "progress": "{read}/{n} Sterne geöffnet", "fromSender": "Ich wünsche dir …", "yours": "dein Wunsch", "secret": "Ein geheimer Wunsch 🤫", "close": "Wieder zufalten ⭐", "later": "Den Rest für später aufheben →", "finaleTitle": "Alles Gute zum Geburtstag{,receiver} ✨", "finaleLine": "Ab heute gibt es dort oben ein Sternbild nur für dich: dein Wunsch in der Mitte, meine Wünsche für dich rundherum.", "constellation": "✦ Ein Sternbild für {receiver} · {date} ✦", "wishes": { "love": ["Dass du immer so sehr geliebt wirst, wie du andere liebst.", "Dass dir jeder Morgen einen Grund zum Lächeln schenkt.", "Dass du dieses Jahr weniger grübelst, gut schläfst und gut isst.", "Dass die Träume, an denen du festhältst, dieses Jahr wahr werden.", "Dass du weißt: Du bist das Schönste in meinem Leben.", "Dass ich am nächsten Geburtstag direkt neben dir bin."], "friend": ["Dass du so verrückt bleibst wie immer, nur viel reicher.", "Dass Deadlines nett zu dir sind und dein Gehalt steigt.", "Dass du jemanden triffst, der dich ehrlich liebt.", "Dass du gesund bleibst, alles isst und schläfst wie ein Baby.", "Dass wir noch viele, viele Jahre beste Freunde bleiben.", "Dass du, wenn du traurig bist, weißt: Du hast mich."], "family": ["Dass es zu Hause immer warm und reichlich ist.", "Dass immer jemand nachfragt und dich ans Essen erinnert.", "Dass jeder Weg vor dir eben und sicher ist.", "Dass es, egal wie groß du wirst, immer einen Ort zum Heimkommen gibt.", "Dass dieses Jahr leichter und voller Freude wird.", "Dass wir immer füreinander da sind."] } }, "ui": { "months": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"], "monthLabel": "{monthName}", "heartTapHint": "Berühre das Herz, um die Fotos zu sehen ♡", "viewPhoto": "Foto ansehen", "tapToClose": "Zum Schließen tippen", "languageLabel": "Sprache" } }, "fr": { "senderName": "moi", "receiverName": "toi", "opening": { "subtitle": "my bestfriend", "continueLabel": "Continuer", "greeting": "Joyeux anniversaire", "day": 20, "month": 12 }, "intro": { "line1": "Il y a un petit cadeau pour toi ici…", "line2": "Mais avant de l'ouvrir, souffle d'abord la bougie 🎂", "idleHint": "👆 Appuie et garde le doigt sur la flamme jusqu'à ce qu'elle s'éteigne", "holdingHint": "continue… encore un peu…", "lightingHint": "j'allume la bougie pour toi…" }, "voice": { "notice": "Attends… une petite cassette a été enregistrée rien que pour toi 📼", "kicker": "Une cassette rien que pour toi", "title": "Il y a des choses que je n'arrivais pas à écrire, alors je les ai enregistrées…", "hint": "Appuie sur ▶ pour écouter le message — monte le son 🔊", "playing": "Lecture… écoute jusqu'au bout, chaque mot est sincère 💛", "ended": "Merci d'avoir écouté jusqu'au bout 💛", "play": "Écouter", "pause": "Pause", "next": "Ce n'est pas fini →" }, "age": { "kicker": "Nouvel âge", "title": "{age} ans, officiellement !", "days": "= {days} jours sur cette planète", "laughs": "= environ {laughs} fous rires", "closing": "À {age} ans — reste exactement toi, juste un peu plus heureux·se.", "fallbackTitle": "Une année de plus 🎉", "fallbackClosing": "Nouvelle année — reste exactement toi, juste un peu plus heureux·se.", "next": "Surprise suivante →" }, "heart": { "caption": "J'ai gardé précieusement toutes ces photos gênantes 😌", "title": "Joyeux anniversaire{,receiver} !", "subtitle": "Aujourd'hui, c'est toi la star 🎈", "next": "Il y a une lettre pour toi →" }, "letter": { "kicker": "Une petite lettre", "body": "Je ne suis pas doué pour les belles phrases, alors je fais simple : joyeux anniversaire.\n\nCette année n'a sûrement pas été facile, et pourtant te voilà arrivé jusqu'ici — tu es plus fort que tu ne le crois.\n\nJe souhaite juste que tu manges bien, que tu dormes assez, que tu t'inquiètes un peu moins, et que tu te souviennes qu'il y a toujours quelqu'un ici quand tu en as besoin.", "signature": "— {sender}", "next": "Ce n'est pas fini →", "flipHint": "Touche la carte pour la retourner ↻", "to": "À", "certTitle": "Officiellement un an de plus", "certUnit": "ans", "certFallback": "Nouvel âge", "zoomHint": "Touche le timbre pour voir la photo en grand ✦" }, "hug": { "idleHint": "👆 Pose ta main et maintiens", "next": "Encore un vœu →", "love": { "prompt": "Une moitié est avec moi, l'autre avec toi… maintiens ici pour les réunir.", "holdingHint": "encore un peu plus près… tu sens mon cœur ?", "done": "Voilà, de nouveau entier. Si loin soit-il, mon cœur est près de toi." }, "friend": { "prompt": "Je ne peux pas venir fêter ça… alors check du poing à travers l'écran !", "holdingHint": "prends de l'élan… 1… 2…", "done": "Boum ! Check. Joyeux anniversaire, bestie !" }, "family": { "prompt": "Cette année on n'est pas ensemble… alors faisons une promesse du petit doigt.", "holdingHint": "accroche bien fort…", "done": "Promis : où qu'on soit, on reste la maison l'un de l'autre." } }, "thanks": { "teaser": "Une dernière chose…", "line": "Merci d'être né·e.", "repeat": "Revoir depuis le début" }, "wish": { "kicker": "Fais un vœu", "title": "Ferme les yeux… et fais un vœu pour ta nouvelle année", "subtitle": "Écris-le sur ce papier, je le plierai en étoile pour toi.", "slipHeader": "mon vœu d'anniversaire ✨", "placeholder": "ex. cette année, j'aimerais oser davantage pour mes rêves…", "fold": "Le plier en étoile ⭐", "skip": "Garder mon vœu pour moi" }, "jar": { "kicker": "Un bocal à vœux", "tag": "pour {receiver} ♡", "lastHint": "Il reste une dernière étoile… celle que j'ai gardée pour la fin ✨", "lastHeader": "ce que je veux te dire le plus…", "lastWish": "Merci d'être toujours là. Quoi que t'apporte cette nouvelle année, je resterai à tes côtés, comme maintenant.", "landed": "Ton étoile est dans le bocal maintenant ✨", "intro": "Il reste {n} étoiles que j'ai pliées pour toi… chacune est un vœu que j'ai fait pour toi.", "tapHint": "Touche chaque étoile pour l'ouvrir ⭐", "progress": "{read}/{n} étoiles ouvertes", "fromSender": "Je te souhaite…", "yours": "ton vœu", "secret": "Un vœu secret 🤫", "close": "La replier ⭐", "later": "Garder les autres pour plus tard →", "finaleTitle": "Joyeux anniversaire{,receiver} ✨", "finaleLine": "Dès ce soir, il y a là-haut une constellation rien qu'à toi : ton vœu au milieu, et mes vœux pour toi tout autour.", "constellation": "✦ Une constellation pour {receiver} · {date} ✦", "wishes": { "love": ["Que tu sois toujours aimé·e autant que tu aimes les autres.", "Que chaque matin t'offre une raison de sourire.", "Que cette année tu t'inquiètes moins, dormes bien et manges bien.", "Que les rêves que tu gardes au fond de toi se réalisent cette année.", "Que tu saches que tu es ce qu'il y a de plus beau dans ma vie.", "Qu'à ton prochain anniversaire, je sois juste à côté de toi."], "friend": ["Que tu restes aussi fou·folle cette année, mais beaucoup plus riche.", "Que les deadlines soient douces avec toi et ton salaire grimpe.", "Que tu rencontres quelqu'un qui t'aime sincèrement.", "Que tu restes en forme, manges de tout et dormes comme un bébé.", "Qu'on reste meilleurs amis encore très, très longtemps.", "Que quand tu es triste, tu te rappelles que tu m'as."], "family": ["Que la maison soit toujours chaleureuse et bien remplie.", "Qu'il y ait toujours quelqu'un pour prendre de tes nouvelles et te rappeler de manger.", "Que chaque chemin devant toi soit doux et sûr.", "Que, même en grandissant, tu aies toujours un endroit où revenir.", "Que cette année soit plus légère et pleine de joie.", "Qu'on reste toujours le pilier l'un de l'autre."] } }, "ui": { "months": ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"], "monthLabel": "{monthName}", "heartTapHint": "Touche le cœur pour voir les photos ♡", "viewPhoto": "Voir la photo", "tapToClose": "Touche pour fermer", "languageLabel": "Langue" } }, "es": { "senderName": "yo", "receiverName": "ti", "opening": { "subtitle": "my bestfriend", "continueLabel": "Continuar", "greeting": "Feliz cumpleaños", "day": 20, "month": 12 }, "intro": { "line1": "Aquí hay un pequeño regalo para ti…", "line2": "Pero antes de abrirlo, sopla primero la vela 🎂", "idleHint": "👆 Mantén pulsada la llama hasta que se apague", "holdingHint": "aguanta un poco más… ya casi…", "lightingHint": "estoy encendiendo la vela para ti…" }, "voice": { "notice": "Espera… hay un pequeño casete grabado solo para ti 📼", "kicker": "Un casete solo para ti", "title": "Hay cosas que no supe escribir, así que las grabé…", "hint": "Pulsa ▶ en el reproductor para escuchar el mensaje — sube el volumen 🔊", "playing": "Reproduciendo… escúchalo hasta el final, cada palabra es sincera 💛", "ended": "Gracias por escuchar hasta el final 💛", "play": "Escuchar", "pause": "Pausa", "next": "Aún hay más →" }, "age": { "kicker": "Nueva edad", "title": "¡{age} años, oficialmente!", "days": "= {days} días en este planeta", "laughs": "= unas {laughs} carcajadas", "closing": "A los {age} — sigue siendo tú, solo un poquito más feliz.", "fallbackTitle": "Un año más 🎉", "fallbackClosing": "Nuevo año — sigue siendo tú, solo un poquito más feliz.", "next": "Siguiente sorpresa →" }, "heart": { "caption": "Guardé muy bien todas estas fotos vergonzosas 😌", "title": "¡Feliz cumpleaños{,receiver}!", "subtitle": "Hoy tú eres protagonista 🎈", "next": "Hay una carta para ti →" }, "letter": { "kicker": "Una pequeña carta", "body": "No se me dan bien las palabras bonitas, así que lo diré sencillo: feliz cumpleaños.\n\nEste último año no debe de haber sido fácil, y aun así aquí estás — eres más fuerte de lo que crees.\n\nSolo deseo que comas bien, duermas lo suficiente, te preocupes un poco menos y recuerdes que siempre hay alguien aquí cuando lo necesites.", "signature": "— {sender}", "next": "Todavía hay más →", "flipHint": "Toca la postal para darle la vuelta ↻", "to": "Para", "certTitle": "Oficialmente un año más", "certUnit": "años", "certFallback": "Nueva edad", "zoomHint": "Toca el sello para ver la foto en grande ✦" }, "hug": { "idleHint": "👆 Pon tu mano y mantén", "next": "Un deseo más →", "love": { "prompt": "Una mitad está conmigo y la otra contigo… mantén aquí para unirlas.", "holdingHint": "un poco más cerca… ¿sientes mi corazón?", "done": "Listo, otra vez uno. Por lejos que esté, mi corazón está a tu lado." }, "friend": { "prompt": "No puedo ir a celebrarlo contigo… ¡así que choquemos puños a través de la pantalla!", "holdingHint": "toma impulso… 1… 2…", "done": "¡Pum! Chocados. ¡Feliz cumple, bestie!" }, "family": { "prompt": "Este año no podemos estar juntos… así que hagamos una promesa de meñique.", "holdingHint": "engancha fuerte…", "done": "Prometido: estemos donde estemos, seguimos siendo el hogar del otro." } }, "thanks": { "teaser": "Una última cosa…", "line": "Gracias por haber nacido.", "repeat": "Ver de nuevo" }, "wish": { "kicker": "Pide un deseo", "title": "Cierra los ojos… y pide un deseo para tu nuevo año", "subtitle": "Escríbelo en este papelito y lo doblaré en una estrella para ti.", "slipHeader": "mi deseo de cumpleaños ✨", "placeholder": "p. ej. este año quiero ser más valiente con mis sueños…", "fold": "Doblarlo en una estrella ⭐", "skip": "Guardar mi deseo para mí" }, "jar": { "kicker": "Un frasco de deseos", "tag": "para {receiver} ♡", "lastHint": "Queda una última estrella… la que guardé para el final ✨", "lastHeader": "lo que más quiero decirte…", "lastWish": "Gracias por estar siempre aquí. Pase lo que pase este nuevo año, seguiré a tu lado, igual que ahora.", "landed": "Tu estrella ya está en el frasco ✨", "intro": "Aquí dentro hay {n} estrellas más que doblé para ti… cada una es un deseo que pedí por ti.", "tapHint": "Toca cada estrella para abrirla ⭐", "progress": "{read}/{n} estrellas abiertas", "fromSender": "Te deseo…", "yours": "tu deseo", "secret": "Un deseo secreto 🤫", "close": "Volver a doblarla ⭐", "later": "Guardar el resto para después →", "finaleTitle": "Feliz cumpleaños{,receiver} ✨", "finaleLine": "Desde esta noche hay allá arriba una constelación solo tuya: tu deseo en el centro y mis deseos para ti a su alrededor.", "constellation": "✦ Una constelación para {receiver} · {date} ✦", "wishes": { "love": ["Que siempre te quieran tanto como tú quieres a los demás.", "Que cada mañana te dé un motivo para sonreír.", "Que este año te preocupes menos, duermas bien y comas rico.", "Que los sueños que guardas se cumplan este año.", "Que sepas que eres lo mejor de mi vida.", "Que el próximo cumpleaños pueda estar justo a tu lado."], "friend": ["Que sigas igual de loco este año, pero mucho más rico.", "Que los plazos te traten bien y tu sueldo no pare de subir.", "Que conozcas a alguien que te quiera de verdad.", "Que tengas salud, comas de todo y duermas como un bebé.", "Que sigamos siendo mejores amigos muchos, muchos años más.", "Que cuando estés triste, recuerdes que me tienes a mí."], "family": ["Que en casa siempre haya calor y abundancia.", "Que siempre haya alguien que pregunte cómo estás y te recuerde comer.", "Que cada camino por delante sea llano y seguro.", "Que, por mucho que crezcas, siempre tengas un lugar al que volver.", "Que este año sea más ligero y lleno de alegría.", "Que siempre seamos el apoyo del otro."] } }, "ui": { "months": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"], "monthLabel": "{monthName}", "heartTapHint": "Toca el corazón para ver las fotos ♡", "viewPhoto": "Ver foto", "tapToClose": "Toca para cerrar", "languageLabel": "Idioma" } } };
 
   const LOCALES = [
     { code: "vi", label: "Tiếng Việt", flag: "🇻🇳" },
@@ -146,7 +146,7 @@
       else bond = 'friend';
     }
 
-    return { receiverName, senderName, day, month, year, age, bond, lang };
+    return { receiverName, senderName, day, month, year, age, bond, lang, stage: get('stage') };
   }
 
   const PARAMS = getUrlParams();
@@ -203,7 +203,7 @@
   // --- STATE ---
   let state = {
     locale: PARAMS.lang && RAW_CONTENTS[PARAMS.lang] ? PARAMS.lang : 'vi',
-    stage: 'opening', // opening | intro | voice | age | letter | hug | wish | jar | thanks
+    stage: (PARAMS.stage && STAGE_SKY[PARAMS.stage]) ? PARAMS.stage : 'opening', // opening | intro | voice | age | letter | hug | wish | jar | thanks
     langMenuOpen: false,
 
     // Intro candle
@@ -253,7 +253,7 @@
 
     document.addEventListener('pointerdown', function onFirstTouch() {
       if (bgAudio && bgAudio.paused && state.stage !== 'voice') {
-        bgAudio.play().catch(() => {});
+        bgAudio.play().catch(() => { });
       }
     }, { once: true });
   }
@@ -267,7 +267,7 @@
     const target = STAGE_VOLUMES[state.stage] ?? 0.6;
     bgAudio.volume = target;
     if (bgAudio.paused && state.stage !== 'voice') {
-      bgAudio.play().catch(() => {});
+      bgAudio.play().catch(() => { });
     }
   }
 
@@ -297,7 +297,7 @@
       gain.connect(audioContext.destination);
       osc.start(t);
       osc.stop(t + 0.2);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   function playChime(freqs, interval = 0.3) {
@@ -322,15 +322,21 @@
           osc.stop(s + dur + 0.05);
         });
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 
   // --- TRANSITION TO NEW STAGE ---
   function goToStage(newStage) {
     state.stage = newStage;
+    if (newStage === 'letter') {
+      state.letterFlipped = false;
+      state.letterDone = false;
+    }
     render();
     onEnterStage(newStage);
   }
+  window.goToStage = goToStage;
+  window.state = state;
 
   // --- RENDER FULL SCREEN ---
   function render() {
@@ -342,25 +348,52 @@
     const isDarkSky = DARK_SKIES.has(currentSky);
     const textColorClass = isDarkSky ? 'text-cream' : 'text-choco';
 
-    let html = `
-      <main class="lovegift-no-select relative isolate flex min-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden px-5 py-6 transition-colors duration-1000 sm:py-16 ${textColorClass}">
-        <!-- Sky Background -->
-        <div aria-hidden="true" class="lg-sky" data-sky="${currentSky}">
-          ${SKY_LAYERS.map(l => `<span class="lg-sky-layer lg-sky-layer--${l}"></span>`).join('')}
-        </div>
+    let skyEl = document.getElementById('sky-background');
+    if (!skyEl) {
+      let html = `
+        <main id="main-container" class="lovegift-no-select relative isolate flex min-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden px-5 py-6 transition-colors duration-1000 sm:py-16 ${textColorClass}">
+          <!-- Sky Background -->
+          <div id="sky-background" aria-hidden="true" class="lg-sky" data-sky="${currentSky}">
+            ${SKY_LAYERS.map(l => `<span class="lg-sky-layer lg-sky-layer--${l}"></span>`).join('')}
+          </div>
 
-        <!-- Stage Decor (balloons/garlands) -->
-        ${renderStageDecor()}
+          <!-- Stage Decor (balloons/garlands) -->
+          <div id="stage-decor-container">
+            ${renderStageDecor()}
+          </div>
 
-        <!-- Language Switcher -->
-        ${renderLanguageSwitcher(content)}
+          <!-- Language Switcher -->
+          <div id="lang-switcher-container">
+            ${renderLanguageSwitcher(content)}
+          </div>
 
-        <!-- Active Stage Content -->
-        ${renderStage(content)}
-      </main>
-    `;
+          <!-- Active Stage Content -->
+          <div id="stage-content-container" class="w-full flex justify-center">
+            ${renderStage(content)}
+          </div>
+        </main>
+      `;
+      app.innerHTML = html;
+    } else {
+      skyEl.setAttribute('data-sky', currentSky);
+      const mainEl = document.getElementById('main-container');
+      if (mainEl) {
+        if (isDarkSky) {
+          mainEl.classList.remove('text-choco');
+          mainEl.classList.add('text-cream');
+        } else {
+          mainEl.classList.remove('text-cream');
+          mainEl.classList.add('text-choco');
+        }
+      }
+      const decorContainer = document.getElementById('stage-decor-container');
+      if (decorContainer) decorContainer.innerHTML = renderStageDecor();
+      const langContainer = document.getElementById('lang-switcher-container');
+      if (langContainer) langContainer.innerHTML = renderLanguageSwitcher(content);
+      const stageContainer = document.getElementById('stage-content-container');
+      if (stageContainer) stageContainer.innerHTML = renderStage(content);
+    }
 
-    app.innerHTML = html;
     attachStageEvents(content);
     updateAudioVolume();
   }
@@ -479,15 +512,15 @@
   function renderStage(content) {
     switch (state.stage) {
       case 'opening': return renderOpening(content);
-      case 'intro':   return renderIntro(content);
-      case 'voice':   return renderVoice(content);
-      case 'age':     return renderAge(content);
-      case 'letter':  return renderLetter(content);
-      case 'hug':     return renderHug(content);
-      case 'wish':    return renderWish(content);
-      case 'jar':     return renderJar(content);
-      case 'thanks':  return renderThanks(content);
-      default:        return '';
+      case 'intro': return renderIntro(content);
+      case 'voice': return renderVoice(content);
+      case 'age': return renderAge(content);
+      case 'letter': return renderLetter(content);
+      case 'hug': return renderHug(content);
+      case 'wish': return renderWish(content);
+      case 'jar': return renderJar(content);
+      case 'thanks': return renderThanks(content);
+      default: return '';
     }
   }
 
@@ -693,6 +726,79 @@
     `;
   }
 
+
+  // --- AGE CANDLES & CONFETTI HELPERS ---
+  const CANDLE_TINTS = [
+    ["#f6e7c1", "#dcc085"],
+    ["#f8d3d8", "#e0a0a9"],
+    ["#dcd4ef", "#a99ccd"],
+    ["#c9deec", "#8eaec8"],
+    ["#d9eee2", "#9fc7b0"]
+  ];
+  const WICK_POSITIONS = [0.5, 0.56, 0.46, 0.48, 0.66, 0.5, 0.44, 0.32, 0.5, 0.55];
+  const FONT_ROUNDED = "'Arial Rounded MT Bold', ui-rounded, 'SF Pro Rounded', 'Nunito', system-ui, sans-serif";
+
+  function renderAgeCandleDigit(digit, tintIdx, lit, digitIdx) {
+    const [color1, color2] = CANDLE_TINTS[tintIdx % CANDLE_TINTS.length];
+    const wickPos = `${100 * (WICK_POSITIONS[digit] !== undefined ? WICK_POSITIONS[digit] : 0.5)}%`;
+    const waxPatternId = `wax-digit-${digitIdx}-${Math.random().toString(36).substring(2, 7)}`;
+
+    return `
+      <span class="lg-age-candle">
+        <svg viewBox="0 0 60 88" aria-hidden="true" class="block h-full w-full overflow-visible">
+          <defs>
+            <pattern id="${waxPatternId}" width="10" height="10" patternTransform="rotate(-32)" patternUnits="userSpaceOnUse">
+              <rect width="10" height="10" fill="${color1}"></rect>
+              <rect width="4" height="10" fill="${color2}"></rect>
+            </pattern>
+          </defs>
+          <text x="30" y="80" text-anchor="middle" font-size="82" font-weight="800" font-family="${FONT_ROUNDED}" fill="url(#${waxPatternId})" stroke="rgba(74,44,33,0.32)" stroke-width="1.6" paint-order="stroke">${digit}</text>
+          <text x="28.4" y="78.6" text-anchor="middle" font-size="82" font-weight="800" font-family="${FONT_ROUNDED}" fill="rgba(255,255,255,0.28)">${digit}</text>
+        </svg>
+        <span aria-hidden="true" class="lg-age-wick" style="left:${wickPos};"></span>
+        <span aria-hidden="true" class="lg-age-flame-wrap ${lit ? 'lg-age-flame-wrap--lit' : ''}" style="left:${wickPos};transition-delay:${lit ? (0.25 + 0.35 * digitIdx) + 's' : '0s'};">
+          <span class="lg-age-flame lovegift-flame" style="animation-delay:${-(0.43 * digitIdx)}s;">
+            <span class="lg-age-flame-core"></span>
+          </span>
+        </span>
+      </span>
+    `;
+  }
+
+  function renderAgeCandles(value, lit) {
+    const digits = String(value).split("").map(Number);
+    return `
+      <span class="lg-age-candles" style="--digits:${digits.length};">
+        ${digits.map((d, idx) => renderAgeCandleDigit(d, idx, lit, idx)).join('')}
+      </span>
+    `;
+  }
+
+  const CONFETTI_COLORS = ["#f4b6a6", "#f6d776", "#fbf6ec", "#c98b76", "#ffe0a3", "#4a2c21"];
+  const CONFETTI_SHAPES = ["dot", "strip", "heart"];
+  const CONFETTI_BITS = Array.from({ length: 34 }, (_, t) => {
+    const a = (t / 34) * Math.PI * 2 + (t % 5) * 0.21;
+    const r = 22 + ((13 * t) % 7) * 4;
+    return {
+      dx: `${(Math.cos(a) * r).toFixed(1)}vmin`,
+      dy: `${(Math.sin(a) * r * 0.75 - 8).toFixed(1)}vmin`,
+      rot: `${(71 * t) % 540}deg`,
+      color: CONFETTI_COLORS[t % CONFETTI_COLORS.length],
+      shape: CONFETTI_SHAPES[t % CONFETTI_SHAPES.length],
+      delay: `${(t % 6) * 18}ms`
+    };
+  });
+
+  function renderAgeConfetti() {
+    return `
+      <div aria-hidden="true" class="lg-confetti" style="left:50%;top:38%;">
+        ${CONFETTI_BITS.map((b, i) => `
+          <span class="lg-confetti-bit lg-confetti-bit--${b.shape}" style="--dx:${b.dx};--dy:${b.dy};--r:${b.rot};--c:${b.color};animation-delay:${b.delay};"></span>
+        `).join('')}
+      </div>
+    `;
+  }
+
   // 4. AGE
   function renderAge(content) {
     const o = content.age;
@@ -707,27 +813,28 @@
       laughs: nf.format(laughs)
     };
 
-    function replaceVars(tpl) {
+    function replaceVars(tpl, override) {
       if (!tpl) return '';
-      return tpl.replace(/\{(\w+)\}/g, (_, k) => values[k] ?? _);
+      const v = override ? { ...values, ...override } : values;
+      return tpl.replace(/\{(\w+)\}/g, (_, k) => v[k] ?? _);
     }
-
-    const girls = IMAGES.girls;
 
     return `
       <section class="relative z-10 flex w-full max-w-md flex-col items-center text-center">
-        <img id="age-flicker-img" src="${girls[0]}" alt="" aria-hidden="true" draggable="false" class="lg-age-flicker pointer-events-none fixed left-1/2 top-1/2 -z-10 h-[62vmin] w-[48vmin] select-none rounded-3xl object-cover" />
+        <!-- Flicker Photo Container -->
+        <div id="age-flicker-container"></div>
+
         <p class="lg-kicker lg-rise">${o.kicker}</p>
-        <div id="age-number-box" class="lg-age-number" role="img" aria-label="0">0</div>
+        <div id="age-number-box" class="lg-age-number" role="img" aria-label="0">
+          ${renderAgeCandles(0, false)}
+        </div>
         <div id="age-confetti-wrap" class="hidden">
-          <div aria-hidden="true" class="lg-confetti-burst pointer-events-none fixed inset-0 z-20 overflow-hidden">
-            ${Array.from({length: 28}, (_, i) => `<span class="lg-confetti lg-confetti--${i % 4}" style="left:${50 + (i % 2 === 0 ? 1 : -1) * (i * 3)}%;top:38%;--drift:${(i % 2 === 0 ? 1 : -1) * (20 + i * 8)}px;--rot:${i * 45}deg;animation-delay:${(i % 5) * 0.08}s;"></span>`).join('')}
-          </div>
+          ${renderAgeConfetti()}
         </div>
         <div class="mt-2 flex min-h-[9.5rem] flex-col items-center gap-1.5">
           <h2 id="age-reveal-title" class="lg-pop font-serif text-[30px] leading-tight text-choco hidden">${replaceVars(o.title)}</h2>
-          <p id="age-reveal-days" class="lg-rise font-sans text-lg text-choco/80 hidden">${replaceVars(o.days)}</p>
-          <p id="age-reveal-laughs" class="lg-rise font-sans text-lg text-choco/80 hidden">${replaceVars(o.laughs)}</p>
+          <p id="age-reveal-days" class="lg-rise font-sans text-lg text-choco/80 hidden">${replaceVars(o.days, { days: '0' })}</p>
+          <p id="age-reveal-laughs" class="lg-rise font-sans text-lg text-choco/80 hidden">${replaceVars(o.laughs, { laughs: '0' })}</p>
           <p id="age-reveal-closing" class="lg-rise mt-3 max-w-xs font-hand text-2xl leading-snug text-choco hidden">${replaceVars(o.closing)}</p>
         </div>
         <div id="age-next-wrap" class="mt-6 transition-all duration-500 pointer-events-none translate-y-2 opacity-0">
@@ -737,17 +844,18 @@
     `;
   }
 
-  // 5. LETTER
-  function renderLetter(content) {
-    const l = content.letter;
-    const bodyText = l.body;
-    const stampPhoto = IMAGES.girls[1] || IMAGES.girls[0] || IMAGES.letterPhoto;
-    const dateFormatted = `${String(PARAMS.day).padStart(2, '0')}.${String(PARAMS.month).padStart(2, '0')}`;
+  // --- LETTER SEAL SVG HELPER ---
+  function renderSealSvg(title, age, unit, fallback, dateFormatted) {
+    const sealId = 'seal-' + Math.random().toString(36).substring(2, 8);
+    const upperTitle = (title || 'BIRTHDAY CERTIFICATE').toLocaleUpperCase() + ' ✦ ';
+    const count = Math.max(1, Math.floor(262 / (8.5 * upperTitle.length)));
+    const ringText = upperTitle.repeat(count);
+    const fontSize = Math.max(5.2, Math.min(9.5, 262 / ringText.length));
 
-    const sealSvg = `
+    return `
       <svg viewBox="0 0 172 120" class="lg-seal" aria-hidden="true">
         <defs>
-          <path id="seal-path-unique" d="M 66 60 a 44 44 0 1 1 88 0 a 44 44 0 1 1 -88 0" />
+          <path id="${sealId}" d="M 66 60 a 44 44 0 1 1 88 0 a 44 44 0 1 1 -88 0" />
         </defs>
         <path d="M2 44 q 8 -6 16 0 t 16 0 t 16 0 t 16 0" fill="none" stroke="currentColor" stroke-width="2"></path>
         <path d="M2 56 q 8 -6 16 0 t 16 0 t 16 0 t 16 0" fill="none" stroke="currentColor" stroke-width="2"></path>
@@ -755,87 +863,82 @@
         <circle cx="110" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="2.6"></circle>
         <circle cx="110" cy="60" r="53" fill="none" stroke="currentColor" stroke-width="1"></circle>
         <circle cx="110" cy="60" r="35" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
-        <text font-size="7.5" font-weight="700" fill="currentColor" dominant-baseline="middle">
-          <textPath href="#seal-path-unique" textLength="262" lengthAdjust="spacing">
-            ${l.certTitle.toUpperCase()} ✦ ${l.certTitle.toUpperCase()} ✦
+        <text font-size="${fontSize}" font-weight="700" fill="currentColor" dominant-baseline="middle">
+          <textPath href="#${sealId}" textLength="262" lengthAdjust="spacing">
+            ${ringText}
           </textPath>
         </text>
-        <text x="110" y="62" text-anchor="middle" font-size="28" font-weight="800" fill="currentColor">${PARAMS.age}</text>
-        <text x="110" y="75" text-anchor="middle" font-size="8" font-weight="700" letter-spacing="1.5" fill="currentColor">${l.certUnit.toUpperCase()}</text>
-        <text x="110" y="88" text-anchor="middle" font-size="7" font-weight="600" letter-spacing="1" fill="currentColor">${dateFormatted}</text>
+        ${age ? `
+          <text x="110" y="62" text-anchor="middle" font-size="${age > 99 ? 22 : 30}" font-weight="800" fill="currentColor">${age}</text>
+          <text x="110" y="77" text-anchor="middle" font-size="10.5" font-weight="700" fill="currentColor">${unit || 'TUỔI'}</text>
+        ` : `
+          <text x="110" y="66" text-anchor="middle" font-size="28" fill="currentColor">✨</text>
+        `}
+        <text x="110" y="103" text-anchor="middle" font-size="9" font-weight="700" fill="currentColor" letter-spacing="1.5">${dateFormatted}</text>
       </svg>
     `;
+  }
+
+  // 5. LETTER
+  function renderLetter(content) {
+    const l = content.letter;
+    const photo = IMAGES.letterPhoto;
+    const stampPhoto = IMAGES.girls[1] || IMAGES.girls[0] || photo;
+    const dateFormatted = `${String(PARAMS.day).padStart(2, '0')}.${String(PARAMS.month).padStart(2, '0')}`;
+    const sealSvg = renderSealSvg(l.certTitle, PARAMS.age || 22, l.certUnit, l.certFallback, dateFormatted);
 
     return `
-      <section class="lovegift-fade-up relative z-10 flex w-full max-w-xl flex-col items-center text-center">
-        <p class="lovegift-kicker">${l.kicker}</p>
-        <div class="mt-5">
-          <div class="flex flex-col items-center">
-            <div class="lg-postcard">
-              <span id="washi-left" aria-hidden="true" class="lg-washi lg-washi--left"></span>
-              <span id="washi-right" aria-hidden="true" class="lg-washi lg-washi--right"></span>
-              <div id="postcard-inner" class="lg-postcard-inner">
-                <!-- Front Side -->
-                <button id="btn-postcard-front" type="button" aria-label="${l.flipHint}" class="lg-postcard-face lg-postcard-front">
-                  <img src="${IMAGES.letterPhoto}" alt="" draggable="false" class="lg-postcard-photo" />
-                  <span aria-hidden="true" class="lg-postcard-shade"></span>
-                  <span class="lg-postcard-greeting">${content.opening.greeting}</span>
-                  <span class="lg-postcard-date">${dateFormatted}</span>
+      <section class="flex flex-col items-center">
+        <div class="lg-postcard">
+          <span id="washi-left" aria-hidden="true" class="lg-washi lg-washi--left ${state.letterFlipped ? 'lg-washi--off' : ''}"></span>
+          <span id="washi-right" aria-hidden="true" class="lg-washi lg-washi--right ${state.letterFlipped ? 'lg-washi--off' : ''}"></span>
+          <div id="postcard-inner" class="lg-postcard-inner ${state.letterFlipped ? 'lg-postcard-inner--flipped' : ''}">
+            <!-- Front -->
+            <button id="btn-postcard-front" type="button" ${state.letterFlipped ? 'disabled' : ''} aria-label="${l.flipHint}" class="lg-postcard-face lg-postcard-front">
+              <img src="${photo}" alt="" draggable="false" class="lg-postcard-photo" />
+              <span aria-hidden="true" class="lg-postcard-shade"></span>
+              <span class="lg-postcard-greeting">${content.opening.greeting}</span>
+              <span class="lg-postcard-date">${dateFormatted}</span>
+            </button>
+            <!-- Back -->
+            <div class="lg-postcard-face lg-postcard-back" aria-hidden="${!state.letterFlipped}">
+              <div class="lg-postcard-address">
+                <button id="btn-stamp-zoom" type="button" tabindex="${state.letterFlipped ? '0' : '-1'}" aria-label="${l.zoomHint}" class="lg-stamp-area">
+                  <span class="lg-stamp">
+                    <span class="lg-stamp-inner">
+                      <img src="${stampPhoto}" alt="" draggable="false" />
+                    </span>
+                  </span>
+                  <span class="lg-seal-wrap">
+                    ${sealSvg}
+                  </span>
                 </button>
-
-                <!-- Back Side -->
-                <div class="lg-postcard-face lg-postcard-back" aria-hidden="true">
-                  <div class="lg-postcard-address">
-                    <button id="btn-stamp-zoom" type="button" tabindex="0" aria-label="${l.zoomHint}" class="lg-stamp-area">
-                      <span class="lg-stamp">
-                        <span class="lg-stamp-inner">
-                          <img src="${stampPhoto}" alt="" draggable="false" />
-                        </span>
-                      </span>
-                      <span class="lg-seal-wrap">${sealSvg}</span>
-                    </button>
-                    <div class="min-w-0 flex-1 self-end text-left sm:mt-auto sm:w-full sm:flex-none">
-                      <p class="lg-postcard-label">${l.to}</p>
-                      <p class="lg-postcard-line truncate font-hand text-[22px] font-bold text-[#3f3530]">${content.receiverName}</p>
-                      <p class="lg-postcard-line"></p>
-                    </div>
-                  </div>
-                  <div class="relative min-h-0 flex-1">
-                    <div id="postcard-text-scroll" class="lovegift-scroll-soft lg-postcard-lines absolute inset-0 cursor-pointer overflow-y-auto overscroll-contain text-left">
-                      <p class="relative m-0 whitespace-pre-line font-hand text-[16px] font-semibold text-[#3f3530] [overflow-wrap:anywhere] sm:text-[17px]">
-                        <span class="invisible">${bodyText}</span>
-                        <span id="letter-typed-text" class="absolute inset-0 whitespace-pre-line"></span>
-                      </p>
-                      <p id="letter-signature" class="m-0 text-right font-hand text-[16px] font-semibold text-[#3f3530] transition-opacity duration-700 [overflow-wrap:anywhere] sm:text-[17px] opacity-0">
-                        ${l.signature}
-                      </p>
-                    </div>
-                  </div>
+                <div class="min-w-0 flex-1 self-end text-left sm:mt-auto sm:w-full sm:flex-none">
+                  <p class="lg-postcard-label">${l.to}</p>
+                  <p class="lg-postcard-line truncate font-hand text-[22px] font-bold text-[#3f3530]">${PARAMS.receiverName || 'Cậu'}</p>
+                  <p class="lg-postcard-line"></p>
+                </div>
+              </div>
+              <div class="relative min-h-0 flex-1">
+                <div id="postcard-text-scroll" class="lovegift-scroll-soft lg-postcard-lines absolute inset-0 cursor-pointer overflow-y-auto overscroll-contain text-left">
+                  <p class="relative m-0 whitespace-pre-line font-hand text-[16px] font-semibold text-[#3f3530] [overflow-wrap:anywhere] sm:text-[17px]">
+                    <span class="invisible">${l.body}</span>
+                    <span id="letter-typed-text" class="absolute inset-0 whitespace-pre-line">${state.letterDone ? l.body : ''}</span>
+                    <span id="letter-caret" class="inline-block w-0 align-baseline"></span>
+                  </p>
+                  <p id="letter-signature" class="m-0 text-right font-hand text-[16px] font-semibold text-[#3f3530] transition-opacity duration-700 [overflow-wrap:anywhere] sm:text-[17px] ${state.letterDone ? 'opacity-100' : 'opacity-0'}">${l.signature}</p>
                 </div>
               </div>
             </div>
-            <div class="lg-postcard-hint-in mt-4 min-h-[1.25rem]">
-              <p id="letter-hint-label" class="lg-rise font-sans text-sm text-choco/70">${l.flipHint}</p>
-            </div>
           </div>
         </div>
 
-        <!-- Next Button -->
-        <div id="letter-next-wrap" class="mt-6 transition-opacity duration-700 pointer-events-none opacity-0">
+        <div class="lg-postcard-hint-in mt-4 min-h-[1.25rem]">
+          <p id="letter-hint-label" class="lg-rise font-sans text-sm text-choco/70 ${state.letterFlipped && !state.letterDone ? 'invisible' : ''}">${state.letterFlipped ? l.zoomHint : l.flipHint}</p>
+        </div>
+
+        <div id="letter-next-wrap" class="mt-4 transition-opacity duration-500 ${state.letterDone ? 'opacity-100' : 'pointer-events-none opacity-0'}">
           <button id="btn-letter-next" type="button" class="lg-party-btn">${l.next}</button>
-        </div>
-
-        <!-- Stamp Zoom Modal -->
-        <div id="stamp-zoom-modal" role="dialog" aria-modal="true" aria-label="${l.certTitle}" class="lg-stamp-zoom hidden">
-          <div class="lg-stamp-zoom-card">
-            <span class="lg-stamp lg-stamp--large">
-              <span class="lg-stamp-inner">
-                <img src="${stampPhoto}" alt="" draggable="false" />
-              </span>
-            </span>
-            <span class="lg-seal-wrap lg-seal-wrap--large">${sealSvg}</span>
-          </div>
-          <p class="mt-14 font-sans text-sm text-cream/80">${content.ui.tapToClose}</p>
         </div>
       </section>
     `;
@@ -1016,16 +1119,16 @@
 
           <!-- Pre-folded stars inside jar -->
           ${wishesList.map((wish, idx) => {
-            const coord = starCoords[idx % starCoords.length];
-            const color = starColors[idx % starColors.length];
-            return `
+      const coord = starCoords[idx % starCoords.length];
+      const color = starColors[idx % starColors.length];
+      return `
               <button type="button" class="jar-star absolute cursor-pointer transition-transform hover:scale-125" data-idx="${idx}" style="left:${coord.x}%;top:${coord.y}%;transform:translate(-50%,-50%) rotate(${coord.r}deg);width:34px;height:34px;z-index:20;">
                 <svg viewBox="0 0 100 100" class="h-full w-full drop-shadow-[0_0_8px_rgba(255,215,106,0.6)]">
                   <polygon points="${starPoints}" fill="${color}" stroke="${color}" stroke-width="10" stroke-linejoin="round"></polygon>
                 </svg>
               </button>
             `;
-          }).join('')}
+    }).join('')}
 
           <!-- User's own wish star dropped in -->
           <button type="button" class="jar-star absolute cursor-pointer transition-transform hover:scale-125" data-idx="mine" style="left:50%;top:58%;transform:translate(-50%,-50%);width:38px;height:38px;z-index:25;">
@@ -1305,7 +1408,6 @@
       const washiL = document.getElementById('washi-left');
       const washiR = document.getElementById('washi-right');
       const btnZoom = document.getElementById('btn-stamp-zoom');
-      const modalZoom = document.getElementById('stamp-zoom-modal');
       const typedTextEl = document.getElementById('letter-typed-text');
       const sigEl = document.getElementById('letter-signature');
       const hintLabel = document.getElementById('letter-hint-label');
@@ -1323,16 +1425,45 @@
           if (washiR) washiR.classList.add('lg-washi--off');
 
           setTimeout(() => {
-            // Typewriter
-            let startTime = performance.now();
+            // Start at the top of the letter each time it is opened.
+            if (scrollBox) scrollBox.scrollTop = 0;
+
+            const startTime = performance.now();
             const totalChars = fullText.length;
-            const speed = 40;
+            const speed = Math.max(33, totalChars / 42);
+
+            // Scroll only when the newest typed character reaches the lower edge
+            // of the visible letter area. This avoids jumping to the bottom early.
+            function keepTypedLineVisible() {
+              if (!scrollBox || !typedTextEl) return;
+              const textNode = typedTextEl.firstChild;
+              if (!textNode || !textNode.length) return;
+
+              let charIndex = textNode.length - 1;
+              while (charIndex > 0 && /\s/.test(textNode.textContent.charAt(charIndex))) {
+                charIndex--;
+              }
+
+              const range = document.createRange();
+              range.setStart(textNode, charIndex);
+              range.setEnd(textNode, Math.min(charIndex + 1, textNode.length));
+              const charRect = range.getBoundingClientRect();
+              const boxRect = scrollBox.getBoundingClientRect();
+              if (!charRect || !boxRect.height) return;
+
+              const safeBottom = boxRect.bottom - 18;
+              if (charRect.bottom > safeBottom) {
+                scrollBox.scrollTop += charRect.bottom - safeBottom + 6;
+              } else if (charRect.top < boxRect.top + 6) {
+                scrollBox.scrollTop -= (boxRect.top + 6) - charRect.top;
+              }
+            }
 
             function step(now) {
               if (state.letterDone) return;
               const count = Math.min(totalChars, Math.floor(((now - startTime) / 1000) * speed));
               if (typedTextEl) typedTextEl.textContent = fullText.slice(0, count);
-              if (scrollBox) scrollBox.scrollTop = scrollBox.scrollHeight;
+              if (count > 0) keepTypedLineVisible();
 
               if (count < totalChars) {
                 requestAnimationFrame(step);
@@ -1346,13 +1477,32 @@
       }
 
       function finishLetter() {
+        if (state.letterDone) return;
         state.letterDone = true;
         if (typedTextEl) typedTextEl.textContent = fullText;
-        if (sigEl) sigEl.classList.remove('opacity-0');
-        if (hintLabel) hintLabel.textContent = content.letter.zoomHint;
+        if (sigEl) {
+          sigEl.classList.remove('opacity-0');
+          sigEl.classList.add('opacity-100');
+        }
+        if (hintLabel) {
+          hintLabel.classList.remove('invisible');
+          hintLabel.textContent = content.letter.zoomHint;
+        }
         if (nextWrap) {
           nextWrap.classList.remove('pointer-events-none', 'opacity-0');
           nextWrap.classList.add('opacity-100');
+        }
+
+        // Wait for the full text and signature to render, then reveal the final line.
+        if (scrollBox) {
+          requestAnimationFrame(() => {
+            scrollBox.scrollTop = scrollBox.scrollHeight;
+            requestAnimationFrame(() => {
+              if (scrollBox.isConnected) {
+                scrollBox.scrollTop = scrollBox.scrollHeight;
+              }
+            });
+          });
         }
       }
 
@@ -1364,18 +1514,52 @@
         });
       }
 
-      if (btnZoom && modalZoom) {
+      if (btnZoom) {
         btnZoom.addEventListener('click', (e) => {
           e.stopPropagation();
-          modalZoom.classList.remove('hidden');
-        });
-        modalZoom.addEventListener('click', () => {
-          modalZoom.classList.add('hidden');
+          const stampPhoto = IMAGES.girls[1] || IMAGES.girls[0] || IMAGES.letterPhoto;
+          const dateFormatted = `${String(PARAMS.day).padStart(2, '0')}.${String(PARAMS.month).padStart(2, '0')}`;
+          const sealSvg = renderSealSvg(content.letter.certTitle, PARAMS.age || 22, content.letter.certUnit, content.letter.certFallback, dateFormatted);
+
+          let modal = document.getElementById('stamp-zoom-modal');
+          if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'stamp-zoom-modal';
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('aria-label', content.letter.certTitle);
+            modal.className = 'lg-stamp-zoom';
+            modal.innerHTML = `
+              <div class="lg-stamp-zoom-card">
+                <span class="lg-stamp lg-stamp--large">
+                  <span class="lg-stamp-inner">
+                    <img src="${stampPhoto}" alt="" draggable="false" />
+                  </span>
+                </span>
+                <span class="lg-seal-wrap lg-seal-wrap--large">
+                  ${sealSvg}
+                </span>
+              </div>
+              <p class="mt-14 font-sans text-sm text-cream/80">${content.ui.tapToClose}</p>
+            `;
+            function closeModal() {
+              window.removeEventListener('keydown', onEsc);
+              if (modal && modal.parentNode) modal.parentNode.removeChild(modal);
+            }
+            function onEsc(evt) {
+              if (evt.key === 'Escape') closeModal();
+            }
+            modal.addEventListener('click', closeModal);
+            window.addEventListener('keydown', onEsc);
+            document.body.appendChild(modal);
+          }
         });
       }
 
       if (btnLetterNext) {
         btnLetterNext.addEventListener('click', () => {
+          const modal = document.getElementById('stamp-zoom-modal');
+          if (modal && modal.parentNode) modal.parentNode.removeChild(modal);
           goToStage('hug');
         });
       }
@@ -1664,52 +1848,203 @@
       }, 1850);
     }
 
+
     if (stage === 'age') {
       const targetAge = PARAMS.age || 22;
+      const days = targetAge ? 365 * targetAge + Math.floor(targetAge / 4) : 0;
+      const laughs = 1000 * Math.round(17 * days / 1000);
+      const nf = new Intl.NumberFormat(state.locale);
+
       const numBox = document.getElementById('age-number-box');
-      const flickerImg = document.getElementById('age-flicker-img');
+      const flickerContainer = document.getElementById('age-flicker-container');
       const confettiWrap = document.getElementById('age-confetti-wrap');
       const revTitle = document.getElementById('age-reveal-title');
       const revDays = document.getElementById('age-reveal-days');
       const revLaughs = document.getElementById('age-reveal-laughs');
       const revClosing = document.getElementById('age-reveal-closing');
       const nextWrap = document.getElementById('age-next-wrap');
-      const girls = IMAGES.girls;
+      const girls = Array.isArray(IMAGES.girls) ? IMAGES.girls.filter(Boolean) : [];
 
-      let startTime = performance.now();
+      const content = getActiveContent();
+      const o = content.age;
+
       const duration = 2600;
+      let startTime = 0;
+      let lastVal = -1;
+      let landed = false;
+      let photoElement = null;
+      let photoSwapTimeout = null;
+      const photoTimers = [];
 
-      function tick(now) {
-        const p = Math.min(1, (now - startTime) / duration);
-        const cur = Math.floor(p * targetAge);
-        if (numBox) numBox.textContent = cur;
-        const photoIdx = Math.floor((now - startTime) / 480);
-        if (flickerImg && girls.length > 0) flickerImg.src = girls[photoIdx % girls.length];
+      function stopPhotoSequence() {
+        while (photoTimers.length) clearTimeout(photoTimers.pop());
+        if (photoSwapTimeout) {
+          clearTimeout(photoSwapTimeout);
+          photoSwapTimeout = null;
+        }
+      }
 
-        if (p < 1) {
-          requestAnimationFrame(tick);
-        } else {
-          if (numBox) {
-            numBox.textContent = targetAge;
-            numBox.classList.add('lg-age-number--landed');
+      function showPhoto(photo) {
+        if (!photoElement || !photo || landed || state.stage !== 'age') return;
+        photoElement.src = photo.src;
+        requestAnimationFrame(() => {
+          if (photoElement && state.stage === 'age' && !landed) {
+            photoElement.style.opacity = '0.68';
           }
-          if (flickerImg) flickerImg.classList.add('hidden');
+        });
+      }
+
+      function startPhotoSequence(loadedPhotos) {
+        if (!flickerContainer || !loadedPhotos.length || state.stage !== 'age') return;
+
+        // Use one persistent image element. The old .lg-age-flicker CSS animation
+        // lasted only 500ms and faded every photo out before the next swap.
+        photoElement = document.createElement('img');
+        photoElement.alt = '';
+        photoElement.setAttribute('aria-hidden', 'true');
+        photoElement.draggable = false;
+        photoElement.className = 'pointer-events-none fixed left-1/2 top-1/2 -z-10 h-[62vmin] w-[48vmin] select-none rounded-3xl object-cover';
+        photoElement.style.animation = 'none';
+        photoElement.style.opacity = '0';
+        photoElement.style.transition = 'opacity 140ms ease';
+        photoElement.style.filter = 'sepia(.08) blur(.2px)';
+        photoElement.style.pointerEvents = 'none';
+        photoElement.style.willChange = 'opacity';
+        flickerContainer.replaceChildren(photoElement);
+
+        // Show the first photo immediately, then each remaining photo once.
+        showPhoto(loadedPhotos[0]);
+
+        if (loadedPhotos.length > 1) {
+          const photoStep = duration / loadedPhotos.length;
+          loadedPhotos.slice(1).forEach((photo, index) => {
+            const delay = photoStep * (index + 1);
+            const timer = setTimeout(() => {
+              if (landed || state.stage !== 'age' || !photoElement) return;
+              photoElement.style.opacity = '0';
+              photoSwapTimeout = setTimeout(() => {
+                showPhoto(photo);
+                photoSwapTimeout = null;
+              }, 110);
+            }, delay);
+            photoTimers.push(timer);
+          });
+        }
+      }
+
+      function tickAge(now) {
+        if (state.stage !== 'age') {
+          stopPhotoSequence();
+          return;
+        }
+        const progress = Math.min(1, (now - startTime) / duration);
+        // Ease out cubic
+        const easeVal = 1 - Math.pow(1 - progress, 3);
+        const cur = Math.round(targetAge * easeVal);
+
+        if (cur !== lastVal) {
+          lastVal = cur;
+          if (numBox) {
+            numBox.setAttribute('aria-label', String(cur));
+            numBox.innerHTML = renderAgeCandles(cur, false);
+          }
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(tickAge);
+        } else {
+          landed = true;
+          stopPhotoSequence();
+          if (photoElement) {
+            photoElement.style.opacity = '0';
+            setTimeout(() => {
+              if (photoElement && photoElement.parentNode) photoElement.remove();
+            }, 160);
+          }
+
+          if (numBox) {
+            numBox.setAttribute('aria-label', String(targetAge));
+            numBox.classList.add('lg-age-number--landed');
+            numBox.innerHTML = renderAgeCandles(targetAge, true);
+          }
           if (confettiWrap) confettiWrap.classList.remove('hidden');
           playChime([523.25, 659.25, 783.99, 1046.5], 0.12);
 
-          setTimeout(() => { if (revTitle) revTitle.classList.remove('hidden'); }, 350);
-          setTimeout(() => { if (revDays) revDays.classList.remove('hidden'); }, 800);
-          setTimeout(() => { if (revLaughs) revLaughs.classList.remove('hidden'); }, 1250);
-          setTimeout(() => { if (revClosing) revClosing.classList.remove('hidden'); }, 1700);
+          // Reveal title at 3000ms (400ms after landing)
           setTimeout(() => {
-            if (nextWrap) {
+            if (state.stage === 'age' && revTitle) revTitle.classList.remove('hidden');
+          }, 400);
+
+          // Reveal days at 3600ms (1000ms after landing) and count up over 1400ms
+          setTimeout(() => {
+            if (state.stage !== 'age' || !revDays) return;
+            revDays.classList.remove('hidden');
+            let dStart = performance.now();
+            function tickDays(t) {
+              if (state.stage !== 'age') return;
+              let p = Math.min(1, (t - dStart) / 1400);
+              let curD = Math.round(days * (1 - Math.pow(1 - p, 3)));
+              revDays.textContent = o.days.replace('{days}', nf.format(curD)).replace('{age}', String(targetAge));
+              if (p < 1) requestAnimationFrame(tickDays);
+            }
+            requestAnimationFrame(tickDays);
+          }, 1000);
+
+          // Reveal laughs at 4200ms (1600ms after landing) and count up over 1400ms
+          setTimeout(() => {
+            if (state.stage !== 'age' || !revLaughs) return;
+            revLaughs.classList.remove('hidden');
+            let lStart = performance.now();
+            function tickLaughs(t) {
+              if (state.stage !== 'age') return;
+              let p = Math.min(1, (t - lStart) / 1400);
+              let curL = Math.round(laughs * (1 - Math.pow(1 - p, 3)));
+              revLaughs.textContent = o.laughs.replace('{laughs}', nf.format(curL)).replace('{age}', String(targetAge));
+              if (p < 1) requestAnimationFrame(tickLaughs);
+            }
+            requestAnimationFrame(tickLaughs);
+          }, 1600);
+
+          // Reveal closing at 5200ms (2600ms after landing)
+          setTimeout(() => {
+            if (state.stage === 'age' && revClosing) revClosing.classList.remove('hidden');
+          }, 2600);
+
+          // Reveal next button at 6200ms (3600ms after landing)
+          setTimeout(() => {
+            if (state.stage === 'age' && nextWrap) {
               nextWrap.classList.remove('pointer-events-none', 'translate-y-2', 'opacity-0');
               nextWrap.classList.add('translate-y-0', 'opacity-100');
             }
-          }, 2200);
+          }, 3600);
         }
       }
-      requestAnimationFrame(tick);
+
+      // Preload all memory photos first. This prevents a late-loading image from
+      // being skipped during the short age countdown. Failed paths are ignored.
+      const photoLoads = girls.map((src) => new Promise((resolve) => {
+        const image = new Image();
+        let settled = false;
+        const finish = (value) => {
+          if (settled) return;
+          settled = true;
+          resolve(value);
+        };
+        image.onload = () => finish(image);
+        image.onerror = () => finish(null);
+        image.src = src;
+        if (image.complete) finish(image.naturalWidth > 0 ? image : null);
+      }));
+
+      Promise.all(photoLoads).then((results) => {
+        if (state.stage !== 'age') return;
+        const loadedPhotos = results.filter(Boolean);
+        startPhotoSequence(loadedPhotos);
+        // Start the number animation after the photos are ready, so every loaded
+        // photo gets its full share of the 2.6-second sequence.
+        startTime = performance.now();
+        requestAnimationFrame(tickAge);
+      });
     }
   }
 
@@ -1717,6 +2052,9 @@
   function init() {
     initAudio();
     render();
+    if (state.stage !== 'opening') {
+      onEnterStage(state.stage);
+    }
 
     // Auto advance opening after 8.8s
     setTimeout(() => {

@@ -1,0 +1,40 @@
+================================================================================
+          HƯỚNG DẪN CHI TIẾT NGUYÊN NHÂN LỖI & CÁCH KHẮC PHỤC
+      KHI CLONE WEB NEXT.JS BẰNG HTTRACK VỀ CHẠY HTML THUẦN (OFFLINE)
+================================================================================
+
+1. NGUYÊN NHÂN TẠI SAO BỊ LỖI DỪNG Ở MÀN HÌNH NGÀY SINH NHẬT
+--------------------------------------------------------------------------------
+- Website gốc được xây dựng bằng Next.js (App Router) + Turbopack + React 19.
+- Cơ chế của Next.js:
+  + Trang HTML tải về ban đầu chỉ là HTML tĩnh do máy chủ xuất sẵn (chứa hiệu ứng
+    CSS cuộn lịch đến ngày sinh nhật).
+  + Toàn bộ logic tương tác phía sau (bánh kem, thổi nến, đọc thư, sao băng...)
+    đều nằm trong các module JavaScript động (chunks) được nạp tiếp qua Turbopack.
+- Vấn đề khi dùng HTTrack clone về:
+  + HTTrack chỉ cào được trang HTML đầu tiên và một số file JS/CSS bề mặt.
+  + Trong mã nguồn Turbopack (`turbopack-*.js`), các đường dẫn nạp file chunk bị
+    gắn cứng dạng tuyệt đối: `/_next/static/chunks/...` (bắt đầu bằng dấu gạch chéo `/`).
+  + Khi chạy `npx serve .` không đúng thư mục gốc hoặc khi mở trực tiếp file HTML
+    (giao thức `file:///`), trình duyệt sẽ tìm file ở ổ đĩa gốc `C:/_next/...`
+    -> Gây lỗi 404 Not Found (ChunkLoadError).
+  + Khi React bị lỗi tải file chunk, quá trình "Hydration" (kích hoạt mã JS)
+    bị SẬP HOÀN TOÀN.
+  + Kết quả: Trình duyệt chỉ chạy xong hiệu ứng CSS cuộn lịch có sẵn trong HTML tĩnh,
+    sau đó ĐỨNG IM MÃI MÃI, không bao giờ chuyển tiếp sang màn hình bánh sinh nhật.
+  + Ngoài ra, HTTrack không quét được các file ảnh nằm ẩn ở các bước sau:
+    thẻ điều ước (`wish-tag-01.webp`), giấy thư (`paper-letter-tall-01.webp`),
+    ảnh kỷ niệm (`girl1.jpeg` đến `girl4.jpeg`), cánh hoa rơi (`petal-*.webp`).
+
+
+================================================================================
+2. TẠI SAO KHÔNG NÊN TIẾP TỤC CHẠY BẰNG NEXT.JS KHI MUỐN CHẠY HTML THUẦN (DOUBLE CLICK)
+--------------------------------------------------------------------------------
+- Khi double-click file `.html`, trình duyệt mở bằng giao thức `file:///`.
+- Trình duyệt hiện đại (Chrome, Edge, Firefox) áp dụng chính sách bảo mật CORS rất
+  nghiêm ngặt đối với `file:///`:
+  + Chặn các lệnh `fetch()` đọc file cục bộ.
+  + Chặn Next.js Flight streaming reader và history pushState nội bộ.
+- Do đó, nếu giữ nguyên cấu trúc Next.js/React phức tạp, bắt buộc phải bật server
+  như `npx serve .`, không thể nào mở trực tiếp bằng double-click.
+- GIẢI PHÁP TỐI ƯU NHẤT: Chuyển đổi mã hiển thị sang HTML + Vanilla JavaScript thuần.
